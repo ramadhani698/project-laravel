@@ -1021,6 +1021,26 @@ body {
     color: #fff;
 }
 
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.sarpras-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: var(--color-text-dark);
+}
+
+.sarpras-subtitle {
+    color: var(--color-text-paragraph);
+    font-size: 1.2rem;
+}
+
 /* SARPRAS */
 .sarpras-card {
     background: #fff;
@@ -1028,8 +1048,22 @@ body {
     border-radius: 12px;
     text-align: center;
     height: 100%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-text-dark);
     transition: 0.3s;
+}
+
+.sarpras-card h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: var(--color-text-dark);
+}
+
+.sarpras-card p {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--color-text-paragraph);
 }
 
 .sarpras-card:hover {

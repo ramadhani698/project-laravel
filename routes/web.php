@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\SchoolHistoryController as AdminSchoolHistoryCont
 use App\Http\Controllers\ProfilController as FrontendProfilController;
 use App\Http\Controllers\Admin\VisionController as AdminVisionController;
 use App\Http\Controllers\Admin\PrincipalMessageController as AdminPrincipalMessageController;
+use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
+use App\Http\Controllers\InformasiController as FrontendInformasiController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -43,13 +45,13 @@ Route::get('/jurusan/mplb', function () {
     return view('frontend.jurusan.mplb');
 });
 
-Route::get('/informasi/berita', function () {
-    return view('frontend.informasi.berita');
-});
+// Route::get('/informasi/berita', function () {
+//     return view('frontend.informasi.berita');
+// });
 
-Route::get('/informasi/sarpras', function () {
-    return view('frontend.informasi.sarpras');
-});
+// Route::get('/informasi/sarpras', function () {
+//     return view('frontend.informasi.sarpras');
+// });
 
 Route::get('/informasi/galeri', function () {
     return view('frontend.informasi.galeri');
@@ -185,6 +187,9 @@ Route::middleware('auth')
 
         // crud principal message
         Route::resource('principal-message', AdminPrincipalMessageController::class);
+
+        // crud sarpras
+        Route::resource('sarpras', AdminSarprasController::class);
     });
 
 Route::get('/profil/sejarah', [FrontendProfilController::class, 'sejarah'])
@@ -205,6 +210,8 @@ Route::get('/informasi/berita', [FrontendBeritaController::class, 'index'])
 Route::get('berita/{slug}', [FrontendBeritaController::class, 'show'])
 ->name('berita.show');
 
+Route::get('/informasi/sarpras',[FrontendInformasiController::class, 'sarpras'])
+->name('informasi.sarpras');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
