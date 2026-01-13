@@ -27,21 +27,26 @@
         </div>
 
         <div class="row g-4">
+            @forelse($sarpras as $index => $item)
 
-            {{-- 1 --}}
-            <div class="col-md-6 col-lg-4">
-                <div class="sarpras-card">
-                    <div class="sarpras-icon">🏫</div>
-                    <h5>Ruang Kelas</h5>
-                    <p>
-                        Ruang kelas yang nyaman, bersih, dilengkapi meja, kursi,
-                        papan tulis, dan proyektor.
-                    </p>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+                    <div class="sarpras-card">
+                        <div class="sarpras-icon">{{ $item->icon }}</div>
+                        <h5>{{ $item->title }}</h5>
+                        <p>
+                            {{ $item->description }}
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            {{-- 2 --}}
-            <div class="col-md-6 col-lg-4">
+            @empty
+                <div class="col-12">
+                    <p class="text-center">Data sarana dan prasarana yang belum tersedia.</p>
+                </div>
+            @endforelse
+
+            <!-- {{-- 2 --}}
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">💻</div>
                     <h5>Laboratorium Komputer</h5>
@@ -53,7 +58,7 @@
             </div>
 
             {{-- 3 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">🖥️</div>
                     <h5>Laboratorium Jaringan</h5>
@@ -65,7 +70,7 @@
             </div>
 
             {{-- 4 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">🎨</div>
                     <h5>Studio Desain Grafis</h5>
@@ -77,7 +82,7 @@
             </div>
 
             {{-- 5 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">📚</div>
                     <h5>Perpustakaan</h5>
@@ -89,7 +94,7 @@
             </div>
 
             {{-- 6 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">🕌</div>
                     <h5>Mushola</h5>
@@ -101,7 +106,7 @@
             </div>
 
             {{-- 7 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="700">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">⚽</div>
                     <h5>Lapangan Olahraga</h5>
@@ -113,7 +118,7 @@
             </div>
 
             {{-- 8 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="800">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">🩺</div>
                     <h5>UKS</h5>
@@ -125,7 +130,7 @@
             </div>
 
             {{-- 9 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="900">
                 <div class="sarpras-card">
                     <div class="sarpras-icon">🅿️</div>
                     <h5>Area Parkir</h5>
@@ -134,7 +139,7 @@
                         guru, dan staf sekolah.
                     </p>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
