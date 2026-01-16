@@ -54,3 +54,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     counters.forEach((counter) => observer.observe(counter));
 });
+
+// MODAL GALERI
+document.addEventListener("DOMContentLoaded", function () {
+    const galeriCards = document.querySelectorAll(".galeri-card");
+
+    galeriCards.forEach((card) => {
+        card.addEventListener("click", function () {
+            const image = this.getAttribute("data-image");
+            const title = this.getAttribute("data-title");
+            const description = this.getAttribute("data-description");
+
+            document.getElementById("galeriModalImage").src = image;
+            document.getElementById("galeriModalTitle").innerText = title;
+            document.getElementById("galeriModalDescription").innerText =
+                description;
+        });
+    });
+});
