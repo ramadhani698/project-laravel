@@ -54,9 +54,9 @@ Route::get('/jurusan/mplb', function () {
 //     return view('frontend.informasi.sarpras');
 // });
 
-Route::get('/informasi/galeri', function () {
-    return view('frontend.informasi.galeri');
-});
+// Route::get('/informasi/galeri', function () {
+//     return view('frontend.informasi.galeri');
+// });
 
 Route::get('/prestasi', function () {
     return view('frontend.prestasi');
@@ -216,6 +216,9 @@ Route::get('berita/{slug}', [FrontendBeritaController::class, 'show'])
 
 Route::get('/informasi/sarpras',[FrontendInformasiController::class, 'sarpras'])
 ->name('informasi.sarpras');
+
+Route::get('/informasi/gallery', [FrontendInformasiController::class, 'gallery'])
+->name('informasi.gallery');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

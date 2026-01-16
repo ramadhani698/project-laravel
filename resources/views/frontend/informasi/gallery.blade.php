@@ -28,24 +28,26 @@
 
         <div class="row g-4">
 
-            {{-- Maksimal 9 item per halaman --}}
-            @for ($i = 1; $i <= 9; $i++)
-            <div class="col-md-6 col-lg-4">
-                <div class="galeri-card"
-                    data-bs-toggle="modal"
-                    data-bs-target="#galeriModal"
-                    data-image="{{ asset('images/berita.jpg') }}"
-                    data-title="Kegiatan Sekolah {{ $i }}"
-                    data-description="Kegiatan ini merupakan dokumentasi aktivitas siswa dalam rangka pengembangan karakter dan kebersamaan.">
-                    <img src="{{ asset('images/berita'.'.jpg') }}"
-                         alt="Galeri {{ $i }}">
+            @forelse ($galleries as $gallery)
+                <div class="col-md-6 col-lg-4">
+                    <div class="galeri-card"
+                        data-bs-toggle="modal"
+                        data-bs-target="#galeriModal"
+                        data-image="{{ asset('uploads/gallery/'.$gallery->image) }}"
+                        data-title="{{ $gallery->title }}"
+                        data-description="{{ $gallery->description }}">
+                        <img src="{{ asset('uploads/gallery/'.$gallery->image) }}">
 
-                    <div class="galeri-overlay">
-                        <h5>Kegiatan Sekolah {{ $i }}</h5>
+                        <div class="galeri-overlay">
+                            <h5>{{ $gallery->title }}</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            @endfor
+            @empty
+                <div class="col-12">
+                    <p class="text-center">Data galeri belum di tambahkan</p>
+                </div>
+            @endforelse
 
         </div>
 

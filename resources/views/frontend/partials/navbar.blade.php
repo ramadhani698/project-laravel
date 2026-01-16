@@ -59,7 +59,7 @@
                     <ul class="dropdown-menu" aria-labelledby="infoDropdown">
                         <li><a class="dropdown-item" href="{{ url('/informasi/berita') }}">Berita Terkini</a></li>
                         <li><a class="dropdown-item" href="{{ url('/informasi/sarpras') }}">Sarana dan Prasarana</a></li>
-                        <li><a class="dropdown-item" href="{{ url('/informasi/galeri') }}">Galeri</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/informasi/gallery') }}">Galeri</a></li>
                     </ul>
                 </li>
 
