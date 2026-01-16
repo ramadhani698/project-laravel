@@ -31,7 +31,12 @@
             {{-- Maksimal 9 item per halaman --}}
             @for ($i = 1; $i <= 9; $i++)
             <div class="col-md-6 col-lg-4">
-                <div class="galeri-card">
+                <div class="galeri-card"
+                    data-bs-toggle="modal"
+                    data-bs-target="#galeriModal"
+                    data-image="{{ asset('images/berita.jpg') }}"
+                    data-title="Kegiatan Sekolah {{ $i }}"
+                    data-description="Kegiatan ini merupakan dokumentasi aktivitas siswa dalam rangka pengembangan karakter dan kebersamaan.">
                     <img src="{{ asset('images/berita'.'.jpg') }}"
                          alt="Galeri {{ $i }}">
 
@@ -66,7 +71,31 @@
             </div>
         </div>
 
+        {{-- ================= MODAL GALERI ================= --}}
+        <div class="modal fade" id="galeriModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="galeriModalTitle">Judul Galeri</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body text-center">
+                        <img id="galeriModalImage"
+                            src=""
+                            class="img-fluid rounded"
+                            alt="Preview Galeri">
+                        <p id="galeriModalDescription" class="text-muted">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
 @endsection
+
+
