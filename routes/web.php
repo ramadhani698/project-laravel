@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\VisionController as AdminVisionController;
 use App\Http\Controllers\Admin\PrincipalMessageController as AdminPrincipalMessageController;
 use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
 use App\Http\Controllers\InformasiController as FrontendInformasiController;
+use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -190,6 +191,9 @@ Route::middleware('auth')
 
         // crud sarpras
         Route::resource('sarpras', AdminSarprasController::class);
+
+        // crud gallery
+        Route::resource('gallery', AdminGalleryController::class);
     });
 
 Route::get('/profil/sejarah', [FrontendProfilController::class, 'sejarah'])
