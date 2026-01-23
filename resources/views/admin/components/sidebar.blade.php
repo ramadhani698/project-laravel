@@ -101,7 +101,7 @@
       </ul>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{{ route('admin.prestasi.index') }}">
         <img src="{{ asset('coreui/assets/icons/star.svg') }}" class="nav-icon" alt="Prestasi Icon" style="width: 1em; height: 1em;"> Prestasi Siswa
       </a>
     </li>

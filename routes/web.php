@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\PrincipalMessageController as AdminPrincipalMessa
 use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
 use App\Http\Controllers\InformasiController as FrontendInformasiController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
+use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
+use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -58,9 +60,9 @@ Route::get('/jurusan/mplb', function () {
 //     return view('frontend.informasi.galeri');
 // });
 
-Route::get('/prestasi', function () {
-    return view('frontend.prestasi');
-});
+// Route::get('/prestasi', function () {
+//     return view('frontend.prestasi');
+// });
 
 Route::middleware('auth')
     ->prefix('admin')
@@ -194,6 +196,9 @@ Route::middleware('auth')
 
         // crud gallery
         Route::resource('gallery', AdminGalleryController::class);
+
+        // crud prestasi
+        Route::resource('prestasi', AdminPrestasiController::class);
     });
 
 Route::get('/profil/sejarah', [FrontendProfilController::class, 'sejarah'])
@@ -219,6 +224,9 @@ Route::get('/informasi/sarpras',[FrontendInformasiController::class, 'sarpras'])
 
 Route::get('/informasi/gallery', [FrontendInformasiController::class, 'gallery'])
 ->name('informasi.gallery');
+
+Route::get('/prestasi', [FrontendPrestasiController::class, 'index'])
+->name('prestasi.index');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
