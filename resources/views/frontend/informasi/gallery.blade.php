@@ -28,8 +28,8 @@
 
         <div class="row g-4">
 
-            @forelse ($galleries as $gallery)
-                <div class="col-md-6 col-lg-4">
+            @forelse ($galleries as $index => $gallery)
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                     <div class="galeri-card"
                         data-bs-toggle="modal"
                         data-bs-target="#galeriModal"
