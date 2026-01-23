@@ -63,7 +63,9 @@ body {
     font-size: 16px;
     padding: 12px 20px !important;
     color: var(--color-text-dark);
-    transition: color 0.25s ease, transform 0.2s ease;
+    transition:
+        color 0.25s ease,
+        transform 0.2s ease;
 }
 
 .navbar-nav .nav-link:hover {
@@ -1201,57 +1203,102 @@ body {
     color: #fff;
 }
 
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+}
+
 /* PRESTASI */
 .prestasi-section {
     background: #f9fafb;
 }
 
+.prestasi-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: var(--color-text-dark);
+}
+
+.prestasi-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-paragraph);
+}
+
 .prestasi-card {
     background: #fff;
-    padding: 28px;
     border-radius: 14px;
+    overflow: hidden;
+    padding: 18px;
     height: 100%;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    transition: 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
 }
 
 .prestasi-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
 }
 
+/* Gambar */
+.prestasi-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.prestasi-image img:hover {
+    transform: scale(1.03);
+}
+
+/* Judul */
+.prestasi-card h5 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    color: var(--color-text-dark);
+}
+
+/* Badge (tidak melebar) */
 .prestasi-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    display: inline-block;
     background: #006837;
     color: #fff;
-    padding: 6px 14px;
-    font-size: 13px;
-    border-radius: 20px;
-}
-
-.prestasi-card h5 {
-    margin-bottom: 10px;
+    font-size: 0.8rem;
     font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
 }
 
+/* Nama siswa */
 .prestasi-siswa {
-    font-size: 14px;
-    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
 }
 
+/* Deskripsi */
 .prestasi-desc {
-    font-size: 14px;
-    color: #666;
-    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 12px;
 }
 
+/* Tahun */
 .prestasi-year {
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 13px;
-    color: #999;
+    font-size: 0.85rem;
+    color: #777;
+    font-weight: 500;
 }
 
 @media (min-width: 992px) {
@@ -1291,7 +1338,9 @@ body {
         font-family: "Montserrat", sans-serif;
         font-weight: 600;
         padding: 10px 25px;
-        transition: background 0.25s ease, color 0.25s ease;
+        transition:
+            background 0.25s ease,
+            color 0.25s ease;
     }
 
     .dropdown-item:hover {

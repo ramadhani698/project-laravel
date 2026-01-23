@@ -30,50 +30,80 @@
         <div class="row g-4">
 
             {{-- Prestasi 1 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="prestasi-card">
-                    <div class="prestasi-badge">Juara 1</div>
+
+                    {{-- Gambar Prestasi --}}
+                    <div class="prestasi-image">
+                        <img src="{{ asset('images/siswa-prestasi.jpg') }}" alt="Prestasi Siswa">
+                    </div>
+
                     <h5>Lomba Desain Grafis Tingkat Kabupaten</h5>
+
+                    <div class="prestasi-badge">Juara 1</div>
+
                     <p class="prestasi-siswa">
-                        Nama Siswa: <strong>Ahmad Fauzi</strong>
+                        Nama Siswa: <strong>Siti Aisyah</strong>
                     </p>
+
                     <p class="prestasi-desc">
                         Meraih juara pertama dalam lomba desain grafis antar SMK
                         se-Kabupaten Tangerang tahun 2025.
                     </p>
+
                     <span class="prestasi-year">2025</span>
                 </div>
             </div>
 
             {{-- Prestasi 2 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="prestasi-card">
-                    <div class="prestasi-badge">Juara 2</div>
-                    <h5>Lomba Networking Competition</h5>
+
+                    {{-- Gambar Prestasi --}}
+                    <div class="prestasi-image">
+                        <img src="{{ asset('images/siswa-prestasi-2.jpg') }}" alt="Prestasi Siswa">
+                    </div>
+
+                    <h5>Lomba Desain Grafis Tingkat Kabupaten</h5>
+
+                    <div class="prestasi-badge">Juara 1</div>
+
                     <p class="prestasi-siswa">
                         Nama Siswa: <strong>Muhammad Rizky</strong>
                     </p>
+
                     <p class="prestasi-desc">
-                        Meraih juara kedua dalam kompetisi jaringan komputer
-                        tingkat provinsi Banten.
+                        Meraih juara pertama dalam lomba desain grafis antar SMK
+                        se-Kabupaten Tangerang tahun 2025.
                     </p>
-                    <span class="prestasi-year">2024</span>
+
+                    <span class="prestasi-year">2025</span>
                 </div>
             </div>
 
             {{-- Prestasi 3 --}}
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="prestasi-card">
-                    <div class="prestasi-badge">Juara 3</div>
-                    <h5>Olimpiade Matematika SMK</h5>
+
+                    {{-- Gambar Prestasi --}}
+                    <div class="prestasi-image">
+                        <img src="{{ asset('images/siswa-prestasi-3.jpg') }}" alt="Prestasi Siswa">
+                    </div>
+
+                    <h5>Lomba Desain Grafis Tingkat Kabupaten</h5>
+
+                    <div class="prestasi-badge">Juara 1</div>
+
                     <p class="prestasi-siswa">
-                        Nama Siswa: <strong>Siti Aisyah</strong>
+                        Nama Siswa: <strong>Fatimah Az-Zahra</strong>
                     </p>
+
                     <p class="prestasi-desc">
-                        Berhasil meraih juara ketiga dalam Olimpiade Matematika
-                        tingkat kota Tangerang.
+                        Meraih juara pertama dalam lomba desain grafis antar SMK
+                        se-Kabupaten Tangerang tahun 2025.
                     </p>
-                    <span class="prestasi-year">2024</span>
+
+                    <span class="prestasi-year">2025</span>
                 </div>
             </div>
 
