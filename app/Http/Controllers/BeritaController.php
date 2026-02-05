@@ -11,7 +11,7 @@ class BeritaController extends Controller
     {
         $beritas = Berita::where('status', 'publish')
             ->orderByDesc('published_at')
-            ->paginate(9);
+            ->paginate(6);
         
         return view('frontend.informasi.berita', compact('beritas'));
     }
