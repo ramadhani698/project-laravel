@@ -172,7 +172,6 @@
             <!-- List Berita -->
             <div class="row g-4">
 
-                {{-- Maksimal 9 berita --}}
                 @forelse ($beritas as $index => $berita)
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 150 }}">
                         <div class="berita-card">

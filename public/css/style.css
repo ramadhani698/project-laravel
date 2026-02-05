@@ -117,15 +117,6 @@ body {
 }
 
 /* =============================
-   SECTION CAROUSEL
-============================= */
-
-/* .carousel-item img {
-    height: 100vh;
-    object-fit: cover;
-} */
-
-/* =============================
    SECTION WELCOME
 ============================= */
 .home-section {
@@ -141,7 +132,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 50vh;
+    min-height: 40vh;
 }
 
 .home-section .container,
@@ -157,22 +148,27 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
+    padding: 8px 0;
+}
+
+.home-title h4,
+.home-title h2 {
+    margin: 0;
 }
 
 .home-title h4 {
-    font-size: 1.5rem;
+    font-size: clamp(14px, 3vw, 18px);
     letter-spacing: 2px;
     font-family: "Merriweather", serif;
     font-weight: 300;
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
     color: var(--color-white);
+    margin-bottom: 6px;
 }
 
 .home-title h2 {
-    margin: 0 auto;
-    font-size: 4rem;
+    font-size: clamp(26px, 6vw, 56px);
+    line-height: 1.1;
     font-family: "Merriweather", serif;
     font-weight: 900;
     text-align: center;
@@ -189,12 +185,14 @@ body {
 }
 
 .keunggulan-title {
+    font-size: clamp(22px, 4vw, 32px);
     font-weight: 700;
     font-family: "Bricolage Grotesque", sans-serif;
     color: var(--color-text-dark);
 }
 
 .keunggulan-subtitle {
+    font-size: clamp(14px, 3vw, 16px);
     color: #666;
     margin-top: 8px;
 }
@@ -981,17 +979,6 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .berita-detail-title {
-        font-size: 26px;
-    }
-
-    .berita-detail-section {
-        padding: 60px 0;
-    }
-}
-
 /* =============================
    HALAMAN SARANA PRASARANA
 ============================= */
@@ -1302,12 +1289,364 @@ body {
 }
 
 @media (min-width: 992px) {
-    /* Hilangkan caret bootstrap */
+
+    /* Hilangkan caret */
     .navbar-nav .dropdown-toggle::after {
         display: none !important;
     }
 
-    /* Dropdown hidden state */
+    /* Dropdown hidden */
+    .navbar-nav .dropdown-menu {
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(12px);
+        transition: all 0.25s ease;
+        border-radius: 14px;
+        padding: 15px 0;
+        border: none;
+        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+        margin-top: 6px;
+        pointer-events: none;
+    }
+
+    /* Hover show */
+    .navbar-nav .dropdown:hover > .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    /* Parent link highlight */
+    .navbar-nav .dropdown:hover > .nav-link {
+        color: var(--color-primary);
+    }
+
+    .dropdown-item {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        padding: 10px 25px;
+        transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .dropdown-item:hover {
+        background: var(--color-primary-light);
+        color: white;
+    }
+}
+
+@media (max-width: 991.98px) {
+
+    .navbar {
+        padding: 10px 0 !important;
+        background: var(--color-white);
+    }
+
+    .navbar-brand img {
+        height: 42px;
+    }
+
+    .navbar-toggler {
+        padding: 4px 8px;
+        border: none;
+        box-shadow: none;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .navbar-nav .nav-link::before {
+        display: none;
+    }
+
+    .navbar-collapse {
+        background: var(--color-white);
+        margin-top: 12px;
+        padding: 12px 0;
+        border-radius: 14px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .navbar-nav {
+        text-align: left;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 12px 24px !important;
+        font-size: 15px;
+    }
+
+    /* 🔥 dropdown mobile: click based */
+    .dropdown-menu {
+        position: static;
+        float: none;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        padding-left: 16px;
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+    }
+
+    .navbar .btn-ppdb {
+        width: 40%;
+        margin: 14px auto 0;
+        display: block;
+        text-align: center;
+    }
+
+    .jurusan-left h2 {
+        font-size: 1.8rem;
+    }
+
+    .jurusan-left p {
+        font-size: 1rem;
+    }
+
+    .statistik-title {
+        font-size: 1.9rem;
+    }
+
+    .statistik-number {
+        font-size: 2rem;
+    }
+
+    .berita-img img {
+        height: 180px;
+    }
+
+    .berita-title {
+        font-size: 1.9rem;
+    }
+
+    .kontak-section {
+        padding: 80px 0;
+    }
+
+    .kontak-title {
+        font-size: 30px;
+    }
+
+    .kontak-subtitle {
+        font-size: 15px;
+    }
+
+    .footer-section {
+        padding: 55px 0 30px;
+    }
+
+    .footer-title {
+        font-size: 1.1rem;
+    }
+
+    .footer-text {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-section {
+        min-height: 30vh;
+    }
+
+    .keunggulan-section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .keunggulan-card {
+        padding: 24px 18px;
+        border-radius: 16px;
+    }
+
+    .keunggulan-icon {
+        font-size: 2.4rem;
+    }
+
+    .keunggulan-section .row.g-4 {
+        --bs-gutter-y: 1.2rem;
+    }
+
+    /* Section spacing lebih rapat */
+    .jurusan-section {
+        padding: 3rem 0;
+    }
+
+    /* Gambar jurusan */
+    .jurusan-img {
+        width: 100%;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 14px;
+    }
+
+    /* Judul kiri */
+    .jurusan-left h2 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    /* Deskripsi kiri */
+    .jurusan-left p {
+        text-align: center;
+        font-size: 0.95rem;
+    }
+
+    /* Card jurusan */
+    .jurusan-card {
+        padding: 20px;
+    }
+
+    .jurusan-card h5 {
+        font-size: 1rem;
+    }
+
+    .jurusan-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Section spacing */
+    .statistik-section {
+        padding: 3rem 0;
+    }
+
+    /* Judul */
+    .statistik-title {
+        font-size: 1.6rem;
+    }
+
+    .statistik-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Card */
+    .statistik-card {
+        padding: 24px 16px;
+        border-radius: 16px;
+    }
+
+    /* Angka statistik */
+    .statistik-number {
+        font-size: 1.8rem;
+    }
+
+    .statistik-number .plus {
+        font-size: 1.2rem;
+    }
+
+    /* Label */
+    .statistik-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Section spacing */
+    .berita-section {
+        padding: 3rem 0;
+    }
+
+    /* Judul section */
+    .berita-title {
+        font-size: 1.6rem;
+    }
+
+    .berita-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Gambar berita */
+    .berita-img img {
+        height: 160px;
+    }
+
+    /* Body card */
+    .berita-body {
+        padding: 16px;
+    }
+
+    .berita-title-card {
+        font-size: 1rem;
+    }
+
+    .berita-desc {
+        font-size: 0.9rem;
+    }
+
+    /* Button bawah */
+    .btn-berita {
+        padding: 10px 26px;
+        font-size: 0.95rem;
+    }
+
+    .kontak-section {
+        padding: 70px 0;
+    }
+
+    .kontak-title {
+        font-size: 26px;
+        line-height: 1.3;
+    }
+
+    .kontak-subtitle {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .kontak-info p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .kontak-action .btn {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+
+    .footer-section {
+        padding: 50px 0 25px;
+        text-align: center;
+    }
+
+    .footer-section img {
+        width: 100px;
+        margin: 0 auto 16px;
+        display: block;
+    }
+
+    .footer-title {
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+    }
+
+    .footer-text {
+        font-size: 0.9rem;
+    }
+
+    .footer-links li,
+    .footer-contact li {
+        font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+        padding-left: 0; /* hindari geser aneh di mobile */
+    }
+
+    .footer-bottom {
+        margin-top: 25px;
+        padding-top: 15px;
+    }
+}
+
+
+/* @media (min-width: 992px) {
+    .navbar-nav .dropdown-toggle::after {
+        display: none !important;
+    }
+
     .navbar-nav .dropdown-menu {
         display: block !important;
         opacity: 0;
@@ -1321,19 +1660,16 @@ body {
         margin-top: 6px;
     }
 
-    /* Show on hover */
     .navbar-nav .dropdown:hover .dropdown-menu {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
     }
 
-    /* Hover link styling */
     .navbar-nav .dropdown:hover > .nav-link {
         color: var(--color-primary);
     }
 
-    /* Dropdown item */
     .dropdown-item {
         font-family: "Montserrat", sans-serif;
         font-weight: 600;
@@ -1349,7 +1685,6 @@ body {
     }
 }
 
-/* MOBILE DROPDOWN (BIAR RAPIH) */
 @media (max-width: 991px) {
     .dropdown-menu {
         border-radius: 10px;
@@ -1366,3 +1701,13 @@ body {
         text-align: center;
     }
 }
+
+@media (max-width: 768px) {
+    .berita-detail-title {
+        font-size: 26px;
+    }
+
+    .berita-detail-section {
+        padding: 60px 0;
+    }
+} */

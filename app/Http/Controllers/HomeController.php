@@ -22,7 +22,7 @@ class HomeController extends Controller
         $beritas = Berita::where('status', 'publish')
             ->whereNotNull('published_at')
             ->orderByDesc('published_at')
-            ->limit(9)
+            ->limit(6)
             ->get();
 
         return view('frontend.home', compact('carousels', 'keunggulans', 'statistiks', 'jurusans', 'beritas'));
