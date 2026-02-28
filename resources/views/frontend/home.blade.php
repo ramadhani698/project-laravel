@@ -213,7 +213,7 @@
     <!-- ALAMAT -->
     <section class="kontak-section position-relative">
         <!-- Background Image -->
-        <img src="{{ asset('images/alamat-section.jpg') }}"
+        <img src="{{ asset('images/kontak.jpeg') }}"
             alt="Gedung SMK Muhammadiyah 2 Tangerang"
             class="kontak-bg">
 
@@ -243,12 +243,12 @@
                         </p>
                     </div>
 
-                    <div class="kontak-action mt-4">
+                    <!-- <div class="kontak-action mt-4">
                         <a href="https://maps.google.com" target="_blank"
                         class="btn btn-outline-light">
                             Lihat di Google Maps
                         </a>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

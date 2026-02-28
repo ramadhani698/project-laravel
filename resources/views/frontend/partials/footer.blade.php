@@ -39,7 +39,11 @@
                 <h5 class="footer-title">Kontak</h5>
                 <ul class="footer-contact">
                     <li>📍 Tangerang, Banten</li>
-                    <li>📞 (021) 123456</li>
+                    <li>📞 
+                        <a href="https://wa.me/6285717414288?text=Halo%20saya%20ingin%20bertanya" target="_blank" rel="noopener noreferrer" class="btn-wa">
+                            0857 1741 4288
+                        </a>
+                    </li>
                     <li>✉️ info@smkmuh2tng.sch.id</li>
                 </ul>
             </div>
@@ -48,6 +52,12 @@
 
         <!-- Copyright -->
         <div class="footer-bottom text-center mt-4">
+            <img src="{{ asset('images/indomaret.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
+            <img src="{{ asset('images/aset-digital.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
+            <img src="{{ asset('images/horison.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
+            <img src="{{ asset('images/indofood.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
+            <img src="{{ asset('images/pkks.png') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
+            <img src="{{ asset('images/alfamart-removebg-preview.png') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="footer-logo">
             <p>
                 © {{ date('Y') }} SMK Muhammadiyah 2 Tangerang.
                 All rights reserved.

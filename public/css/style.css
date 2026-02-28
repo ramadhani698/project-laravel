@@ -479,10 +479,18 @@ body {
     padding: 60px 0 30px;
 }
 
-.footer-section img {
-    width: 120px;
+.footer-logo {
+    width: 80px;
     margin-bottom: 20px;
     border-radius: 20px;
+}
+
+.partner-logo {
+    width: 100px;
+    margin: 10px 15px;
+    border-radius: 0;
+    background: white;
+    padding: 5px;
 }
 
 .footer-title {
@@ -530,6 +538,20 @@ body {
     margin: 0;
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-wa {
+    display: inline-block;
+    color: #fff;
+    padding: 10px 5px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-wa:hover {
+    color: #1ebe5d;
 }
 
 /* =============================
@@ -1307,7 +1329,6 @@ body {
         border: none;
         box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
         margin-top: 6px;
-        pointer-events: none;
     }
 
     /* Hover show */
