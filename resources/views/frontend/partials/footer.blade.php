@@ -45,6 +45,11 @@
                         </a>
                     </li>
                     <li>✉️ info@smkmuh2tng.sch.id</li>
+
+                    <div class="footer-socials">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </ul>
             </div>
 
