@@ -45,6 +45,12 @@
                         </a>
                     </li>
                     <li>✉️ info@smkmuh2tng.sch.id</li>
+                    
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/smk.mudatang/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@smkmuhammadiyah2tangerang412"><i class="fab fa-youtube"></i></a>
+                    </div>
+
                 </ul>
             </div>
 
@@ -57,7 +63,7 @@
             <img src="{{ asset('images/horison.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
             <img src="{{ asset('images/indofood.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
             <img src="{{ asset('images/pkks.png') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
-            <img src="{{ asset('images/alfamart-removebg-preview.png') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="footer-logo">
+            <img src="{{ asset('images/alfamart.png') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
             <p>
                 © {{ date('Y') }} SMK Muhammadiyah 2 Tangerang.
                 All rights reserved.
