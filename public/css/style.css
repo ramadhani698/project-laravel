@@ -601,8 +601,7 @@ body {
    PAGE HEADER
 ============================= */
 .vm-page-header {
-    margin-top: 80px;
-    padding: 60px 0;
+    padding: 120px 0 60px;
     background: #f8f9fa;
 }
 
@@ -630,14 +629,14 @@ body {
 /* =============================
    SECTION
 ============================= */
-.vm-section {
+/* .vm-section {
     padding: 48px 0;
-}
+} */
 
 /* GRID (replacement row + col) */
 .vm-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 24px;
 }
 
@@ -697,8 +696,7 @@ body {
    KATA KEPSEK SECTION
 ============================= */
 .kk-page-header {
-    margin-top: 80px;
-    padding: 60px 0;
+    padding: 120px 0 60px;
     background: #f8f9fa;
 }
 
@@ -731,7 +729,7 @@ body {
 /* GRID LAYOUT */
 .kk-grid {
     display: grid;
-    grid-template-columns: 4fr 8fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
     align-items: center;
 }
@@ -1399,7 +1397,7 @@ body {
         font-size: 15px;
     }
 
-    /* 🔥 dropdown mobile: click based */
+    /* dropdown mobile: click based */
     .dropdown-menu {
         position: static;
         float: none;
@@ -1467,6 +1465,10 @@ body {
 
     .footer-text {
         font-size: 0.95rem;
+    }
+
+    .vm-title {
+        font-size: 26px;
     }
 }
 
@@ -1659,6 +1661,171 @@ body {
     .footer-bottom {
         margin-top: 25px;
         padding-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .keunggulan-section {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .keunggulan-title {
+        font-size: 22px;
+    }
+
+    .keunggulan-subtitle {
+        font-size: 14px;
+    }
+
+    .keunggulan-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .keunggulan-card h5 {
+        font-size: 16px;
+    }
+
+    .keunggulan-card p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .keunggulan-icon {
+        font-size: 28px; /* kecilkan icon */
+        margin-bottom: 10px;
+    }
+
+    .jurusan-img {
+        max-width: 430px;
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .jurusan-left h2 {
+        font-size: 22px;
+        margin-top: 16px !important;
+    }
+
+    .jurusan-left p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .jurusan-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .jurusan-card h5 {
+        font-size: 16px;
+    }
+
+    .jurusan-card p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .berita-section {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .berita-title {
+        font-size: 22px;
+    }
+
+    .berita-subtitle {
+        font-size: 14px;
+    }
+
+    .berita-card {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    .berita-img img {
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .berita-body {
+        padding: 18px;
+    }
+
+    .berita-title-card {
+        font-size: 16px;
+    }
+
+    .berita-desc {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .berita-link {
+        font-size: 13px;
+    }
+
+    .vm-page-header {
+        padding: 40px 0;
+    }
+
+    .vm-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .vm-header-image {
+        max-width: 100%;
+    }
+
+    .vm-card-body {
+        padding: 18px;
+    }
+
+    .vm-card-title {
+        font-size: 18px;
+    }
+
+    .vm-text,
+    .vm-list li {
+        font-size: 14px;
+    }
+
+    .kk-page-header {
+        padding: 40px 0;
+    }
+
+    .kk-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .kk-section {
+        padding: 40px 0;
+    }
+
+    .kk-photo {
+        width: 60%;
+        max-width: 180px;
+    }
+
+    .kk-greeting {
+        font-size: 18px;
+    }
+
+    .kk-text {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .kk-position {
+        margin-top: 24px;
     }
 }
 
