@@ -112,16 +112,19 @@
             </p>
         </div>
 
-        <div class="row g-3 jurusan-gallery__grid">
-            @foreach($jurusan->galleries as $gallery)
-                <div class="col-md-4 jurusan-gallery__item">
-                    <img 
-                        src="{{ asset('uploads/jurusan_gallery/' . $gallery->image) }}" 
-                        alt="Kegiatan Jurusan {{ $jurusan->name }}"
-                        class="img-fluid rounded-4 shadow-sm jurusan-gallery__image"
-                    >
-                </div>
-            @endforeach
+       <div class="row">
+    @foreach($jurusan->galleries as $gallery)
+        <div class="col-md-4 mb-4">
+            <div class="gallery-square">
+                <img 
+                    src="{{ asset('uploads/jurusan_gallery/' . $gallery->image) }}" 
+                    class="gallery-image"
+                >
+            </div>
+        </div>
+    @endforeach
+</div>
+    
         </div>
     </div>
 </section>
