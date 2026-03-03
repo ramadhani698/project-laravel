@@ -2,39 +2,28 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\CarouselController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\CarouselController as AdminCarouselController;
+use App\Http\Controllers\Admin\KeunggulanController as AdminKeunggulanController;
 use App\Http\Controllers\Admin\JurusanController as AdminJurusanController;
+use App\Http\Controllers\Admin\StatistikController as AdminStatistikController;
 use App\Http\Controllers\Admin\JurusanHeadController;
 use App\Http\Controllers\Admin\JurusanVisiMisiController;
 use App\Http\Controllers\Admin\JurusanGalleryController;
-use App\Http\Controllers\JurusanController as FrontendJurusanController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
-use App\Http\Controllers\BeritaController as FrontendBeritaController;
 use App\Http\Controllers\Admin\SchoolHistoryController as AdminSchoolHistoryController;
-use App\Http\Controllers\ProfilController as FrontendProfilController;
 use App\Http\Controllers\Admin\VisionController as AdminVisionController;
 use App\Http\Controllers\Admin\PrincipalMessageController as AdminPrincipalMessageController;
 use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
-use App\Http\Controllers\InformasiController as FrontendInformasiController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
+use App\Http\Controllers\JurusanController as FrontendJurusanController;
+use App\Http\Controllers\BeritaController as FrontendBeritaController;
+use App\Http\Controllers\ProfilController as FrontendProfilController;
+use App\Http\Controllers\InformasiController as FrontendInformasiController;
 use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-
-// Route::prefix('profil')->name('profil.')->group(function () {
-//     Route::get('/sejarah', function () {
-//         return view('frontend.profil.sejarah');
-//     })->name('sejarah');
-// });
-
-// Route::get('/profil/visi-misi', function () {
-//     return view('frontend.profil.visi-misi');
-// });
-
-// Route::get('/profil/kata-kepsek', function () {
-//     return view('frontend.profil.kata-kepsek');
-// });
 
 Route::get('/jurusan/tkj', function () {
     return view('frontend.jurusan.tkj');
@@ -48,110 +37,19 @@ Route::get('/jurusan/mplb', function () {
     return view('frontend.jurusan.mplb');
 });
 
-// Route::get('/informasi/berita', function () {
-//     return view('frontend.informasi.berita');
-// });
-
-// Route::get('/informasi/sarpras', function () {
-//     return view('frontend.informasi.sarpras');
-// });
-
-// Route::get('/informasi/galeri', function () {
-//     return view('frontend.informasi.galeri');
-// });
-
-// Route::get('/prestasi', function () {
-//     return view('frontend.prestasi');
-// });
-
-Route::middleware('auth')
-    ->prefix('admin')
-    ->group(function () {
-        Route::get('/carousel', 
-            [\App\Http\Controllers\Admin\CarouselController::class, 'index']
-        )->name('admin.carousel.index');
-        
-        Route::get('/carousel/create',
-            [\App\Http\Controllers\Admin\CarouselController::class, 'create']
-        )->name('admin.carousel.create');
-
-        Route::post('/carousel',
-            [\App\Http\Controllers\Admin\CarouselController::class, 'store']
-        )->name('admin.carousel.store');
-
-        Route::get('/carousel/{id}/edit',
-            [App\Http\Controllers\Admin\CarouselController::class, 'edit']
-        )->name('admin.carousel.edit');
-        
-        Route::put('/carousel/{id}',
-            [App\Http\Controllers\Admin\CarouselController::class, 'update']
-        )->name('admin.carousel.update');
-
-        Route::delete('/carousel/{id}',
-            [App\Http\Controllers\Admin\CarouselController::class, 'destroy']
-        )->name('admin.carousel.destroy');
-    });
-
-Route::middleware('auth')
-    ->prefix('admin')
-    ->group(function () {
-        Route::get('/keunggulan',
-            [App\Http\Controllers\Admin\KeunggulanController::class, 'index']
-        )->name('admin.keunggulan.index');
-
-        Route::get('/keunggulan/create',
-            [App\Http\Controllers\Admin\KeunggulanController::class, 'create']
-        )->name('admin.keunggulan.create');
-
-        Route::post('/keunggulan',
-            [App\Http\Controllers\Admin\KeunggulanController::class, 'store']
-        )->name('admin.keunggulan.store');
-
-        Route::get('/keunggulan/{id}/edit',
-            [App\Http\Controllers\Admin\KeunggulanController::class, 'edit']
-        )->name('admin.keunggulan.edit');
-
-        Route::put('/keunggulan/{id}',
-            [App\Http\Controllers\Admin\KeunggulanController::class, 'update']
-        )->name('admin.keunggulan.update');
-
-        Route::delete('/keunggulan/{id}',
-            [App\Http\Controllers\Admin\KeunggulanController::class, 'destroy']
-        )->name('admin.keunggulan.destroy');
-    });
-
-Route::middleware('auth')
-    ->prefix('admin')
-    ->group(function () {
-        Route::get('/statistik',
-            [App\Http\Controllers\Admin\StatistikController::class, 'index']
-        )->name('admin.statistik.index');
-
-        Route::get('/statistik/create',
-            [App\Http\Controllers\Admin\StatistikController::class, 'create']
-        )->name('admin.statistik.create');
-
-        Route::post('/statistik',
-            [App\Http\Controllers\Admin\StatistikController::class, 'store']
-        )->name('admin.statistik.store');
-
-        Route::get('statistik/{id}/edit',
-            [App\Http\Controllers\Admin\StatistikController::class, 'edit']
-        )->name('admin.statistik.edit');
-
-        Route::put('statistik/{id}',
-            [App\Http\Controllers\Admin\StatistikController::class, 'update']
-        )->name('admin.statistik.update');
-
-        Route::delete('statistik/{id}',
-            [App\Http\Controllers\Admin\StatistikController::class, 'destroy']
-        )->name('admin.statistik.destroy');
-    });
-
 Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+
+        // crud carousel
+        Route::resource('carousel', AdminCarouselController::class);
+
+        // crud keunggulan
+        Route::resource('keunggulan', AdminKeunggulanController::class);
+
+        // crud statistik
+        Route::resource('statistik', AdminStatistikController::class);
 
         // crud jurusan
         Route::resource('jurusan', AdminJurusanController::class);
@@ -228,9 +126,8 @@ Route::get('/informasi/gallery', [FrontendInformasiController::class, 'gallery']
 Route::get('/prestasi', [FrontendPrestasiController::class, 'index'])
 ->name('prestasi.index');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

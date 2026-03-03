@@ -1,0 +1,32 @@
+/* Smooth animation */
+.dashboard-card {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon animation */
+.dashboard-card .fa-solid,
+.dashboard-card .fas {
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover .fas {
+    transform: scale(1.10);
+    opacity: 1;
+}
+
+/* Footer hover */
+.dashboard-card .card-footer {
+    transition: background 0.3s ease;
+}
+
+.dashboard-card:hover .card-footer {
+    background: rgba(0, 0, 0, 0.25);
+}
