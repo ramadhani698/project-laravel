@@ -33,24 +33,27 @@
             <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <div class="prestasi-card">
 
-                    {{-- Gambar Prestasi --}}
                     <div class="prestasi-image">
-                        <img src="{{ asset('uploads/prestasi/'.$prestasi->image) }}" alt="{{ $prestasi->judul }}">
+                        <img src="{{ asset('uploads/prestasi/'.$prestasi->image) }}">
                     </div>
 
-                    <h5>{{ $prestasi->judul }}</h5>
+                    <div class="prestasi-body">
 
-                    <div class="prestasi-badge">{{ $prestasi->juara }}</div>
+                        <h5>{{ $prestasi->judul }}</h5>
 
-                    <p class="prestasi-siswa">
-                        Nama Siswa: <strong>{{ $prestasi->nama_siswa }}</strong>
-                    </p>
+                        <div class="prestasi-badge">{{ $prestasi->juara }}</div>
 
-                    <p class="prestasi-desc">
-                        {{ $prestasi->deskripsi }}
-                    </p>
+                        <p class="prestasi-siswa">
+                            Nama Siswa: <strong>{{ $prestasi->nama_siswa }}</strong>
+                        </p>
 
-                    <span class="prestasi-year">{{ $prestasi->tahun }}</span>
+                        <p class="prestasi-desc">
+                            {{ $prestasi->deskripsi }}
+                        </p>
+
+                        <span class="prestasi-year">{{ $prestasi->tahun }}</span>
+
+                    </div>
                 </div>
             </div>
             @empty

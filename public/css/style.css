@@ -627,6 +627,15 @@ body {
     clear: both;
 }
 
+.history-content ol {
+    color: var(--color-text-paragraph);
+    padding-left: 20px;
+}
+
+.history-content li {
+    color: var(--color-text-paragraph);
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .sejarah-img {
@@ -1011,8 +1020,9 @@ body {
 
 .berita-detail-image img {
     width: 100%;
-    border-radius: 14px;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
+    border-radius: 14px;
 }
 
 /* Content */
@@ -1090,6 +1100,7 @@ body {
     justify-content: center;
     align-items: center;
     color: #fff;
+    padding: 0 20px;
 }
 
 .hero-content h1 {
@@ -1121,7 +1132,7 @@ body {
     height: 100%;
     box-shadow: 4px 4px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--color-text-dark);
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .sarpras-card h5 {
@@ -1138,7 +1149,7 @@ body {
 }
 
 .sarpras-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 }
 
 .sarpras-icon {
@@ -1207,13 +1218,18 @@ body {
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.galeri-card:hover {
+    transform: translateY(-5px);
 }
 
 .galeri-card img {
     width: 100%;
     height: 260px;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
 }
 
 .galeri-card:hover img {
@@ -1305,28 +1321,31 @@ body {
     background: #fff;
     border-radius: 14px;
     overflow: hidden;
-    padding: 18px;
+    padding: 0;
     height: 100%;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease;
 }
 
 .prestasi-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
 }
 
 /* Gambar */
 .prestasi-image img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
     transition: transform 0.3s ease;
 }
 
 .prestasi-image img:hover {
     transform: scale(1.03);
+}
+
+.prestasi-body {
+    padding: 20px;
 }
 
 /* Judul */
@@ -1724,6 +1743,306 @@ body {
         margin-top: 25px;
         padding-top: 15px;
     }
+
+    /* HERO */
+    .hero-berita {
+        height: 200px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.8rem;
+        padding: 0 10px;
+    }
+
+    /* TITLE */
+    .berita-title {
+        font-size: 1.4rem;
+    }
+
+    .berita-subtitle {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+
+    /* CARD */
+    .berita-card {
+        border-radius: 15px;
+    }
+
+    .berita-img img {
+        height: 160px;
+    }
+
+    .berita-body {
+        padding: 15px;
+    }
+
+    .berita-date {
+        font-size: 0.75rem;
+    }
+
+    .berita-title-card {
+        font-size: 1rem;
+    }
+
+    .berita-desc {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .berita-link {
+        font-size: 0.85rem;
+    }
+
+    /* PAGINATION */
+    .pagination {
+        font-size: 0.85rem;
+        gap: 3px;
+    }
+
+    .berita-detail-section {
+        padding: 80px 0;
+        background-color: #f9fafb;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .berita-detail-section .container {
+        max-width: 900px;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        font-size: 14px;
+        margin-bottom: 20px;
+        color: #6b7280;
+    }
+
+    .breadcrumb a {
+        color: #2563eb;
+        text-decoration: none;
+    }
+
+    .breadcrumb span {
+        margin: 0 6px;
+    }
+
+    .breadcrumb .active {
+        color: #111827;
+    }
+
+    /* Title */
+    .berita-detail-title {
+        font-size: 32px;
+        line-height: 1.3;
+        margin-bottom: 12px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    /* Meta */
+    .berita-detail-meta {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 32px;
+    }
+
+    .berita-detail-meta .dot {
+        margin: 0 8px;
+    }
+
+    /* Image */
+    .berita-detail-image {
+        margin-bottom: 40px;
+    }
+
+    .berita-detail-image img {
+        width: 100%;
+        border-radius: 14px;
+        object-fit: cover;
+    }
+
+    /* Content */
+    .berita-detail-content {
+        font-size: 16px;
+        line-height: 1.9;
+        color: #374151;
+    }
+
+    .berita-detail-content p {
+        margin-bottom: 20px;
+    }
+
+    .berita-detail-content h2,
+    .berita-detail-content h3,
+    .berita-detail-content h4 {
+        margin: 40px 0 16px;
+        color: #111827;
+        font-weight: 600;
+    }
+
+    .berita-detail-content ul,
+    .berita-detail-content ol {
+        padding-left: 22px;
+        margin-bottom: 20px;
+    }
+
+    .berita-detail-content img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin: 24px 0;
+    }
+
+    /* Back */
+    .berita-detail-back {
+        margin-top: 60px;
+    }
+
+    .berita-detail-back a {
+        text-decoration: none;
+        font-weight: 500;
+        color: #2563eb;
+    }
+
+    .berita-detail-back a:hover {
+        text-decoration: underline;
+    }
+
+    .hero-sarpras {
+        height: 250px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        padding: 0 20px;
+    }
+
+    .sarpras-title {
+        font-size: 24px;
+    }
+
+    .sarpras-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    .sarpras-card {
+        padding: 20px;
+    }
+
+    .sarpras-icon {
+        font-size: 32px;
+    }
+
+    .sarpras-card h5 {
+        font-size: 1.1rem;
+    }
+
+    .sarpras-card p {
+        font-size: 0.9rem;
+    }
+
+    .hero-galeri {
+        height: 250px;
+    }
+
+     .galeri-title {
+        font-size: 1.6rem;
+    }
+
+    .galeri-subtitle {
+        font-size: 0.95rem;
+        padding: 0 10px;
+    }
+
+    .galeri-section .row.g-4 > div {
+        width: 50%;
+    }
+
+    .galeri-card img {
+        height: 200px;
+    }
+
+    .galeri-overlay {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #galeriModalImage {
+        max-height: 300px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* HERO */
+    .hero-prestasi {
+        height: 250px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+
+    /* TITLE */
+    .prestasi-title {
+        font-size: 1.7rem;
+    }
+
+    .prestasi-subtitle {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+
+    /* CARD */
+    .prestasi-card {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .prestasi-image img {
+        height: 160px;
+    }
+
+    .prestasi-card h5 {
+        font-size: 0.95rem;
+    }
+
+    .prestasi-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+
+    .prestasi-siswa {
+        font-size: 0.85rem;
+    }
+
+    .prestasi-desc {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .prestasi-year {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1888,6 +2207,223 @@ body {
 
     .kk-position {
         margin-top: 24px;
+    }
+
+    .berita-detail-section {
+        padding: 40px 0;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    /* Judul */
+    .berita-detail-title {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    /* Meta */
+    .berita-detail-meta {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    /* Gambar */
+    .berita-detail-image img {
+        border-radius: 10px;
+    }
+
+    /* Content */
+    .berita-detail-content {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .berita-detail-content p {
+        margin-bottom: 16px;
+    }
+
+    .berita-detail-content h2,
+    .berita-detail-content h3,
+    .berita-detail-content h4 {
+        font-size: 18px;
+        margin: 25px 0 10px;
+    }
+
+    .berita-detail-content ul,
+    .berita-detail-content ol {
+        padding-left: 18px;
+    }
+
+    /* Back */
+    .berita-detail-back {
+        margin-top: 30px;
+    }
+
+    .berita-detail-back a {
+        font-size: 14px;
+    }
+
+    /* HERO */
+    .hero-sarpras {
+        height: 200px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.8rem;
+        padding: 0 10px;
+    }
+
+    /* TITLE */
+    .sarpras-title {
+        font-size: 1.4rem;
+    }
+
+    .sarpras-subtitle {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+
+    /* CARD */
+    .sarpras-card {
+        padding: 15px;
+    }
+
+    .sarpras-icon {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    .sarpras-card h5 {
+        font-size: 1rem;
+    }
+
+    .sarpras-card p {
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+
+    /* HERO */
+    .hero-galeri {
+        height: 200px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.8rem;
+        padding: 0 10px;
+    }
+
+    /* TITLE */
+    .galeri-title {
+        font-size: 1.4rem;
+    }
+
+    .galeri-subtitle {
+        font-size: 0.85rem;
+    }
+
+    /* CARD IMAGE */
+    .galeri-section .row.g-4 > div {
+        width: 50%;
+    }
+
+    .galeri-card img {
+        aspect-ratio: 1/1;
+        height: auto !important;
+    }
+
+    /* OVERLAY TEXT */
+    .galeri-overlay h5 {
+        font-size: 0.9rem;
+    }
+
+    /* MODAL */
+    .modal-dialog {
+        margin: 10px auto;
+    }
+
+    .modal-content {
+        border-radius: 10px;
+    }
+
+    .modal-body {
+        padding: 10px;
+    }
+
+    #galeriModalImage {
+        max-height: 220px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    #galeriModalDescription {
+        font-size: 0.85rem;
+    }
+
+    /* HERO */
+    .hero-prestasi {
+        height: 200px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.8rem;
+        padding: 0 10px;
+    }
+
+    /* TITLE */
+    .prestasi-title {
+        font-size: 1.4rem;
+    }
+
+    .prestasi-subtitle {
+        font-size: 0.85rem;
+        padding: 0 10px;
+    }
+
+    /* CARD */
+    .prestasi-card {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .prestasi-image img {
+        height: 140px;
+    }
+
+    .prestasi-body {
+        padding: 12px;
+    }
+
+    .prestasi-card h5 {
+        font-size: 1rem;
+    }
+
+    .prestasi-desc {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .prestasi-siswa {
+        font-size: 0.85rem;
+    }
+
+    .prestasi-year {
+        font-size: 0.8rem;
     }
 }
 

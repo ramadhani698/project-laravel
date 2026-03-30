@@ -56,7 +56,7 @@
         </li>
       </ul>
     </li>
-    <li class="nav-item nav-group">
+    <!-- <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/school.svg') }}" class="nav-icon" alt="Jurusan Icon" style="width: 1em; height: 1em;"> Jurusan
       </a>
@@ -77,7 +77,7 @@
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
     <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/info.svg') }}" class="nav-icon" alt="Informasi Icon" style="width: 1em; height: 1em;"> Informasi Sekolah

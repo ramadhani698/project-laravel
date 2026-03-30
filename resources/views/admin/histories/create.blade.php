@@ -44,4 +44,14 @@
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('textarea[name="content"]'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection

@@ -16,7 +16,7 @@ class InformasiController extends Controller
 
     public function gallery()
     {
-        $galleries = Gallery::latest()->paginate(9);
+        $galleries = Gallery::latest()->paginate(6);
         return view('frontend.informasi.gallery', compact('galleries'));
     }
 }

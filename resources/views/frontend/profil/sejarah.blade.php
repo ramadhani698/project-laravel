@@ -12,9 +12,9 @@
                 class="sejarah-img">
             <h2>{{ $history->title }}</h2>
 
-            <p>
-                {!! nl2br(e($history->content)) !!}
-            </p>
+            <div class="history-content">
+                {!! $history->content  !!}
+            </div>
 
         </div>
 

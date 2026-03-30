@@ -22,7 +22,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Isi Berita</label>
-                    <textarea class="form-control" name="content" rows="6" placeholder="Isi berita" required></textarea>
+                    <textarea class="form-control" name="content" rows="6" placeholder="Isi berita"></textarea>
                 </div>
 
                 <div class="mb-3">
@@ -50,4 +50,14 @@
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('textarea[name="content"]'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 @endsection
