@@ -43,6 +43,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center mt-4">
+                {{ $galleries->links() }}
+            </div>
         </div>
     </div>
 @endsection

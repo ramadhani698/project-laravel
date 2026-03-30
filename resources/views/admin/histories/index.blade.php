@@ -27,7 +27,7 @@
                         <td>
                             <img src="{{ asset('uploads/histories/'.$history->image) }}" width="120">
                         </td>
-                        <td>{{ \Illuminate\Support\Str::limit($history->content, 100) }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit(strip_tags($history->content), 100) }}</td>
                         <td>{{ $history->position }}</td>
                         <td>
                             <a href="{{ route('admin.histories.edit', $history->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>

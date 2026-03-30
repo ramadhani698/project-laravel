@@ -52,26 +52,13 @@
         </div>
 
         {{-- ================= PAGINATION ================= --}}
-        <div class="row mt-5">
-            <div class="col d-flex justify-content-center">
-                <nav>
-                    <ul class="pagination">
-                        <li class="page-item disabled">
-                            <span class="page-link">Sebelumnya</span>
-                        </li>
-                        <li class="page-item active">
-                            <span class="page-link">1</span>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Selanjutnya</a>
-                        </li>
-                    </ul>
-                </nav>
+        @if ($galleries->hasPages())
+            <div class="row mt-5">
+                <div class="col d-flex justify-content-center">
+                    {{ $galleries->links('pagination::bootstrap-5') }}
+                </div>
             </div>
-        </div>
+        @endif
 
         {{-- ================= MODAL GALERI ================= --}}
         <div class="modal fade" id="galeriModal" tabindex="-1">

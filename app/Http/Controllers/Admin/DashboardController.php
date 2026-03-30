@@ -8,6 +8,8 @@ use App\Models\Berita;
 use App\Models\Jurusan;
 use App\Models\Prestasi;
 use App\Models\Gallery;
+use App\Models\Statistik;
+use App\Models\Sarpras;
 
 class DashboardController extends Controller
 {
@@ -17,12 +19,16 @@ class DashboardController extends Controller
         $totalJurusan = Jurusan::count();
         $totalPrestasi = Prestasi::count();
         $totalGallery = Gallery::count();
+        $statistiks = Statistik::orderBy('id', 'asc')->get();
+        $totalFasilitas = Sarpras::count();
 
         return view('admin.dashboard', compact(
             'totalBerita',
             'totalJurusan',
             'totalPrestasi',
-            'totalGallery'
+            'totalGallery',
+            'statistiks',
+            'totalFasilitas'
         ));
     }
 }
