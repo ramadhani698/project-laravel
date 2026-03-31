@@ -4,9 +4,9 @@
 
 {{-- ================= HERO SECTION ================= --}}
 <section class="hero-galeri position-relative">
-    <img src="{{ asset('images/hero-galeri.jpg') }}" class="w-100 hero-img" alt="Galeri Sekolah">
-    <div class="hero-overlay"></div>
-    <div class="hero-content text-center">
+    <!-- <img src="{{ asset('images/hero-galeri.jpg') }}" class="w-100 hero-img" alt="Galeri Sekolah"> -->
+    <!-- <div class="hero-overlay"></div> -->
+    <div class="hero-content-galeri text-center">
         <h1>Galeri Sekolah</h1>
         <p>Dokumentasi kegiatan dan fasilitas SMK Muhammadiyah 2 Tangerang</p>
     </div>
