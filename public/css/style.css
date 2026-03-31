@@ -936,6 +936,7 @@ body {
     height: 400px;
     position: relative;
     overflow: hidden;
+    background: url('/images/bg-berita.png') center/cover no-repeat;
 }
 
 .hero-img {
@@ -943,11 +944,11 @@ body {
     object-fit: cover;
 }
 
-.hero-overlay {
+/* .hero-overlay {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.55);
-}
+} */
 
 .hero-content {
     position: absolute;
@@ -1079,6 +1080,7 @@ body {
     height: 400px;
     position: relative;
     overflow: hidden;
+    background: url('/images/bg-sarpras1.jpg') center/cover no-repeat;
 }
 
 .hero-sarpras .hero-img {
@@ -1108,6 +1110,12 @@ body {
     font-weight: 700;
     margin-bottom: 15px;
     font-family: "Bricolage Grotesque", sans-serif;
+    mix-blend-mode: difference;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    mix-blend-mode: difference;
 }
 
 .sarpras-title {
@@ -1165,6 +1173,7 @@ body {
     height: 400px;
     position: relative;
     overflow: hidden;
+    background: url('/images/bg-galeri.jpg') center/cover no-repeat;
 }
 
 .hero-galeri .hero-img {
@@ -1178,7 +1187,7 @@ body {
     background: rgba(0, 0, 0, 0.55);
 }
 
-.hero-content {
+.hero-content-galeri {
     position: absolute;
     inset: 0;
     display: flex;
@@ -1188,7 +1197,7 @@ body {
     color: #fff;
 }
 
-.hero-content h1 {
+.hero-content-galeri h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 15px;

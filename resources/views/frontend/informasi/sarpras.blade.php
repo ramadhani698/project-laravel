@@ -4,8 +4,8 @@
 
 {{-- ================= HERO SECTION ================= --}}
 <section class="hero-sarpras position-relative">
-    <img src="{{ asset('images/fasilitas.jpg') }}" class="w-100 hero-img" alt="Sarana dan Prasarana">
-    <div class="hero-overlay"></div>
+    <!-- <img src="{{ asset('images/download.jpg') }}" class="w-100 hero-img" alt="Sarana dan Prasarana"> -->
+    <!-- <div class="hero-overlay"></div> -->
     <div class="hero-content text-center">
         <h1>Sarana dan Prasarana</h1>
         <p>Fasilitas pendukung kegiatan belajar mengajar SMK Muhammadiyah 2 Tangerang</p>

@@ -4,11 +4,11 @@
 
 {{-- ================= HERO SECTION ================= --}}
 <section class="hero-berita position-relative">
-    <img src="{{ asset('images/breakingnews.jpg') }}" class="w-100 hero-img" alt="Berita Terkini">
-    <div class="hero-overlay"></div>
+    <!-- <img src="{{ asset('images/bg-berita.png') }}" class="w-100 hero-img" alt="Berita Terkini"> -->
+    <!-- <div class="hero-overlay"></div> -->
     <div class="hero-content text-center">
-        <h1>Berita Terkini</h1>
-        <p>Informasi dan kegiatan terbaru SMK Muhammadiyah 2 Tangerang</p>
+        <!-- <h1>Berita Terkini</h1>
+        <p>Informasi dan kegiatan terbaru SMK Muhammadiyah 2 Tangerang</p> -->
     </div>
 </section>
 
