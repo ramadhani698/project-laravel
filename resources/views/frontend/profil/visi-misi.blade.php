@@ -4,52 +4,62 @@
 
 @section('content')
 
-<section class="vm-page-header">
-    <div class="vm-container vm-text-center">
-        <h1 class="vm-title">Visi & Misi Sekolah</h1>
+<section class="container py-5 vm-section" style="margin-top: 70px;">
 
-        <img 
-            src="{{ Storage::url('vision/'.$vision->image) }}" 
+    {{-- HERO: foto sebagai background --}}
+    <div class="vm-hero" data-aos="fade-in">
+        <img
+            src="{{ Storage::url('vision/'.$vision->image) }}"
             alt="Visi dan Misi Sekolah"
-            class="vm-header-image"
+            class="vm-hero-img"
+            loading="lazy"
         >
-    </div>
-</section>
-
-<section class="vm-section">
-    <div class="vm-container">
-        <div class="vm-grid">
-
-            <!-- VISI -->
-            <div class="vm-col">
-                <div class="vm-card">
-                    <div class="vm-card-body">
-                        <h3 class="vm-card-title">Visi</h3>
-                        <p class="vm-text">
-                            {{ $vision->vision ?? 'Visi belum tersedia.' }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MISI -->
-            <div class="vm-col">
-                <div class="vm-card">
-                    <div class="vm-card-body">
-                        <h3 class="vm-card-title">Misi</h3>
-                        <ul class="vm-list">
-                            @forelse($vision->mission ?? [] as $item)
-                                <li>{{ $item }}</li>
-                            @empty
-                                <li>Misi belum tersedia.</li>
-                            @endforelse
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+        <div class="vm-hero-overlay">
+            <span class="vm-eyebrow">Tentang Kami</span>
+            <h1 class="vm-hero-title">Visi &amp; Misi Sekolah</h1>
+            <p class="vm-hero-desc">
+                Arah yang kami tuju, dan langkah-langkah nyata yang kami tempuh untuk mencapainya.
+            </p>
         </div>
     </div>
+
+    {{-- VISI & MISI: dua kotak sejajar --}}
+    <div class="vm-grid">
+
+        {{-- VISI --}}
+        <div class="vm-card vm-card-visi" data-aos="fade-up" data-aos-delay="100">
+            <div class="vm-card-icon">
+                <i class="fas fa-compass"></i>
+            </div>
+            <span class="vm-card-eyebrow">Visi Kami</span>
+            <h3 class="vm-card-title">Visi</h3>
+            <p class="vm-card-text">
+                {{ $vision->vision ?? 'Visi belum tersedia.' }}
+            </p>
+        </div>
+
+        {{-- MISI --}}
+        <div class="vm-card vm-card-misi" data-aos="fade-up" data-aos-delay="200">
+            <div class="vm-card-icon">
+                <i class="fas fa-route"></i>
+            </div>
+            <span class="vm-card-eyebrow">Langkah Kami</span>
+            <h3 class="vm-card-title">Misi</h3>
+
+            <ol class="vm-card-list">
+                @forelse($vision->mission ?? [] as $item)
+                    <li>
+                        <span class="vm-card-list-num">{{ sprintf('%02d', $loop->iteration) }}</span>
+                        <span>{{ $item }}</span>
+                    </li>
+                @empty
+                    <li><span>Misi belum tersedia.</span></li>
+                @endforelse
+            </ol>
+        </div>
+
+    </div>
+
 </section>
 
 @endsection

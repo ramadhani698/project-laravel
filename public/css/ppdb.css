@@ -1,0 +1,108 @@
+:root {
+    --ppdb-primary: #0F5C2E;   /* hijau muhammadiyah */
+    --ppdb-primary-dark: #0A4522;
+    --ppdb-gold: #E8B84B;
+    --ppdb-dark: #1A1A1A;
+    --ppdb-light-bg: #F7F9F7;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--ppdb-dark);
+}
+
+/* Navbar */
+.navbar-ppdb {
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    padding: 0.75rem 0;
+}
+.navbar-ppdb .brand-text {
+    font-weight: 700;
+    color: var(--ppdb-primary);
+    font-size: 1rem;
+}
+.navbar-ppdb .nav-link {
+    font-weight: 500;
+    color: var(--ppdb-dark);
+    margin: 0 0.5rem;
+}
+.navbar-ppdb .nav-link.active,
+.navbar-ppdb .nav-link:hover {
+    color: var(--ppdb-primary);
+}
+.btn-daftar {
+    background: var(--ppdb-primary);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+.btn-daftar:hover {
+    background: var(--ppdb-primary-dark);
+    color: #fff;
+}
+
+/* Sections */
+.ppdb-section {
+    padding: 100px 0;
+    scroll-margin-top: 80px;
+}
+.bg-light-section {
+    background: var(--ppdb-light-bg);
+}
+.section-title {
+    font-weight: 800;
+    color: var(--ppdb-primary);
+    margin-bottom: 0.5rem;
+}
+.section-subtitle {
+    color: #666;
+    margin-bottom: 2.5rem;
+}
+
+/* Hero */
+.ppdb-hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--ppdb-primary) 0%, var(--ppdb-primary-dark) 100%);
+    color: #fff;
+    padding-top: 90px;
+}
+.badge-tahun {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.hero-title {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin: 1.25rem 0;
+}
+.hero-subtitle {
+    font-size: 1.05rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+.btn-daftar-lg {
+    background: var(--ppdb-gold);
+    color: var(--ppdb-dark);
+    font-weight: 700;
+    padding: 0.75rem 2.25rem;
+    border-radius: 50px;
+    display: inline-block;
+}
+.btn-daftar-lg:hover {
+    background: #d9a63b;
+    color: var(--ppdb-dark);
+}
+
+/* Footer */
+.ppdb-footer {
+    background: var(--ppdb-dark);
+    color: #ccc;
+    font-size: 0.9rem;
+}

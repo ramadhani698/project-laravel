@@ -1,0 +1,220 @@
+/* =============================
+   TOKENS
+============================= */
+.vm-section {
+    --vm-forest: #1c8661;
+    --vm-forest-soft: #204a3b;
+    --vm-gold: #c8a24c;
+    --vm-ivory: #f7f5ef;
+    --vm-ink: #1e2620;
+    --vm-muted: #6c8579;
+    --vm-line: rgba(22, 54, 43, 0.12);
+}
+
+/* =============================
+   HERO
+============================= */
+.vm-hero {
+    position: relative;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+}
+
+.vm-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.vm-hero:hover .vm-hero-img {
+    transform: scale(1.04);
+}
+
+.vm-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14, 30, 23, 0.25) 0%, rgba(14, 30, 23, 0.55) 55%, rgba(14, 30, 23, 0.8) 100%);
+}
+
+.vm-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 24px;
+}
+
+.vm-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--vm-gold);
+    margin-bottom: 14px;
+}
+
+.vm-hero-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 14px;
+}
+
+.vm-hero-desc {
+    max-width: 480px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =============================
+   GRID & CARDS
+============================= */
+.vm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.vm-card {
+    border-radius: 16px;
+    padding: 2.25rem 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vm-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    margin-bottom: 1.25rem;
+    border: 1px solid;
+}
+
+.vm-card-eyebrow {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.vm-card-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 16px;
+}
+
+/* --- VISI: kotak gelap --- */
+.vm-card-visi {
+    background: var(--vm-forest);
+    background-image: linear-gradient(150deg, var(--vm-forest-soft), var(--vm-forest) 65%);
+    box-shadow: 0 18px 40px -22px rgba(22, 54, 43, 0.55);
+}
+
+.vm-card-visi:hover {
+    transform: translateY(-4px);
+}
+
+.vm-card-visi .vm-card-icon {
+    color: var(--vm-gold);
+    border-color: rgba(200, 162, 76, 0.4);
+}
+
+.vm-card-visi .vm-card-eyebrow {
+    color: var(--vm-gold);
+}
+
+.vm-card-visi .vm-card-title {
+    color: #fff;
+}
+
+.vm-card-text {
+    font-style: italic;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+/* --- MISI: kotak terang --- */
+.vm-card-misi {
+    background: #d8d5d5;
+    border: 1px solid var(--vm-line);
+    box-shadow: 0 2px 6px rgba(22, 54, 43, 0.05);
+}
+
+.vm-card-misi:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px -20px rgba(22, 54, 43, 0.3);
+}
+
+.vm-card-misi .vm-card-icon {
+    color: var(--vm-forest);
+    border-color: var(--vm-gold);
+}
+
+.vm-card-misi .vm-card-eyebrow {
+    color: var(--vm-muted);
+}
+
+.vm-card-misi .vm-card-title {
+    color: var(--vm-forest);
+}
+
+.vm-card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.vm-card-list li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--vm-line);
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--vm-ink);
+}
+
+.vm-card-list li:first-child {
+    border-top: none;
+}
+
+.vm-card-list-num {
+    flex: 0 0 auto;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--vm-gold);
+    padding-top: 2px;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 768px) {
+    .vm-grid {
+        grid-template-columns: 1fr;
+    }
+    .vm-hero {
+        height: 260px;
+    }
+}

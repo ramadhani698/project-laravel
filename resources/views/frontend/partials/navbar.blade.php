@@ -72,7 +72,7 @@
 
             <!-- PPDB BUTTON -->
             <div class="d-flex">
-                <a href="{{ url('/ppdb') }}" class="btn btn-ppdb">PPDB</a>
+                <a href="{{ url('/ppdb') }}" class="btn btn-ppdb" target="_blank">PPDB</a>
             </div>
 
         </div>
