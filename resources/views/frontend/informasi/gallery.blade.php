@@ -33,10 +33,10 @@
                     <div class="galeri-card"
                         data-bs-toggle="modal"
                         data-bs-target="#galeriModal"
-                        data-image="{{ asset('uploads/gallery/'.$gallery->image) }}"
+                        data-image="{{ Storage::url('gallery/'.$gallery->image) }}"
                         data-title="{{ $gallery->title }}"
                         data-description="{{ $gallery->description }}">
-                        <img src="{{ asset('uploads/gallery/'.$gallery->image) }}">
+                        <img src="{{ Storage::url('gallery/'.$gallery->image) }}">
 
                         <div class="galeri-overlay">
                             <h5>{{ $gallery->title }}</h5>

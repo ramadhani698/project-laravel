@@ -31,7 +31,7 @@
 
             <div class="col-md-6 text-center jurusan-about__image-wrapper">
                 <img 
-                    src="{{ asset('uploads/jurusan/' . $jurusan->image) }}" 
+                    src="{{ Storage::url('jurusan/' . $jurusan->image) }}" 
                     alt="Kegiatan Jurusan {{ $jurusan->name }}"
                     class="img-fluid rounded-4 shadow jurusan-about__image"
                 >
@@ -46,7 +46,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center jurusan-head__content">
                 <img 
-                    src="{{ asset('uploads/jurusan_head/' . $jurusan->head->photo) }}" 
+                    src="{{ Storage::url('jurusan_head/' . $jurusan->head->photo) }}" 
                     alt="Kepala Kompetensi Keahlian {{ $jurusan->name }}"
                     class="img-fluid rounded-circle mb-3 jurusan-head__photo"
                 >
@@ -113,18 +113,16 @@
         </div>
 
        <div class="row">
-    @foreach($jurusan->galleries as $gallery)
-        <div class="col-md-4 mb-4">
-            <div class="gallery-square">
-                <img 
-                    src="{{ asset('uploads/jurusan_gallery/' . $gallery->image) }}" 
-                    class="gallery-image"
-                >
-            </div>
-        </div>
-    @endforeach
-</div>
-    
+            @foreach($jurusan->galleries as $gallery)
+                <div class="col-md-4 mb-4">
+                    <div class="gallery-square">
+                        <img 
+                            src="{{ Storage::url('jurusan_gallery/' . $gallery->image) }}" 
+                            class="gallery-image"
+                        >
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>

@@ -35,7 +35,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="berita-card">
                     <div class="berita-img">
-                        <img src="{{ asset('uploads/berita/' . $berita->image) }}" alt="Berita">
+                        <img src="{{ Storage::url('berita/' . $berita->image) }}" alt="Berita">
                     </div>
                     <div class="berita-body">
                         <span class="berita-date">

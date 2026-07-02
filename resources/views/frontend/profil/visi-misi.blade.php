@@ -9,7 +9,7 @@
         <h1 class="vm-title">Visi & Misi Sekolah</h1>
 
         <img 
-            src="{{ $vision->image_url }}" 
+            src="{{ Storage::url('vision/'.$vision->image) }}" 
             alt="Visi dan Misi Sekolah"
             class="vm-header-image"
         >

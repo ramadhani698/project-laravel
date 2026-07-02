@@ -32,7 +32,7 @@
         <!-- Image -->
         @if ($berita->image)
             <div class="berita-detail-image">
-                <img src="{{ asset('uploads/berita/' . $berita->image) }}"
+                <img src="{{ Storage::url('berita/' . $berita->image) }}"
                      alt="{{ $berita->title }}">
             </div>
         @endif

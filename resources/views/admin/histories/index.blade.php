@@ -25,7 +25,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $history->title }}</td>
                         <td>
-                            <img src="{{ asset('uploads/histories/'.$history->image) }}" width="120">
+                            <img src="{{ Storage::url('histories/'.$history->image) }}" width="120">
                         </td>
                         <td>{{ \Illuminate\Support\Str::limit(strip_tags($history->content), 100) }}</td>
                         <td>{{ $history->position }}</td>

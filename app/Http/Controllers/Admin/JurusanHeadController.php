@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jurusan;
 use App\Models\JurusanHead;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class JurusanHeadController extends Controller
@@ -36,25 +37,16 @@ class JurusanHeadController extends Controller
         if ($request->hasFile('photo')) {
 
             // hapus foto lama (kalo ada)
-            if ($photoName) {
-                $oldPath = public_path('uploads/jurusan_head/' . $photoName);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
-                }
+            if ($photoName && Storage::disk('public')->exists('jurusan_head/'.$photoName)) {
+                Storage::disk('public')->delete('jurusan_head/'.$photoName);
             }
 
             // upload foto baru
-            $photo = $request->File('photo');
-            $photoName = time(). '.' . $photo->extension();
-            $path = public_path('uploads/jurusan_head');
+            $photo = $request->file('photo');
+            $photoName = time().'_'.uniqid().'.'.$photo->extension();
 
-            // buat folder kalo belom ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            Image::read($photo)
-                ->save($path.'/'.$photoName, 75);
+            $encoded = Image::read($photo)->encodeByExtension($photo->extension(), quality: 75);
+            Storage::disk('public')->put('jurusan_head/'.$photoName, (string) $encoded);
         }
 
         // 5. update / create kepala jurusan

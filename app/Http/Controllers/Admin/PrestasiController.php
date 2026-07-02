@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Prestasi;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class PrestasiController extends Controller
@@ -36,19 +37,13 @@ class PrestasiController extends Controller
         $imageName = null;
 
         // 3. upload gambar
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/prestasi');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya belum ada
-            if(!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('prestasi/'.$imageName, (string) $encoded);
         }
 
         // 4. simpan ke db
@@ -92,26 +87,18 @@ class PrestasiController extends Controller
         $imageName = $prestasi->image;
 
         // 4. upload gambar
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
             // hapus gambar lama
-            $oldPath = public_path('uploads/prestasi/'.$prestasi->image);
-            if(file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($prestasi->image && Storage::disk('public')->exists('prestasi/'.$prestasi->image)) {
+                Storage::disk('public')->delete('prestasi/'.$prestasi->image);
             }
 
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/prestasi');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya blm ada
-            if(!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('prestasi/'.$imageName, (string) $encoded);
         }
 
         // 5. update db
@@ -135,10 +122,9 @@ class PrestasiController extends Controller
         // 1. cari id
         $prestasi = Prestasi::findOrFail($id);
 
-        // 2. hapus gambar dari folder
-        $imagePath = public_path('uploads/prestasi/'.$prestasi->image);
-        if(file_exists($imagePath)) {
-            unlink($imagePath);
+        // 2. hapus gambar
+        if ($prestasi->image && Storage::disk('public')->exists('prestasi/'.$prestasi->image)) {
+            Storage::disk('public')->delete('prestasi/'.$prestasi->image);
         }
 
         // 3. hapus data dari db
