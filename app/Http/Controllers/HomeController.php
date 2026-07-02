@@ -17,8 +17,7 @@ class HomeController extends Controller
         $keunggulans = Keunggulan::orderBy('order', 'asc')->get();
         $statistiks = Statistik::orderBy('order', 'asc')->get();
         $jurusans = Jurusan::orderBy('order', 'asc')
-            ->take(3) //section jurusan ringkas
-            ->get();
+            ->paginate(3, ['*'], 'jurusan_page');
         $beritas = Berita::where('status', 'publish')
             ->whereNotNull('published_at')
             ->orderByDesc('published_at')

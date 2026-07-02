@@ -13,8 +13,8 @@
 
             <img 
                 src="{{ $principalMessage->header_image
-                    ? asset('uploads/principal-message/header-image/'.$principalMessage->header_image)
-                    : asset('images/smk.jpg') }}"
+                    ? Storage::url('principal-message/header-image/'.$principalMessage->header_image)
+                    : Storage::url('images/smk.jpg') }}"
                 alt="Kepala Sekolah"
                 class="kk-header-image"
             >
@@ -30,8 +30,8 @@
                 <div class="kk-photo-wrapper">
                     <img 
                         src="{{ $principalMessage->photo
-                            ? asset('uploads/principal-message/photo/'.$principalMessage->photo)
-                            : asset('images/kepsek.jpg') }}"
+                            ? Storage::url('principal-message/photo/'.$principalMessage->photo)
+                            : Storage::url('images/kepsek.jpg') }}"
                         alt="Foto Kepala Sekolah"
                         class="kk-photo"
                     >

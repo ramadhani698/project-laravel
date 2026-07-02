@@ -8,7 +8,7 @@
     <div class="container">
         @forelse($histories as $history)
         <div class="sejarah-wrapper">
-            <img src="{{ asset('uploads/histories/'.$history->image) }}"
+            <img src="{{ Storage::url('histories/'.$history->image) }}"
                 class="sejarah-img">
             <h2>{{ $history->title }}</h2>
 

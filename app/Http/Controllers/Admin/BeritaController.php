@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berita;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class BeritaController extends Controller
@@ -32,24 +33,18 @@ class BeritaController extends Controller
             'status' => 'required|in:draft,publish',
             'published_at' => 'nullable|date',
         ]);
-        
+
         // 2. variabel buat nama gambar
         $imageName = null;
 
         // 3. proses upload gambar
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/berita');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya belum ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('berita/'.$imageName, (string) $encoded);
         }
 
         // 4. simpan ke db
@@ -97,24 +92,16 @@ class BeritaController extends Controller
         if ($request->hasFile('image')) {
 
             // hapus gambar lama
-            $oldPath = public_path('uploads/berita/'.$berita->image);
-            if ($berita->image && file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($berita->image && Storage::disk('public')->exists('berita/'.$berita->image)) {
+                Storage::disk('public')->delete('berita/'.$berita->image);
             }
 
             // proses upload gambar baru
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/berita');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya belum ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('berita/'.$imageName, (string) $encoded);
         }
 
         // 5. update ke db
@@ -140,9 +127,8 @@ class BeritaController extends Controller
         $berita = Berita::findOrFail($id);
 
         // 2. hapus gambar
-        $imagePath = public_path('uploads/berita/'.$berita->image);
-        if ($berita->image && file_exists($imagePath)) {
-            unlink($imagePath);
+        if ($berita->image && Storage::disk('public')->exists('berita/'.$berita->image)) {
+            Storage::disk('public')->delete('berita/'.$berita->image);
         }
 
         // 3. hapus dari db

@@ -28,7 +28,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Gambar Saat Ini</label><br>
-                    <img src="{{ asset('uploads/berita/'.$berita->image) }}" width="200" class="mb-2">
+                    <img src="{{ Storage::url('berita/'.$berita->image) }}" width="200" class="mb-2">
                 </div>
 
                 <div class="mb-3">

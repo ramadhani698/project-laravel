@@ -34,7 +34,7 @@
                 <div class="prestasi-card">
 
                     <div class="prestasi-image">
-                        <img src="{{ asset('uploads/prestasi/'.$prestasi->image) }}">
+                        <img src="{{ Storage::url('prestasi/'.$prestasi->image) }}">
                     </div>
 
                     <div class="prestasi-body">

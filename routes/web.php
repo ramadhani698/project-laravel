@@ -22,6 +22,8 @@ use App\Http\Controllers\BeritaController as FrontendBeritaController;
 use App\Http\Controllers\ProfilController as FrontendProfilController;
 use App\Http\Controllers\InformasiController as FrontendInformasiController;
 use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
+use App\Http\Controllers\HomeController as FrontendHomeController;
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 

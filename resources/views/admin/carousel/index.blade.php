@@ -26,7 +26,7 @@
                     @forelse($carousels as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img src="{{ asset('uploads/carousel/'.$item->image) }}" width="120"></td>
+                        <td><img src="{{ Storage::url('carousel/'.$item->image) }}" width="120"></td>
                         <td>{{ $item->title ?? '-' }}</td>
                         <td>
                             <a href="{{ route('admin.carousel.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>

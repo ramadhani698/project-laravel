@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SchoolHistory;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class SchoolHistoryController extends Controller
@@ -37,17 +38,11 @@ class SchoolHistoryController extends Controller
         // 3. upload gambar
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/histories');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya belum ada, buat foldernya
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('histories/'.$imageName, (string) $encoded);
         }
 
         // 4. simpan data ke db
@@ -91,24 +86,16 @@ class SchoolHistoryController extends Controller
         // 4. upload gambar
         if ($request->hasFile('image')) {
             // hapus gambar lama
-            $oldPath = public_path('uploads/histories/'.$imageName);
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($imageName && Storage::disk('public')->exists('histories/'.$imageName)) {
+                Storage::disk('public')->delete('histories/'.$imageName);
             }
 
             // upload gambar baru
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/histories');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya belum ada, buat foldernya
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('histories/'.$imageName, (string) $encoded);
         }
 
         // 5. update ke db
@@ -132,9 +119,8 @@ class SchoolHistoryController extends Controller
         $history = SchoolHistory::findOrFail($id);
 
         // 2. hapus gambar
-        $imagePath = public_path('uploads/histories/'.$history->image);
-        if (file_exists($imagePath)){
-            unlink($imagePath);
+        if ($history->image && Storage::disk('public')->exists('histories/'.$history->image)) {
+            Storage::disk('public')->delete('histories/'.$history->image);
         }
 
         // 3. hapus data dari db
