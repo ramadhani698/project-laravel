@@ -22,7 +22,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Gambar saat ini</label><br>
-                    <img src="{{ asset('uploads/vision/'.$vision->image) }}" width="200">
+                    <img src="{{ Storage::url('vision/'.$vision->image) }}" width="200">
                 </div>
 
                 <div class="mb-3">

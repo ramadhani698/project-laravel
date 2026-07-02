@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $beritas->firstItem() + $loop->index }}</td>
                         <td>{{ $berita->title }}</td>
-                        <td><img src="{{ asset('uploads/berita/'.$berita->image) }}" width="120"></td>
+                        <td><img src="{{ Storage::url('berita/'.$berita->image) }}" width="120"></td>
                         <td>
                             @if($berita->status== 'publish')
                                 <span class="badge bg-success">Publish</span>

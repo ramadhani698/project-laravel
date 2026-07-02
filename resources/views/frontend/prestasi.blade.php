@@ -4,8 +4,8 @@
 
 {{-- ================= HERO SECTION ================= --}}
 <section class="hero-prestasi position-relative">
-    <!-- <img src="{{ asset('images/hero-prestasi.jpg') }}" class="w-100 hero-img" alt="Prestasi Siswa">
-    <div class="hero-overlay"></div> -->
+    <img src="{{ asset('images/hero-prestasi.jpg') }}" class="w-100 hero-img" alt="Prestasi Siswa">
+    <div class="hero-overlay"></div>
     <div class="hero-content text-center">
         <h1>Prestasi Siswa</h1>
         <p>Apresiasi atas pencapaian dan prestasi siswa SMK Muhammadiyah 2 Tangerang</p>
@@ -34,7 +34,7 @@
                 <div class="prestasi-card">
 
                     <div class="prestasi-image">
-                        <img src="{{ asset('uploads/prestasi/'.$prestasi->image) }}">
+                        <img src="{{ Storage::url('prestasi/'.$prestasi->image) }}">
                     </div>
 
                     <div class="prestasi-body">

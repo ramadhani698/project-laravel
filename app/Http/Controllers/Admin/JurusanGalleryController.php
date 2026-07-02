@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Jurusan;
 use App\Models\JurusanGallery;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class JurusanGalleryController extends Controller
@@ -25,23 +26,16 @@ class JurusanGalleryController extends Controller
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
-        // 3. lokasi folder uploads
-        $path = public_path('uploads/jurusan_gallery');
-
-        if(!file_exists($path)) {
-            mkdir($path, 0755, true);
-        }
-        
-        // 4. loop semua gambar
+        // 3. loop semua gambar
         $order = $jurusan->galleries()->max('order') + 1;
         foreach ($request->file('images') as $image) {
 
             // nama file unik
-            $imageName = time().'.'.uniqid().'.'.$image->extension();
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('jurusan_gallery/'.$imageName, (string) $encoded);
 
             // simpan ke database
             $jurusan->galleries()->create([
@@ -50,7 +44,7 @@ class JurusanGalleryController extends Controller
             ]);
         }
 
-        // 5. redirect ke halaman edit
+        // 4. redirect ke halaman edit
         return back()->with('success', 'Gallery berhasil ditambahkan');
     }
 
@@ -59,10 +53,9 @@ class JurusanGalleryController extends Controller
         // 1. cari id gallery
         $gallery = JurusanGallery::findOrFail($id);
 
-        // 2. hapus file fisik
-        $imagePath = public_path('uploads/jurusan_gallery/'.$gallery->image);
-        if ($gallery->image && file_exists($imagePath)) {
-            unlink($imagePath);
+        // 2. hapus file
+        if ($gallery->image && Storage::disk('public')->exists('jurusan_gallery/'.$gallery->image)) {
+            Storage::disk('public')->delete('jurusan_gallery/'.$gallery->image);
         }
 
         // 3. hapus data dari db

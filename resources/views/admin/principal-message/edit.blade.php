@@ -27,7 +27,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Gambar Header</label><br>
-                <img src="{{ asset('uploads/principal-message/header-image/'.$principalMessage->header_image) }}" class="mb-2" width='200'>
+                <img src="{{ Storage::url('principal-message/header-image/'.$principalMessage->header_image) }}" class="mb-2" width='200'>
             </div>
 
             <div class="mb-3">
@@ -37,7 +37,7 @@
             
             <div class="mb-3">
                 <label class="form-label">Foto Kepala Sekolah</label><br>
-                <img src="{{ asset('uploads/principal-message/photo/'.$principalMessage->photo) }}" class="mb-2" width='200'>
+                <img src="{{ Storage::url('principal-message/photo/'.$principalMessage->photo) }}" class="mb-2" width='200'>
             </div>
 
             <div class="mb-3">

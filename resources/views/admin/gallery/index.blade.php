@@ -23,7 +23,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{ asset('uploads/gallery/' . $item->image) }}" width="120">
+                                <img src="{{ Storage::url('gallery/' . $item->image) }}" width="120">
                             </td>
                             <td>{{ $item->title }}</td>
                             <td>{{ \Illuminate\Support\Str::limit($item->description, 50) }}</td>

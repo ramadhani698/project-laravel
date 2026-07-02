@@ -20,6 +20,8 @@
 
     <!-- STYLE CUSTOM -->
     <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/visimisi.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/kk.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>

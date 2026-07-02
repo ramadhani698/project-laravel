@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PrincipalMessage;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class PrincipalMessageController extends Controller
@@ -49,32 +50,19 @@ class PrincipalMessageController extends Controller
         // 3. cek header image(header_image)
         if ($request->hasFile('header_image')) {
             $headerImage = $request->file('header_image');
-            $headerImageName = time().'.'.$headerImage->extension();
-            $path = public_path('uploads/principal-message/header-image');
+            $headerImageName = time().'_'.uniqid().'.'.$headerImage->extension();
 
-            // kalo folder nya blm ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($headerImage)
-                ->save($path.'/'.$headerImageName, 75);
+            $encoded = Image::read($headerImage)->encodeByExtension($headerImage->extension(), quality: 75);
+            Storage::disk('public')->put('principal-message/header-image/'.$headerImageName, (string) $encoded);
         }
+
         // cek photo(photo)
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $photoName = time().'.'.$photo->extension();
-            $path = public_path('uploads/principal-message/photo');
+            $photoName = time().'_'.uniqid().'.'.$photo->extension();
 
-            // kalo folder nya blm ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($photo)
-                ->save($path.'/'.$photoName, 75);
+            $encoded = Image::read($photo)->encodeByExtension($photo->extension(), quality: 75);
+            Storage::disk('public')->put('principal-message/photo/'.$photoName, (string) $encoded);
         }
 
         PrincipalMessage::create([
@@ -127,47 +115,31 @@ class PrincipalMessageController extends Controller
         // 4. cek header image(header_image)
         if ($request->hasFile('header_image')) {
             // hapus header image lama
-            $oldPath = public_path('uploads/principal-message/header-image/'.$headerImageName);
-            if ($principalMessage->header_image && file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($headerImageName && Storage::disk('public')->exists('principal-message/header-image/'.$headerImageName)) {
+                Storage::disk('public')->delete('principal-message/header-image/'.$headerImageName);
             }
 
             // simpan header image baru
             $headerImage = $request->file('header_image');
-            $headerImageName = time().'.'.$headerImage->extension();
-            $path = public_path('uploads/principal-message/header-image');
+            $headerImageName = time().'_'.uniqid().'.'.$headerImage->extension();
 
-            // kalo foldernya blm ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($headerImage)
-                ->save($path.'/'.$headerImageName, 75);
+            $encoded = Image::read($headerImage)->encodeByExtension($headerImage->extension(), quality: 75);
+            Storage::disk('public')->put('principal-message/header-image/'.$headerImageName, (string) $encoded);
         }
 
         // cek photo(photo)
         if ($request->hasFile('photo')) {
             // hapus photo lama
-            $oldPath = public_path('uploads/principal-message/photo/'.$photoName);
-            if ($principalMessage->photo && file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($photoName && Storage::disk('public')->exists('principal-message/photo/'.$photoName)) {
+                Storage::disk('public')->delete('principal-message/photo/'.$photoName);
             }
-            
+
             // simpan photo baru
             $photo = $request->file('photo');
-            $photoName = time().'.'.$photo->extension();
-            $path = public_path('uploads/principal-message/photo');
+            $photoName = time().'_'.uniqid().'.'.$photo->extension();
 
-            // kalo foldernya blm ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($photo)
-                ->save($path.'/'.$photoName, 75);
+            $encoded = Image::read($photo)->encodeByExtension($photo->extension(), quality: 75);
+            Storage::disk('public')->put('principal-message/photo/'.$photoName, (string) $encoded);
         }
 
         // 5. update db
@@ -196,20 +168,18 @@ class PrincipalMessageController extends Controller
         $principalMessage = PrincipalMessage::findOrFail($id);
 
         // hapus header image
-        $oldHeaderImage = public_path('uploads/principal-message/header-image/'.$principalMessage->header_image);
-        if (file_exists($oldHeaderImage)) {
-            unlink($oldHeaderImage);
+        if ($principalMessage->header_image && Storage::disk('public')->exists('principal-message/header-image/'.$principalMessage->header_image)) {
+            Storage::disk('public')->delete('principal-message/header-image/'.$principalMessage->header_image);
         }
 
         // hapus photo
-        $oldPhoto = public_path('uploads/principal-message/photo/'.$principalMessage->photo);
-        if (file_exists($oldPhoto)) {
-            unlink($oldPhoto);
+        if ($principalMessage->photo && Storage::disk('public')->exists('principal-message/photo/'.$principalMessage->photo)) {
+            Storage::disk('public')->delete('principal-message/photo/'.$principalMessage->photo);
         }
 
         // 2. hapus db
         $principalMessage->delete();
-        
+
         // 3. redirect ke index
         return redirect()
             ->route('admin.principal-message.index')

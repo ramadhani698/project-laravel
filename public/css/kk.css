@@ -1,0 +1,413 @@
+/* =============================
+   TOKENS
+============================= */
+.kk-page {
+    --kk-forest: #16362b;
+    --kk-forest-soft: #204a3b;
+    --kk-gold: #c8a24c;
+    --kk-ivory: #f7f5ef;
+    --kk-ink: #1e2620;
+    --kk-muted: #6c8579;
+    --kk-line: rgba(22, 54, 43, 0.12);
+}
+
+.kk-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.kk-text-center { text-align: center; }
+
+/* =============================
+   HERO
+============================= */
+.kk-hero {
+    position: relative;
+    height: 420px;
+    overflow: hidden;
+}
+
+.kk-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.kk-hero:hover .kk-hero-img {
+    transform: scale(1.03);
+}
+
+.kk-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14, 30, 23, 0.35) 0%, rgba(14, 30, 23, 0.445) 100%);
+}
+
+.kk-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.kk-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--kk-gold);
+    margin-bottom: 12px;
+}
+
+.kk-hero-title {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+/* =============================
+   SECTION / LETTER LAYOUT
+============================= */
+.kk-section {
+    padding: 72px 0;
+    background: var(--kk-ivory);
+}
+
+.kk-letter {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 48px;
+    box-shadow: 0 2px 6px rgba(22, 54, 43, 0.06);
+    border: 1px solid var(--kk-line);
+}
+
+/* =============================
+   PORTRAIT
+============================= */
+.kk-portrait {
+    text-align: center;
+}
+
+.kk-portrait-frame {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--kk-forest);
+    background-image: linear-gradient(150deg, var(--kk-forest-soft), var(--kk-forest) 70%);
+    padding: 10px;
+}
+
+.kk-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.kk-portrait-caption {
+    margin-top: 16px;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--kk-forest);
+    line-height: 1.5;
+}
+
+.kk-portrait-caption span {
+    display: block;
+    font-family: var(--font-sans, inherit);
+    font-weight: 500;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--kk-muted);
+    margin-top: 2px;
+}
+
+/* =============================
+   MESSAGE
+============================= */
+.kk-message {
+    position: relative;
+}
+
+.kk-quote-mark {
+    display: block;
+    width: 38px;
+    height: 28px;
+    color: var(--kk-gold);
+    opacity: 0.9;
+    margin-bottom: 12px;
+}
+
+.kk-greeting {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-style: italic;
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--kk-forest);
+    margin: 0 0 20px;
+}
+
+.kk-text {
+    color: var(--kk-ink);
+    font-size: 15.5px;
+    line-height: 1.8;
+}
+
+.kk-text p {
+    margin-bottom: 14px;
+}
+
+/* SIGNATURE */
+.kk-signature {
+    margin-top: 36px;
+}
+
+.kk-signature-rule {
+    display: block;
+    width: 56px;
+    height: 2px;
+    background: var(--kk-gold);
+    margin-bottom: 14px;
+}
+
+.kk-name {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--kk-forest);
+    margin: 0;
+}
+
+.kk-position {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--kk-muted);
+    margin: 2px 0 0;
+}
+
+/* =============================
+   EMPTY STATE
+============================= */
+.kk-empty {
+    color: var(--kk-muted);
+    font-size: 15px;
+    padding: 60px 0;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+/* ---------- Laptop / Tablet ---------- */
+@media (max-width: 992px) {
+
+    .kk-section{
+        padding:60px 0;
+    }
+
+    .kk-letter{
+        grid-template-columns:220px 1fr;
+        gap:32px;
+        padding:36px;
+    }
+
+    .kk-hero{
+        height:360px;
+    }
+
+    .kk-text{
+        font-size:15px;
+        line-height:1.75;
+    }
+
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 768px) {
+
+    .kk-container{
+        padding:0 18px;
+    }
+
+    .kk-section{
+        padding:48px 0;
+    }
+
+    .kk-letter{
+        grid-template-columns:1fr;
+        padding:28px;
+        gap:28px;
+        border-radius:18px;
+    }
+
+    .kk-portrait{
+        max-width:280px;
+        margin:0 auto;
+    }
+
+    .kk-hero{
+        height:300px;
+    }
+
+    .kk-eyebrow{
+        font-size:11px;
+        letter-spacing:.16em;
+    }
+
+    .kk-hero-title{
+        font-size:30px;
+    }
+
+    .kk-greeting{
+        font-size:19px;
+        margin-bottom:16px;
+    }
+
+    .kk-text{
+        font-size:15px;
+        line-height:1.8;
+    }
+
+    .kk-signature{
+        margin-top:30px;
+    }
+
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 576px){
+
+    .kk-container{
+        padding:0 14px;
+    }
+
+    .kk-section{
+        padding:36px 0;
+    }
+
+    .kk-letter{
+        padding:22px 18px;
+        gap:22px;
+        border-radius:16px;
+    }
+
+    .kk-hero{
+        height:220px;
+    }
+
+    .kk-hero-overlay{
+        padding:0 16px;
+    }
+
+    .kk-eyebrow{
+        margin-bottom:8px;
+        font-size:10px;
+    }
+
+    .kk-hero-title{
+        font-size:24px;
+        line-height:1.3;
+    }
+
+    .kk-portrait{
+        max-width:220px;
+    }
+
+    .kk-portrait-frame{
+        padding:8px;
+        border-radius:14px;
+    }
+
+    .kk-portrait-caption{
+        margin-top:12px;
+        font-size:14px;
+    }
+
+    .kk-portrait-caption span{
+        font-size:11px;
+    }
+
+    .kk-quote-mark{
+        width:30px;
+        height:22px;
+        margin-bottom:10px;
+    }
+
+    .kk-greeting{
+        font-size:17px;
+        margin-bottom:14px;
+    }
+
+    .kk-text{
+        font-size:14px;
+        line-height:1.75;
+    }
+
+    .kk-text p{
+        margin-bottom:12px;
+    }
+
+    .kk-signature{
+        margin-top:24px;
+    }
+
+    .kk-signature-rule{
+        width:44px;
+    }
+
+    .kk-name{
+        font-size:16px;
+    }
+
+    .kk-position{
+        font-size:12px;
+    }
+
+}
+
+/* ---------- Extra Small ---------- */
+@media (max-width:380px){
+
+    .kk-hero{
+        height:190px;
+    }
+
+    .kk-hero-title{
+        font-size:21px;
+    }
+
+    .kk-letter{
+        padding:18px 16px;
+    }
+
+    .kk-portrait{
+        max-width:190px;
+    }
+
+    .kk-greeting{
+        font-size:16px;
+    }
+
+    .kk-text{
+        font-size:13.5px;
+    }
+
+}

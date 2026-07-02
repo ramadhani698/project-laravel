@@ -24,7 +24,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>
                                 @if ($vision->image)
-                                    <img src="{{ asset('uploads/vision/'.$vision->image) }}" width="120">
+                                    <img src="{{ Storage::url('vision/'.$vision->image) }}" width="120">
                                 @else
                                     <span class="text-muted">Tidak ada gambar</span>
                                 @endif

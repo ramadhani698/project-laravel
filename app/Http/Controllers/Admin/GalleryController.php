@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class GalleryController extends Controller
@@ -33,19 +34,13 @@ class GalleryController extends Controller
         $imageName = null;
 
         // 3. upload gambar
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/gallery');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya blm ada
-            if(!file_exists($path)) {
-                mkdir($path, true, 0755);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('gallery/'.$imageName, (string) $encoded);
         }
 
         // 4. simpan ke db
@@ -77,33 +72,25 @@ class GalleryController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jped,png,webp|max:10240',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
         // 3. siapin tempat upload gambar
         $imageName = $gallery->image;
 
         // 4. upload gambar
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
 
             // hapus gambar lama
-            $oldPath = public_path('uploads/gallery/'.$gallery->image);
-            if(file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($gallery->image && Storage::disk('public')->exists('gallery/'.$gallery->image)) {
+                Storage::disk('public')->delete('gallery/'.$gallery->image);
             }
 
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/gallery');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya blm ada
-            if(!file_exists($path)) {
-                mkdir($path, true, 0755);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('gallery/'.$imageName, (string) $encoded);
         }
 
         // 5. update ke db
@@ -124,10 +111,9 @@ class GalleryController extends Controller
         // 1. cari id
         $gallery = Gallery::findOrFail($id);
 
-        // 2. hapus gambar dari folder
-        $imagePath = public_path('uploads/gallery/'.$gallery->image);
-        if(file_exists($imagePath)) {
-            unlink($imagePath);
+        // 2. hapus gambar
+        if ($gallery->image && Storage::disk('public')->exists('gallery/'.$gallery->image)) {
+            Storage::disk('public')->delete('gallery/'.$gallery->image);
         }
 
         // 3. hapus dari db

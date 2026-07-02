@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Carousel;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class CarouselController extends Controller
@@ -32,19 +33,13 @@ class CarouselController extends Controller
         $imageName = null;
 
         // 3. proses upload gambar
-        if ($request->hasFile('image')) {                   // cek apakah ada file gambar
-            $image = $request->file('image');               // ambil file gambar
-            $imageName = time().'.'.$image->extension();    // buat nama file gambar
-            $path = public_path('uploads/carousel');        // path folder uploads
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalau folder uploads nya belum di buat
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('carousel/'.$imageName, (string) $encoded);
         }
 
         // 4. simpan data ke db
@@ -83,24 +78,16 @@ class CarouselController extends Controller
         if ($request->hasFile('image')) {
 
             // hapus gambar lama
-            $oldPath = public_path('uploads/carousel/'.$carousel->image);
-            if ($carousel->image && file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($carousel->image && Storage::disk('public')->exists('carousel/'.$carousel->image)) {
+                Storage::disk('public')->delete('carousel/'.$carousel->image);
             }
 
             // proses upload gambar baru
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/carousel');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalau folder nya belum di buat
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar nya
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('carousel/'.$imageName, (string) $encoded);
         }
 
         // update data ke db
@@ -120,10 +107,10 @@ class CarouselController extends Controller
         $carousel = Carousel::findOrFail($id);
 
         // 1. hapus gambar
-        $imagePath = public_path('uploads/carousel/' . $carousel->image);
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
+        if ($carousel->image && Storage::disk('public')->exists('carousel/'.$carousel->image)) {
+            Storage::disk('public')->delete('carousel/'.$carousel->image);
         }
+
         // 2. hapus data dari database
         $carousel->delete();
 

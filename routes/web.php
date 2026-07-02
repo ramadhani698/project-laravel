@@ -22,6 +22,8 @@ use App\Http\Controllers\BeritaController as FrontendBeritaController;
 use App\Http\Controllers\ProfilController as FrontendProfilController;
 use App\Http\Controllers\InformasiController as FrontendInformasiController;
 use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
+use App\Http\Controllers\HomeController as FrontendHomeController;
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
@@ -125,6 +127,8 @@ Route::get('/informasi/gallery', [FrontendInformasiController::class, 'gallery']
 
 Route::get('/prestasi', [FrontendPrestasiController::class, 'index'])
 ->name('prestasi.index');
+
+Route::view('/ppdb', 'ppdb.home')->name('ppdb.home');
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('dashboard');

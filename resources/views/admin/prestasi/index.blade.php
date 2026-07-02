@@ -24,7 +24,7 @@
                 @forelse($prestasis as $prestasi)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img src="{{ asset('uploads/prestasi/'.$prestasi->image) }}" width="120"></td>
+                        <td><img src="{{ Storage::url('prestasi/'.$prestasi->image) }}" width="120"></td>
                         <td>{{ $prestasi->juara }}</td>
                         <td>{{ $prestasi->nama_siswa }}</td>
                         <td>{{ \Illuminate\Support\Str::limit($prestasi->deskripsi, 50) }}</td>

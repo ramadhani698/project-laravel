@@ -66,7 +66,7 @@
                 <div class="mb-3">
                     <label class="form-label">Gambar Jurusan</label>
                     @if($jurusan->image)
-                        <img src="{{ asset('uploads/jurusan/'.$jurusan->image) }}" class="img-thumbnail mb-2" width="200">
+                        <img src="{{ Storage::url('jurusan/'.$jurusan->image) }}" class="img-thumbnail mb-2" width="200">
                     @endif
                     <input type="file" name="image" class="form-control">
                 </div>
@@ -94,7 +94,7 @@
                 <div class="mb-3">
                     <label class="form-label">Foto Kepala Jurusan</label>
                     @if(isset($jurusan->head) && $jurusan->head->photo)
-                        <img src="{{ asset('uploads/jurusan_head/'.$jurusan->head->photo) }}" class="img-thumbnail mb-2" width="150">
+                        <img src="{{ Storage::url('jurusan_head/'.$jurusan->head->photo) }}" class="img-thumbnail mb-2" width="150">
                     @endif
                     <input type="file" name="photo" class="form-control">
                 </div>
@@ -138,7 +138,7 @@
                 @foreach($jurusan->galleries as $gallery)
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                            <img src="{{ asset('uploads/jurusan_gallery/'.$gallery->image) }}" class="card-img-top">
+                            <img src="{{ Storage::url('jurusan_gallery/'.$gallery->image) }}" class="card-img-top">
                             <div class="card-body text-center">
                                 <form action="{{ route('admin.jurusan.gallery.destroy', $gallery->id) }}" method="POST"
                                       onsubmit="return confirm('Yakin ingin menghapus foto ini?')">

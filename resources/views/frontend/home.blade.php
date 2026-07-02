@@ -18,7 +18,7 @@
         <div class="carousel-inner">
             @foreach($carousels as $index => $carousel)
                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                    <img src="{{ asset('uploads/carousel/' . $carousel->image) }}" alt="Carousel Image" class="d-block w-100">
+                    <img src="{{ Storage::url('carousel/' . $carousel->image) }}" alt="Carousel Image" class="d-block w-100">
                 </div>
             @endforeach
         </div>
@@ -116,6 +116,13 @@
                     @endforelse
 
                     </div>
+
+                    <!-- Pagination -->
+                    @if ($jurusans->hasPages())
+                        <div class="mt-4">
+                            {{ $jurusans->links() }}
+                        </div>
+                    @endif
                 </div>
 
             </div>
@@ -176,7 +183,7 @@
                     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 150 }}">
                         <div class="berita-card">
                             <div class="berita-img">
-                                <img src="{{ asset('uploads/berita/'.$berita->image) }}" alt="{{ $berita->title }}">
+                                <img src="{{ Storage::url('berita/'.$berita->image) }}" alt="{{ $berita->title }}">
                             </div>
                             <div class="berita-body">
                                 <span class="berita-date">{{ optional($berita->published_at)->translatedFormat('d F Y') }}</span>

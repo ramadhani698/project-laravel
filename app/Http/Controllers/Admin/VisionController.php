@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vision;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
 class VisionController extends Controller
@@ -49,17 +50,11 @@ class VisionController extends Controller
         // 4. cek gambar
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/vision');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo folder nya blm ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            // compress gambar lalu simpan ke disk 'public'
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('vision/'.$imageName, (string) $encoded);
         }
 
         // 5. simpan ke db
@@ -99,7 +94,7 @@ class VisionController extends Controller
             'vision' => 'required|string|max:255',
             'mission' => 'required|string',
         ]);
-        
+
         // 3. ubah string jadi array
         $missionArray = array_filter(
             array_map('trim', preg_split("/\r\n|\n|\r/", $request->mission))
@@ -111,38 +106,29 @@ class VisionController extends Controller
         // 5. cek gambar
         if ($request->hasFile('image')) {
             // hapus gambar lama
-            $oldPath = public_path('uploads/vision/'.$imageName);
-            if (file_exists($oldPath)) {
-                unlink($oldPath);
+            if ($imageName && Storage::disk('public')->exists('vision/'.$imageName)) {
+                Storage::disk('public')->delete('vision/'.$imageName);
             }
 
             // simpan gambar baru
             $image = $request->file('image');
-            $imageName = time().'.'.$image->extension();
-            $path = public_path('uploads/vision');
+            $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // kalo foldernya blm ada
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-
-            // compress gambar
-            Image::read($image)
-                ->save($path.'/'.$imageName, 75);
+            $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
+            Storage::disk('public')->put('vision/'.$imageName, (string) $encoded);
         }
 
-        // 5. simpan ke db
+        // 6. simpan ke db
         $vision->update([
             'image' => $imageName,
             'vision' => $request->vision,
             'mission' => $missionArray,
         ]);
 
-        // 6. redirect ke index
+        // 7. redirect ke index
         return redirect()
             ->route('admin.vision.index')
             ->with('success', ' Data Visi Misi berhasil diupdate');
-        
     }
 
     /**
@@ -154,9 +140,8 @@ class VisionController extends Controller
         $vision = Vision::findOrFail($id);
 
         // 2. hapus gambar
-        $imagePath = public_path('uploads/vision/'.$vision->image);
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
+        if ($vision->image && Storage::disk('public')->exists('vision/'.$vision->image)) {
+            Storage::disk('public')->delete('vision/'.$vision->image);
         }
 
         // 3. hapus data

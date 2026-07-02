@@ -56,6 +56,7 @@
 
         <!-- Copyright -->
         <div class="footer-bottom text-center mt-4">
+            <p class="text-center">Mitra :</p>
             <img src="{{ asset('images/indomaret.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
             <img src="{{ asset('images/aset-digital.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">
             <img src="{{ asset('images/horison.jpg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="partner-logo">

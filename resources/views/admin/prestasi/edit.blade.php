@@ -22,7 +22,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Gambar Saat Ini</label><br>
-                    <img src="{{ asset('uploads/prestasi/'.$prestasi->image) }}" width="200">
+                    <img src="{{ Storage::url('prestasi/'.$prestasi->image) }}" width="200">
                 </div>
 
                 <div class="mb-3">
