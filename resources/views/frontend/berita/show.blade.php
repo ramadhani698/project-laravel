@@ -3,7 +3,7 @@
 @section('title', $berita->title)
 
 @section('content')
-<section class="berita-detail-section">
+<section class="berita-detail-section mt-4">
     <div class="container">
 
         <!-- Breadcrumb -->

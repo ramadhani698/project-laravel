@@ -233,10 +233,10 @@
                     <div class="kontak-info mt-4">
                         <p>
                             <strong>Alamat:</strong><br>
-                            Jl. KH. Ahmad Dahlan No. XX, Tangerang, Banten
+                            Jln. Raden Fatah RT 01/10 No 100 Parung serab Ciledug Kota Tangerang, Kec. Ciledug, Kota Tangerang, Prov. Banten.
                         </p>
                         <p>
-                            <strong>Telepon:</strong> (021) 1234 5678
+                            <strong>Telepon:</strong> 085717414288
                         </p>
                         <p>
                             <strong>Email:</strong> smkmuhammadiyah2@gmail.com

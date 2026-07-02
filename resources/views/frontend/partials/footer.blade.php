@@ -45,6 +45,10 @@
                         </a>
                     </li>
                     <li>✉️ info@smkmuh2tng.sch.id</li>
+                    <div class="footer-socials">
+                        <a href="https://www.youtube.com/@smkmuhammadiyah2tangerang412" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/smk.mudatang/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </ul>
             </div>
 
