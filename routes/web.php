@@ -128,6 +128,8 @@ Route::get('/informasi/gallery', [FrontendInformasiController::class, 'gallery']
 Route::get('/prestasi', [FrontendPrestasiController::class, 'index'])
 ->name('prestasi.index');
 
+Route::view('/ppdb', 'ppdb.home')->name('ppdb.home');
+
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('dashboard');
 
