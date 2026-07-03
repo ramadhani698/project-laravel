@@ -58,51 +58,507 @@ body {
     margin-bottom: 0.5rem;
 }
 .section-subtitle {
-    color: #666;
+    color: #666666;
     margin-bottom: 2.5rem;
 }
 
-/* Hero */
-.ppdb-hero {
+/* Import Google Fonts Poppins & Georgia */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.ppdb-wrapper {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--ppdb-primary) 0%, var(--ppdb-primary-dark) 100%);
-    color: #fff;
-    padding-top: 90px;
-}
-.badge-tahun {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-.hero-title {
-    font-weight: 800;
-    font-size: 2.5rem;
-    margin: 1.25rem 0;
-}
-.hero-subtitle {
-    font-size: 1.05rem;
-    opacity: 0.9;
-    margin-bottom: 2rem;
-}
-.btn-daftar-lg {
-    background: var(--ppdb-gold);
-    color: var(--ppdb-dark);
-    font-weight: 700;
-    padding: 0.75rem 2.25rem;
-    border-radius: 50px;
-    display: inline-block;
-}
-.btn-daftar-lg:hover {
-    background: #d9a63b;
-    color: var(--ppdb-dark);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Footer */
-.ppdb-footer {
-    background: var(--ppdb-dark);
-    color: #ccc;
+/* Header Styles (Deep Green Muhammadiyah Theme) */
+.ppdb-header {
+    background-color: #042f1a; /* Hijau Gelap */
+    padding: 10px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px #00000026;
+}
+
+.ppdb-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ppdb-logo-link {
+    text-decoration: none;
+}
+
+.ppdb-logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ppdb-logo-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.ppdb-logo-title-text {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.ppdb-logo-subtitle-text {
+    color: #fbbf24; /* Gold Muhammadiyah */
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.ppdb-navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ppdb-nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.ppdb-nav-link:hover {
+    background-color: #ffffff1a;
+}
+
+.ppdb-nav-link.active {
+    background-color: #fbbf24; /* Aksen Kuning Emas */
+    color: #042f1a;
+    font-weight: 700;
+}
+
+.ppdb-nav-link.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+/* Hero Section Styles - Gradasi Hijau & Kuning Muhammadiyah */
+.ppdb-hero-section {
+    background: linear-gradient(135deg, #022c16 0%, #15803d 60%, #166534 100%); /* Gradasi Hijau Muhammadiyah Premium */
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+/* Pola latar belakang modern */
+.ppdb-hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(#fbbf241a 1.5px, transparent 1.5px);
+    background-size: 25px 25px;
+    opacity: 0.6;
+    pointer-events: none;
+}
+@media (max-width: 992px) {
+    .ppdb-hero-container {
+        grid-template-columns: 1fr; /* langsung stack di tablet */
+        text-align: center;
+    }
+    .ppdb-hero-center {
+        align-items: center;
+    }
+}
+.ppdb-hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr; /* sebelumnya: 1.2fr 1.8fr 1.2fr */
+    align-items: center;
+    min-height: 420px;
+    padding: 40px 20px;
+    gap: 20px;
+}
+
+/* Hero Left: Siswa SMK */
+.ppdb-hero-left {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+}
+
+
+/* Hero Center: Judul & Tahun Ajaran */
+.ppdb-hero-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    padding-bottom: 40px;
+    z-index: 2;
+}
+
+.ppdb-telah-dibuka-badge {
+    background-color: #fbbf24; /* Gold */
+    color: #022c16;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 4px;
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px #00000026;
+}
+
+.ppdb-hero-main-title {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 0.9;
+    margin: 0;
+    letter-spacing: -2px;
+    color: #ffffff;
+    text-shadow: 3px 3px 0px #022c16, -3px -3px 0px #022c16, 3px -3px 0px #022c16, -3px 3px 0px #022c16, 0 8px 15px #00000066;
+}
+
+.ppdb-hero-sub-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fbbf24; /* Kuning Emas */
+    margin: 10px 0;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px #00000080;
+}
+
+.ppdb-hero-academic-year {
+    border: 2px solid #fbbf24;
+    background-color: #fbbf2426;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 6px 22px;
+    border-radius: 50px;
+    display: inline-block;
+    align-self: flex-start;
+    box-shadow: 0 4px 10px #00000026;
+}
+
+.ppdb-registration-date-box {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ppdb-date-label {
+    color: #fbbf24;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.ppdb-date-value {
+    background-color: #022c16;
+    border: 1px solid #10b981;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 8px 24px;
+    border-radius: 50px;
+    display: inline-block;
+    align-self: flex-start;
+    box-shadow: 0 4px 8px #00000033;
+}
+
+/* Hero Right: QR & Kontak */
+.ppdb-hero-right {
+    background-color: #022c16a6;
+    border: 1px solid #fbbf2433;
+    border-radius: 12px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px #00000066;
+    margin-bottom: 30px;
+    align-self: center;
+    z-index: 2;
+}
+
+.ppdb-mini-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.ppdb-mini-logo-text {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 4px;
+    line-height: 1;
+    text-align: center;
+}
+
+.ppdb-mini-logo-sub {
+    color: #fbbf24;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.ppdb-online-register-label {
+    color: #fbbf24;
+    font-size: 0.85rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+
+.ppdb-social-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.ppdb-badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+}
+
+.ppdb-badge-item {
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 3px;
+    color: #ffffff;
+}
+
+.ppdb-badge-item.halo {
+    background-color: #16a34a;
+}
+
+.ppdb-badge-item.stem {
+    background-color: #d97706;
+}
+
+.ppdb-badge-item.merdeka {
+    background-color: #2563eb;
+}
+
+.ppdb-contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.ppdb-contact-pill:hover {
+    transform: translateY(-1px);
+}
+
+.ppdb-contact-pill.instagram {
+    background-color: #16a34a;
+}
+
+.ppdb-contact-pill.whatsapp {
+    background-color: #16a34a;
+}
+
+/* Sub-banner (Major Levels Bar) */
+.ppdb-hero-levels-bar {
+    background-color: #fbbf24; /* Kuning Emas */
+    color: #022c16;
+    padding: 12px 5%;
+    font-weight: 800;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px #0000001a;
+    position: relative;
+    z-index: 5;
+}
+
+.ppdb-hero-levels-bar span {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Content Body Styles */
+.ppdb-welcome-content {
+    background-color: #ffffff;
+    padding: 60px 5%;
+    flex: 1;
+}
+
+.ppdb-welcome-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ppdb-welcome-heading {
+    font-size: 1.5rem;
+    color: #0f172a;
+    font-weight: 800;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.ppdb-welcome-text {
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.ppdb-welcome-text.address-section {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    margin-top: 30px;
     font-size: 0.9rem;
+    color: #475569;
+}
+
+.ppdb-link-highlight {
+    color: #16a34a; /* Hijau Muhammadiyah link highlight */
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.2s;
+}
+
+.ppdb-link-highlight:hover {
+    border-bottom-color: #16a34a;
+}
+
+.ppdb-text-highlight {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+/* Footer Styles */
+.ppdb-main-footer {
+    background-color: #022c16;
+    color: #a7f3d0;
+    padding: 20px 5%;
+    font-size: 0.8rem;
+    text-align: left;
+    border-top: 1px solid #042f1a;
+}
+
+.ppdb-footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ppdb-footer-container p {
+    margin: 0;
+}
+
+/* Floating WhatsApp Button */
+.ppdb-whatsapp-float {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px #0000004d;
+    z-index: 1000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ppdb-whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px #00000066;
+}
+
+.ppdb-whatsapp-float-icon {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .ppdb-hero-container {
+        grid-template-columns: 1fr 1.5fr;
+        padding-top: 20px;
+    }
+    .ppdb-hero-left {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .ppdb-hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+    .ppdb-hero-center {
+        align-items: center;
+        padding-bottom: 20px;
+    }
+    .ppdb-hero-main-title {
+        font-size: 4.5rem;
+    }
+    .ppdb-hero-sub-title {
+        font-size: 1.4rem;
+    }
+    .ppdb-telah-dibuka-badge {
+        align-self: center;
+    }
+    .ppdb-hero-academic-year {
+        align-self: center;
+    }
+    .ppdb-registration-date-box {
+        align-items: center;
+    }
+    .ppdb-date-value {
+        align-self: center;
+    }
+    .ppdb-navbar-nav {
+        display: none;
+    }
 }
