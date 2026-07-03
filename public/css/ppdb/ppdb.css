@@ -94,21 +94,29 @@ main {
 }
 
 .ppdb-header-container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .ppdb-logo-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
     text-decoration: none;
 }
 
 .ppdb-logo-wrapper {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: flex-start;
+}
+
+.ppdb-logo-image {
+    display: block;
+    height: 55px;
+    width: auto;
 }
 
 .ppdb-logo-text-group {
@@ -137,6 +145,8 @@ main {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-left: auto;
+    flex-wrap: wrap;
 }
 
 .ppdb-nav-link {
