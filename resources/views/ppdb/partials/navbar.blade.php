@@ -12,8 +12,8 @@
             <a href="#" class="ppdb-nav-link">Persyaratan</a>
             <a href="#" class="ppdb-nav-link">Prosedur PPDB</a>
             <a href="#" class="ppdb-nav-link">Kontak</a>
-            <a href="#" class="ppdb-nav-link">Pendaftaran</a>
-            <a href="#" class="ppdb-nav-link">Login</a>
+            <a href="{{ route('ppdb.auth.daftar') }}" class="ppdb-nav-link">Pendaftaran</a>
+            <a href="{{ route('ppdb.auth.login') }}" class="ppdb-nav-link">Login</a>
         </nav>
     </div>
 </header>
