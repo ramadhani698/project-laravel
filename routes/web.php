@@ -72,6 +72,8 @@ Route::prefix('ppdb')
     ->group(function () {
         Route::view('/', 'ppdb.home')->name('home');
         Route::view('/prosedur', 'ppdb.prosedur')->name('prosedur');
+        Route::view('/daftar', 'ppdb.daftar')->name('daftar');
+        Route::view('/persyaratan', 'ppdb.persyaratan')->name('persyaratan');
 
         Route::prefix('auth')
             ->name('auth.')

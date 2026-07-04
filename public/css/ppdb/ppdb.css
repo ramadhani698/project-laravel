@@ -569,3 +569,313 @@ main {
         display: none;
     }
 }
+/* =============================================
+   STYLE HALAMAN PERSYARATAN SPMB v2 (SMK Muhammadiyah)
+   Tambahan di bawah ini, aman digabung ke ppdb.css
+   karena semua class diawali prefix pr-
+   ============================================= */
+    :root {
+        --hijau-tua: #06402B;
+        --hijau-sedang: #0B6B45;
+        --hijau-terang: #E8F3EC;
+        --emas: #C99A2E;
+        --emas-terang: #F3E2B3;
+        --krem: #FBF8F1;
+        --kertas: #FFFDF8;
+        --teks-gelap: #16241C;
+        --teks-abu: #667066;
+        --garis: #E1DFD3;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--teks-gelap);
+        background-color: var(--krem);
+        line-height: 1.6;
+    }
+    h1, h2, h3 {
+        font-family: 'Fraunces', serif;
+        margin: 0;
+        letter-spacing: -0.01em;
+    }
+
+    /* =============================================
+   STYLE HALAMAN PERSYARATAN SPMB v2 (SMK Muhammadiyah)
+   Tambahan di bawah ini, aman digabung ke ppdb.css
+   karena semua class diawali prefix pr-
+   ============================================= */
+    :root {
+        --hijau-tua: #06402B;
+        --hijau-sedang: #0B6B45;
+        --hijau-terang: #E8F3EC;
+        --emas: #C99A2E;
+        --emas-terang: #F3E2B3;
+        --krem: #FBF8F1;
+        --kertas: #FFFDF8;
+        --teks-gelap: #16241C;
+        --teks-abu: #667066;
+        --garis: #E1DFD3;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--teks-gelap);
+        background-color: var(--hijau-terang);
+        line-height: 1.6;
+    }
+    h1, h2, h3 {
+        font-family: 'Fraunces', serif;
+        margin: 0;
+        letter-spacing: -0.01em;
+    }
+
+    /* =========================================================
+       CATATAN: Bagian NAVBAR situs Anda TIDAK termasuk di sini.
+       Tempelkan blok <main> ini persis di bawah navbar yang
+       sudah ada, tanpa mengubah navbar tersebut.
+       ========================================================= */
+
+    .pr-head-wrap {
+        background-color: var(--hijau-tua);
+        position: relative;
+        overflow: hidden;
+    }
+    .pr-head-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 26px);
+        pointer-events: none;
+    }
+    .pr-head {
+        position: relative;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 48px 24px 40px;
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .pr-head-text { max-width: 560px; }
+    .pr-eyebrow {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--hijau-tua);
+        background-color: var(--emas-terang);
+        border-radius: 999px;
+        padding: 5px 14px;
+        margin-bottom: 14px;
+    }
+    .pr-head h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+    .pr-head p {
+        color: #CFE3D6;
+        font-size: 0.98rem;
+        margin: 0;
+    }
+
+    /* logo resmi sekolah */
+    .pr-logo-wrap {
+        flex-shrink: 0;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+    .pr-logo-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 50%;
+    }
+
+    .pr-body {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 24px 64px;
+    }
+
+    /* ---------- kartu formulir persyaratan ---------- */
+    .pr-form-card {
+        position: relative;
+        background-color: var(--kertas);
+        border: 1px solid var(--garis);
+        border-radius: 4px;
+        padding: 8px;
+        margin-bottom: 44px;
+    }
+    .pr-form-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 24px; right: 24px;
+        border-top: 2px dashed var(--garis);
+    }
+    .pr-form-inner { padding: 32px 28px; }
+
+    .pr-form-title-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    .pr-form-title-row .no {
+        font-family: 'Fraunces', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--emas);
+    }
+    .pr-form-title-row h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--hijau-tua);
+    }
+
+    .pr-check-row {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--garis);
+    }
+    .pr-check-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .pr-check-row:first-of-type { padding-top: 0; }
+    .pr-checkbox {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        border: 1.5px solid var(--hijau-sedang);
+        background-color: var(--hijau-terang);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1px;
+    }
+    .pr-check-row .teks { font-size: 0.96rem; }
+    .pr-check-row .teks strong { color: var(--hijau-tua); }
+
+    .pr-sub-doclist {
+        list-style: none;
+        margin: 10px 0 0;
+        padding: 0 0 0 4px;
+        border-left: 2px solid var(--emas-terang);
+    }
+    .pr-sub-doclist li {
+        position: relative;
+        font-size: 0.9rem;
+        color: var(--teks-abu);
+        padding: 3px 0 3px 16px;
+    }
+
+    /* ---------- jalur pendaftaran ---------- */
+    .pr-section-label {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+    .pr-section-label h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--hijau-tua);
+    }
+    .pr-section-label span {
+        font-size: 0.85rem;
+        color: var(--teks-abu);
+    }
+
+    .pr-jalur-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 44px;
+    }
+    @media (min-width: 680px) {
+        .pr-jalur-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .pr-jalur-card {
+        display: flex;
+        gap: 14px;
+        background-color: var(--kertas);
+        border: 1px solid var(--garis);
+        border-left: 3px solid var(--hijau-tua);
+        border-radius: 8px;
+        padding: 18px 18px;
+    }
+    .pr-jalur-card:nth-child(2n) { border-left-color: var(--emas); }
+    .pr-jalur-card .ic {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+    }
+    .pr-jalur-card h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--teks-gelap);
+        margin-bottom: 4px;
+    }
+    .pr-jalur-card p {
+        font-size: 0.88rem;
+        color: var(--teks-abu);
+        margin: 0;
+    }
+
+    /* ---------- kompetensi keahlian - pita chip ---------- */
+    .pr-jurusan-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 44px;
+    }
+    .pr-jurusan-chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: var(--hijau-tua);
+        color: #fff;
+        border-radius: 999px;
+        padding: 8px 8px 8px 8px;
+        font-size: 0.86rem;
+    }
+    .pr-jurusan-chip .kode {
+        background-color: var(--emas);
+        color: var(--hijau-tua);
+        font-weight: 700;
+        font-size: 0.76rem;
+        border-radius: 999px;
+        padding: 3px 10px;
+    }
+    .pr-jurusan-chip .nama { padding-right: 10px; }
+
+    /* ---------- catatan penutup ---------- */
+    .pr-catatan {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background-color: var(--hijau-terang);
+        border-radius: 10px;
+        padding: 18px 20px;
+    }
+    .pr-catatan .ic { flex-shrink: 0; margin-top: 2px; }
+    .pr-catatan strong { color: var(--hijau-tua); }
+    .pr-catatan span { font-size: 0.9rem; color: var(--hijau-tua); }
+
+    @media (max-width: 560px) {
+        .pr-head { flex-direction: column; align-items: flex-start; }
+        .pr-form-inner { padding: 24px 18px; }
+    }
