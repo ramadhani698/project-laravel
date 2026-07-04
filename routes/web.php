@@ -30,6 +30,8 @@ use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
 
 // PPDB Controllers
 use App\Http\Controllers\Ppdb\AuthController as PpdbAuthController;
+use App\Http\Controllers\Ppdb\DashboardController as PpdbDashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +88,7 @@ Route::prefix('ppdb')
             });
 
         Route::middleware('auth:ppdb')->group(function () {
-            Route::get('/dashboard', fn () => 'Login berhasil. Dashboard pendaftar menyusul.')->name('dashboard');
+            Route::get('/dashboard', [PpdbDashboardController::class, 'index'])->name('dashboard');
             Route::post('/logout', [PpdbAuthController::class, 'logout'])->name('logout');
         });
     });
