@@ -10,7 +10,7 @@
         <nav class="ppdb-navbar-nav">
             <a href="{{ route('ppdb.home') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.home') ? 'active' : '' }}">Beranda</a>
             <a href="{{ route('ppdb.persyaratan') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.persyaratan') ? 'active' : '' }}">Persyaratan</a>
-            <a href="#" class="ppdb-nav-link">Prosedur PPDB</a>
+            <a href="{{ route('ppdb.prosedur') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.prosedur') ? 'active' : '' }}">Prosedur PPDB</a>
             <a href="#" class="ppdb-nav-link">Kontak</a>
             <a href="{{ route('ppdb.auth.daftar') }}" class="ppdb-nav-link">Pendaftaran</a>
             <a href="{{ route('ppdb.auth.login') }}" class="ppdb-nav-link">Login</a>
