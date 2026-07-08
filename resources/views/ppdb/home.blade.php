@@ -49,7 +49,7 @@
         </div>
         <!-- Major Levels Bar -->
         <div class="ppdb-hero-levels-bar">
-            <span>Teknik Komputer & Jaringan (TKJ) - Desain Komunikasi Visual (DKV) - Manajemen Perkantoran dan Layanan Bisnis (MPLB)</span>
+            <span>Teknik Komputer & Jaringan (TKJ) - Desain Komunikasi Visual (DKV) - Manajemen Perkantoran dan Layanan Bisnis (MPLB) - Teknik dan Bisnis Sepeda Motor (TBSM) - Manajemen Logistik (ML) - Layanan Kesehatan (LK)</span>
         </div>
     </section>
 
@@ -59,7 +59,7 @@
             <h2 class="ppdb-welcome-heading">Selamat datang di halaman Sistem Penerimaan Murid Baru (SPMB) SMK Muhammadiyah 2 Tangerang TA. 2026-2027</h2>
 
             <p class="ppdb-welcome-text">
-                Untuk memulai pendaftaran silahkan klik Menu <a href="{{ route('ppdb.daftar') }}" class="ppdb-link-highlight">"Pendaftaran"</a>, atau klik Menu <a href="{{ route('ppdb.persyaratan') }}" class="ppdb-link-highlight">"Persyaratan SPMB"</a> untuk informasi lengkap seputar alur dan berkas pendaftaran.
+                Untuk memulai pendaftaran silahkan klik Menu <a href="{{ route('ppdb.auth.daftar') }}" class="ppdb-link-highlight">"Pendaftaran"</a>, atau klik Menu <a href="{{ route('ppdb.persyaratan') }}" class="ppdb-link-highlight">"Persyaratan SPMB"</a> untuk informasi lengkap seputar alur dan berkas pendaftaran.
             </p>
 
             <p class="ppdb-welcome-text">
