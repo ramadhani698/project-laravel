@@ -31,7 +31,7 @@
                 <span class="pr-checkbox">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#06402B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
-                <span class="teks">Membayar biaya formulir pendaftaran sebesar <strong>Rp 300.000</strong></span>
+                <span class="teks">Biaya free (program sekolah gratis)</span>
             </div>
 
             <div class="pr-check-row">
@@ -39,14 +39,17 @@
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#06402B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </span>
                 <div class="teks" style="flex:1">
-                    <span>Mengunggah dokumen format JPG/JPEG/PDF, maksimal 10 MB per berkas</span>
+                    <span>Mengunggah dokumen format JPG/JPEG/PDF, maksimal 2 MB per berkas</span>
+                    <h6>Daftar dokumen yang harus di siapkan sebelum lanjut mendaftar</h6>
                     <ul class="pr-sub-doclist">
-                        <li>Rapor kelas VIII dan IX (semester 1 dan 2)</li>
-                        <li>Ijazah / Surat Keterangan Lulus SMP-Sederajat</li>
+                        <li>KTP orang tua</li>
                         <li>Akta Kelahiran</li>
                         <li>Kartu Keluarga</li>
-                        <li>Pas foto berwarna terbaru, latar merah</li>
-                        <li>Kartu Indonesia Sehat / BPJS, jika ada</li>
+                        <li>Ijazah SMP-Sederajat</li>
+                        <li>Surat Keterangan Lulus SMP-Sederajat</li>
+                        <li>Raport semester terakhir</li>
+                        <li>Surat keterangan sehat</li>
+                        
                     </ul>
                 </div>
             </div>
@@ -62,7 +65,7 @@
             <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#06402B" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v-1M16 4v-1"/></svg>
             <div>
                 <h3>Jalur Reguler</h3>
-                <p>Tes akademik Matematika, Bahasa Indonesia, dan Baca Tulis Al-Qur'an, ditambah wawancara minat jurusan.</p>
+                <p>Tes akademik Matematika, Bahasa Indonesia, dan Baca Tulis Al-Qur'an, ditambah wawancara minat jurusan, dan kemuhammadiyahan.</p>
             </div>
         </div>
         <div class="pr-jalur-card">
@@ -95,8 +98,11 @@
     <div class="pr-jurusan-strip">
         <div class="pr-jurusan-chip"><span class="kode">TKJ</span><span class="nama">Teknik Komputer dan Jaringan</span></div>
         <div class="pr-jurusan-chip"><span class="kode">TBSM</span><span class="nama">Teknik dan Bisnis Sepeda Motor</span></div>
-        <div class="pr-jurusan-chip"><span class="kode">AKL</span><span class="nama">Akuntansi dan Keuangan Lembaga</span></div>
-        <div class="pr-jurusan-chip"><span class="kode">BDP</span><span class="nama">Bisnis Daring dan Pemasaran</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">MPLB</span><span class="nama">Manajemen Perkantoran dan Layanan Bisnis</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">DKV</span><span class="nama">Desain Komunikasi dan Visual</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">ML</span><span class="nama">Manajemen Logistik</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">LK</span><span class="nama">Layanan Kesehatan</span></div>
+        
     </div>
 
     <div class="pr-catatan">
