@@ -50,13 +50,6 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="pr-check-row">
-                <span class="pr-checkbox">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#06402B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span class="teks">Surat keterangan sehat dan bebas buta warna dari dokter <strong>(khusus kompetensi keahlian tertentu)</strong></span>
-            </div>
         </div>
     </div>
 
