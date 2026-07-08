@@ -15,21 +15,17 @@ class JurusanVisiMisiController extends Controller
 
     public function update(Request $request, $jurusanId)
     {
-        // 1. cari id jurusan
         $jurusan = Jurusan::findOrFail($jurusanId);
 
-        // 2. validasi form
         $request->validate([
             'visi' => 'required|string',
             'misi' => 'required|string',
         ]);
 
-        // 3. ubah string jadi array
         $misiArray = array_filter(
             array_map('trim', explode("\n", $request->misi))
         );
 
-        // 4. update / create visi dan misi
         $jurusan->visiMisi()->updateOrCreate(
             ['jurusan_id' => $jurusan->id],
             [
@@ -38,7 +34,13 @@ class JurusanVisiMisiController extends Controller
             ]
         );
 
-        // 5. redirect ke halaman edit
+        // NEW: kalau dari wizard, lanjut ke step 4 (Galeri)
+        if ($request->has('wizard')) {
+            return redirect()
+                ->route('admin.jurusan.wizard.gallery', $jurusan->id)
+                ->with('success', 'Visi & misi berhasil disimpan.');
+        }
+
         return back()->with('success', 'Visi dan Misi jurusan berhasil diupdate');
     }
 }

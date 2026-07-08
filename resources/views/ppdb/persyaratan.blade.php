@@ -95,8 +95,10 @@
     <div class="pr-jurusan-strip">
         <div class="pr-jurusan-chip"><span class="kode">TKJ</span><span class="nama">Teknik Komputer dan Jaringan</span></div>
         <div class="pr-jurusan-chip"><span class="kode">TBSM</span><span class="nama">Teknik dan Bisnis Sepeda Motor</span></div>
-        <div class="pr-jurusan-chip"><span class="kode">AKL</span><span class="nama">Akuntansi dan Keuangan Lembaga</span></div>
-        <div class="pr-jurusan-chip"><span class="kode">BDP</span><span class="nama">Bisnis Daring dan Pemasaran</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">MPLB</span><span class="nama">Manajemen Perkantoran dan Layanan Bisnis</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">DKV</span><span class="nama">Desain Komunikasi Visual</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">ML</span><span class="nama">Manajemen Logistik</span></div>
+        <div class="pr-jurusan-chip"><span class="kode">LK</span><span class="nama">Layanan Kesehatan (Caregiver)</span></div>
     </div>
 
     <div class="pr-catatan">

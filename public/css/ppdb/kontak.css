@@ -1,0 +1,133 @@
+/* ==========================================================
+   public/css/ppdb/kontak.css
+   Catatan: kode HTML yang dikirim tidak menyertakan isi asli
+   ppdb.css, jadi berikut ini style dasar berdasarkan nama
+   class yang dipakai di kontak.blade.php. Silakan sesuaikan
+   dengan style ppdb.css yang sudah ada di project kamu.
+   ========================================================== */
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin: 24px 0;
+}
+
+.kontak-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    padding: 0 16px;
+}
+
+.kontak-info,
+.kontak-map {
+    flex: 1 1 400px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.kontak-item {
+    margin-bottom: 16px;
+}
+
+.kontak-label {
+    display: block;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.kontak-tombol {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+
+.btn-whatsapp {
+    background: #25d366;
+}
+
+.btn-email {
+    background: #3b82f6;
+}
+
+.kontak-sosmed .sosmed-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.sosmed-icons a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.map-frame {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.kontak-form-wrapper {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-row {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-row input,
+.form-row textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.btn-kirim {
+    background: #16a34a;
+    border: none;
+    cursor: pointer;
+}
+
+.text-danger {
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: 4px;
+}

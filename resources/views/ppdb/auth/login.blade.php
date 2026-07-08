@@ -77,7 +77,7 @@
                     Ingat saya
                 </label>
             </div>
-            <a href="#" style="font-size:0.85rem; color:var(--ppdb-green-700); text-decoration:none; font-weight:600;">
+            <a href="{{ route('ppdb.auth.lupa-password.verify') }}" style="font-size:0.85rem; color:var(--ppdb-green-700); text-decoration:none; font-weight:600;">
                 Lupa kata sandi?
             </a>
         </div>
