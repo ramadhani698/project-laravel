@@ -31,6 +31,7 @@ use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
 // PPDB Controllers
 use App\Http\Controllers\Ppdb\AuthController as PpdbAuthController;
 use App\Http\Controllers\Ppdb\DashboardController as PpdbDashboardController;
+use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
 
 
 /*
@@ -86,6 +87,19 @@ Route::prefix('ppdb')
 
                 Route::get('/login', [PpdbAuthController::class, 'showLogin'])->name('login');
                 Route::post('/login', [PpdbAuthController::class, 'login'])->name('login.store');
+
+                // ===============================
+                // Lupa Password
+                // ===============================
+                Route::prefix('lupa-password')
+                    ->name('lupa-password.')
+                    ->group(function () {
+                        Route::get('/', [ForgotPasswordController::class, 'showVerifyForm'])->name('verify');
+                        Route::post('/', [ForgotPasswordController::class, 'verify'])->name('verify.store');
+
+                        Route::get('/reset', [ForgotPasswordController::class, 'showResetForm'])->name('reset');
+                        Route::post('/reset', [ForgotPasswordController::class, 'resetPassword'])->name('reset.store');
+                    });
             });
 
         Route::middleware('auth:ppdb')->group(function () {
@@ -124,6 +138,19 @@ Route::middleware('auth')
         Route::delete('jurusan/gallery/{gallery}', [JurusanGalleryController::class, 'destroy'])
             ->name('jurusan.gallery.destroy');
 
+        // WIZARD ROUTES (alur create jurusan bertahap)
+        Route::get('jurusan/{jurusan}/wizard/head', [AdminJurusanController::class, 'wizardHead'])
+            ->name('jurusan.wizard.head');
+
+        Route::get('jurusan/{jurusan}/wizard/visi-misi', [AdminJurusanController::class, 'wizardVisiMisi'])
+            ->name('jurusan.wizard.visi-misi');
+
+        Route::get('jurusan/{jurusan}/wizard/gallery', [AdminJurusanController::class, 'wizardGallery'])
+            ->name('jurusan.wizard.gallery');
+
+        Route::get('jurusan/{jurusan}/wizard/finish', [AdminJurusanController::class, 'wizardFinish'])
+            ->name('jurusan.wizard.finish');
+
         Route::resource('berita', AdminBeritaController::class);
         Route::resource('histories', AdminSchoolHistoryController::class);
         Route::resource('vision', AdminVisionController::class);
@@ -131,6 +158,15 @@ Route::middleware('auth')
         Route::resource('sarpras', AdminSarprasController::class);
         Route::resource('gallery', AdminGalleryController::class);
         Route::resource('prestasi', AdminPrestasiController::class);
+
+        // ROUTE PPDB ADMIN
+        Route::prefix('ppdb')->name('ppdb.')->group(function () {
+            Route::get('pendaftar', [\App\Http\Controllers\Admin\Ppdb\PendaftarController::class, 'index'])
+                ->name('pendaftar.index');
+
+            Route::delete('pendaftar/{pendaftar}', [\App\Http\Controllers\Admin\Ppdb\PendaftarController::class, 'destroy'])
+                ->name('pendaftar.destroy');
+        });
     });
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
