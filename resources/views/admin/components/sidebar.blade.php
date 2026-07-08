@@ -23,11 +23,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('admin.jurusan.index') }}">
-            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Jurusan
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="{{ route('admin.statistik.index') }}">
             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Statistik Sekolah
           </a>
@@ -56,28 +51,18 @@
         </li>
       </ul>
     </li>
-    <!-- <li class="nav-item nav-group">
+    <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/school.svg') }}" class="nav-icon" alt="Jurusan Icon" style="width: 1em; height: 1em;"> Jurusan
       </a>
       <ul class="nav-group-items">
         <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> TKJ
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> DKV
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> MPLB
+          <a class="nav-link" href="{{ route('admin.jurusan.index') }}">
+            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Kelola Jurusan
           </a>
         </li>
       </ul>
-    </li> -->
+    </li>
     <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/info.svg') }}" class="nav-icon" alt="Informasi Icon" style="width: 1em; height: 1em;"> Informasi Sekolah
@@ -105,10 +90,18 @@
         <img src="{{ asset('coreui/assets/icons/star.svg') }}" class="nav-icon" alt="Prestasi Icon" style="width: 1em; height: 1em;"> Prestasi Siswa
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <img src="{{ asset('coreui/assets/icons/user-follow.svg') }}" class="nav-icon" alt="PPDB Icon" style="width: 1em; height: 1em;"> PPDB
+    <li class="nav-title">Sistem PPDB</li>
+    <li class="nav-item nav-group">
+      <a class="nav-link nav-group-toggle" href="#">
+        <img src="{{ asset('coreui/assets/icons/address-book.svg') }}" class="nav-icon" alt="PPDB Icon" style="width: 1em; height: 1em;"> Penerimaan Siswa Baru
       </a>
+      <ul class="nav-group-items">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.ppdb.pendaftar.index') }}">
+            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Akun Pendaftar
+          </a>
+        </li>
+      </ul>
     </li>
   </ul>
   <div class="sidebar-footer border-top d-flex">

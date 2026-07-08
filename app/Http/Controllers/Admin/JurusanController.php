@@ -37,7 +37,6 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. validasi form dulu
         $request->validate([
             'name' => 'required|string|max:255',
             'short_description' => 'required|string|max:255',
@@ -46,21 +45,18 @@ class JurusanController extends Controller
             'order' => 'required|integer',
         ]);
 
-        // 2. variabel untuk nama gambar
         $imageName = null;
 
-        // 3. proses upload gambar
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // compress gambar lalu simpan ke disk 'public'
             $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
             Storage::disk('public')->put('jurusan/'.$imageName, (string) $encoded);
         }
 
-        // simpan data ke db
-        Jurusan::create([
+        // simpan ke variabel $jurusan (sebelumnya tidak ditampung)
+        $jurusan = Jurusan::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'short_description' => $request->short_description,
@@ -69,10 +65,49 @@ class JurusanController extends Controller
             'order' => $request->order,
         ]);
 
-        // redirect ke index
+        // redirect ke wizard step 2 (Kepala Kompetensi), bukan langsung ke index
+        return redirect()
+            ->route('admin.jurusan.wizard.head', $jurusan->id)
+            ->with('success', 'Jurusan berhasil ditambahkan. Sekarang lengkapi data pendukungnya.');
+    }
+
+    /**
+     * WIZARD STEP 2 — Form Kepala Kompetensi
+     */
+    public function wizardHead(string $id)
+    {
+        $jurusan = Jurusan::findOrFail($id);
+        return view('admin.jurusan.wizard-head', compact('jurusan'));
+    }
+
+    /**
+     * WIZARD STEP 3 — Form Visi & Misi
+     */
+    public function wizardVisiMisi(string $id)
+    {
+        $jurusan = Jurusan::findOrFail($id);
+        return view('admin.jurusan.wizard-visi-misi', compact('jurusan'));
+    }
+
+    /**
+     * WIZARD STEP 4 — Form Galeri
+     */
+    public function wizardGallery(string $id)
+    {
+        $jurusan = Jurusan::findOrFail($id)->load('galleries');
+        return view('admin.jurusan.wizard-gallery', compact('jurusan'));
+    }
+
+    /**
+     * WIZARD SELESAI — redirect ke index dengan pesan sukses lengkap
+     */
+    public function wizardFinish(string $id)
+    {
+        $jurusan = Jurusan::findOrFail($id);
+
         return redirect()
             ->route('admin.jurusan.index')
-            ->with('success', 'Jurusan berhasil ditambahkan');
+            ->with('success', "Jurusan \"{$jurusan->name}\" berhasil ditambahkan lengkap dengan data pendukungnya.");
     }
 
     /**

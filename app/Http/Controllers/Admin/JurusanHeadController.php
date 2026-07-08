@@ -20,28 +20,21 @@ class JurusanHeadController extends Controller
 
     public function update(Request $request, $jurusanId)
     {
-        // 1. cari id jurusan
         $jurusan = Jurusan::findOrFail($jurusanId);
 
-        // 2. validasi form
         $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
-        // 3. photo lama
         $photoName = $jurusan->head->photo ?? null;
 
-        // 4. upload foto baru
         if ($request->hasFile('photo')) {
-
-            // hapus foto lama (kalo ada)
             if ($photoName && Storage::disk('public')->exists('jurusan_head/'.$photoName)) {
                 Storage::disk('public')->delete('jurusan_head/'.$photoName);
             }
 
-            // upload foto baru
             $photo = $request->file('photo');
             $photoName = time().'_'.uniqid().'.'.$photo->extension();
 
@@ -49,7 +42,6 @@ class JurusanHeadController extends Controller
             Storage::disk('public')->put('jurusan_head/'.$photoName, (string) $encoded);
         }
 
-        // 5. update / create kepala jurusan
         $jurusan->head()->updateOrCreate(
             ['jurusan_id' => $jurusan->id],
             [
@@ -59,7 +51,13 @@ class JurusanHeadController extends Controller
             ]
         );
 
-        // 6. redirect ke halaman edit
+        // NEW: kalau datang dari wizard, lanjut ke step 3. Kalau dari edit biasa, tetap back().
+        if ($request->has('wizard')) {
+            return redirect()
+                ->route('admin.jurusan.wizard.visi-misi', $jurusan->id)
+                ->with('success', 'Kepala kompetensi berhasil disimpan.');
+        }
+
         return back()->with('success', 'Kepala kompetensi jurusan berhasil diupdate');
     }
 }
