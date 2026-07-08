@@ -17,34 +17,33 @@ class JurusanGalleryController extends Controller
 
     public function store(Request $request, $jurusanId)
     {
-        // 1. cari id jurusan
         $jurusan = Jurusan::findOrFail($jurusanId);
 
-        // 2. validasi form
         $request->validate([
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:10240',
         ]);
 
-        // 3. loop semua gambar
         $order = $jurusan->galleries()->max('order') + 1;
         foreach ($request->file('images') as $image) {
-
-            // nama file unik
             $imageName = time().'_'.uniqid().'.'.$image->extension();
 
-            // compress gambar lalu simpan ke disk 'public'
             $encoded = Image::read($image)->encodeByExtension($image->extension(), quality: 75);
             Storage::disk('public')->put('jurusan_gallery/'.$imageName, (string) $encoded);
 
-            // simpan ke database
             $jurusan->galleries()->create([
                 'image' => $imageName,
                 'order' => $order++,
             ]);
         }
 
-        // 4. redirect ke halaman edit
+        // NEW: kalau dari wizard, tetap di halaman wizard galeri (biar bisa upload lagi / klik Selesai)
+        if ($request->has('wizard')) {
+            return redirect()
+                ->route('admin.jurusan.wizard.gallery', $jurusan->id)
+                ->with('success', 'Foto galeri berhasil ditambahkan.');
+        }
+
         return back()->with('success', 'Gallery berhasil ditambahkan');
     }
 

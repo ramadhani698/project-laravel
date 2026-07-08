@@ -102,7 +102,6 @@
         <div class="pr-jurusan-chip"><span class="kode">DKV</span><span class="nama">Desain Komunikasi dan Visual</span></div>
         <div class="pr-jurusan-chip"><span class="kode">ML</span><span class="nama">Manajemen Logistik</span></div>
         <div class="pr-jurusan-chip"><span class="kode">LK</span><span class="nama">Layanan Kesehatan</span></div>
-        
     </div>
 
     <div class="pr-catatan">
