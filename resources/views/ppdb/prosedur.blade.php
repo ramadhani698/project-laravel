@@ -1,56 +1,122 @@
 ﻿@extends('ppdb.layouts.app')
-
-@section('title', 'Prosedur Pendaftaran')
-
+ 
+@section('title', 'Prosedur Pendaftaran - SMK Muhammadiyah')
+ 
+@push('styles')
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('css/ppdb-prosedur.css') }}">
+@endpush
+ 
 @section('content')
-<div class="page-title">Prosedur Pendaftaran</div>
-
-<div class="wrapper">
-  <div class="sidebar">
-    <div class="tab active" onclick="showTab('prosedur', this)">Prosedur Pendaftaran</div>
-    <div class="tab" onclick="showTab('ulang', this)">Daftar Ulang</div>
-
-    <div class="sidebar-icon">
-      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="14" y="8" width="26" height="34" rx="2" fill="#f2b90c" stroke="#0b3d1e" stroke-width="2"/>
-        <line x1="19" y1="16" x2="35" y2="16" stroke="#0b3d1e" stroke-width="2"/>
-        <line x1="19" y1="22" x2="35" y2="22" stroke="#0b3d1e" stroke-width="2"/>
-        <line x1="19" y1="28" x2="30" y2="28" stroke="#0b3d1e" stroke-width="2"/>
-        <circle cx="46" cy="40" r="12" fill="#0b3d1e"/>
-        <path d="M40 40 L44 44 L52 34" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+ 
+@php
+    // Setiap langkah: nomor urut, judul, deskripsi, dan ikon Tabler (ti-*)
+    // yang melambangkan aksi pada langkah tersebut.
+    $steps = [
+        ['title' => 'Registrasi Akun', 'icon' => 'ti-user-plus',
+         'desc'  => 'Buka menu "Pendaftaran" lalu isi data awal calon peserta didik dan lakukan pembayaran biaya pendaftaran melalui teller bank, ATM, atau mobile banking.'],
+        ['title' => 'Login', 'icon' => 'ti-login-2',
+         'desc'  => 'Akun aktif otomatis setelah pembayaran terverifikasi. Masuk ke website menggunakan User ID dan Password yang telah dibuat.'],
+        ['title' => 'Isi Formulir', 'icon' => 'ti-forms',
+         'desc'  => 'Lengkapi formulir pendaftaran secara online. Semua kolom bertanda bintang (*) wajib diisi dengan data yang benar.'],
+        ['title' => 'Upload Berkas', 'icon' => 'ti-cloud-upload',
+         'desc'  => 'Unggah dokumen persyaratan seperti kartu keluarga, akta kelahiran, rapor, dan pas foto pada menu "Upload Dokumen".'],
+        ['title' => 'Verifikasi Berkas & Pembayaran', 'icon' => 'ti-shield-check',
+         'desc'  => 'Panitia PPDB memeriksa kelengkapan dan keabsahan berkas yang diunggah beserta status pembayaran.'],
+        ['title' => 'Tes / Seleksi', 'icon' => 'ti-pencil',
+         'desc'  => 'Calon peserta didik mengikuti tes atau seleksi sesuai jadwal yang ditentukan oleh sekolah.'],
+        ['title' => 'Pengumuman Hasil', 'icon' => 'ti-speakerphone',
+         'desc'  => 'Hasil seleksi dapat dilihat melalui akun pendaftaran masing-masing pada tanggal yang telah dijadwalkan.'],
+        ['title' => 'Daftar Ulang', 'icon' => 'ti-user-check',
+         'desc'  => 'Calon peserta didik yang dinyatakan lulus wajib melakukan daftar ulang sesuai batas waktu yang ditentukan.'],
+    ];
+ 
+    $faqs = [
+        ['q' => 'Apakah biaya pendaftaran dapat dikembalikan jika saya tidak lulus seleksi?',
+         'a' => 'Biaya pendaftaran tidak dapat dikembalikan (non-refundable) karena digunakan untuk proses administrasi dan seleksi.'],
+        ['q' => 'Bagaimana jika saya lupa User ID atau Password akun pendaftaran?',
+         'a' => 'Silakan hubungi panitia PPDB melalui menu Kontak dengan menyertakan nomor pendaftaran dan data diri untuk verifikasi.'],
+        ['q' => 'Apa yang terjadi jika berkas yang diunggah tidak lengkap atau tidak valid?',
+         'a' => 'Panitia akan menghubungi calon peserta didik untuk melengkapi atau mengganti berkas sebelum batas waktu verifikasi berakhir.'],
+    ];
+ 
+    // Pecah 8 langkah menjadi baris berisi 4 kartu untuk tampilan desktop
+    $stepRows = array_chunk($steps, 4);
+@endphp
+ 
+{{-- ============ HERO / RINGKASAN ============ --}}
+<section class="ppdb-hero">
+    <div class="box">
+        <p class="eyebrow display">PPDB {{ date('Y') }}/{{ date('Y') + 1 }}</p>
+        <h1 class="display">Prosedur Pendaftaran</h1>
+        <p>Ikuti 8 tahapan berikut secara berurutan agar proses pendaftaran calon peserta
+           didik baru berjalan lancar, mulai dari pembuatan akun hingga daftar ulang.</p>
     </div>
-  </div>
-
-  <div class="content" id="prosedur">
-    <h2>Prosedur Pendaftaran:</h2>
-    <div class="steps">
-      <div class="step-row"><span class="num">1.</span> Melihat informasi PPDB dan sekolah melalui website resmi.</div>
-      <div class="step-row"><span class="num">2.</span> Membuat akun pendaftaran dengan mengunjungi menu <b>"Pendaftaran"</b>, lalu mengisi data awal calon peserta didik.</div>
-      <div class="step-row"><span class="num">3.</span> Membayar biaya pendaftaran melalui teller bank, ATM, atau mobile banking. Akun akan aktif otomatis setelah pembayaran terverifikasi.</div>
-      <div class="step-row"><span class="num">4.</span> Login di website menggunakan <b>User ID</b> dan <b>Password</b>, lalu melengkapi formulir. Kolom bertanda bintang (*) wajib diisi.</div>
-      <div class="step-row"><span class="num">5.</span> Mengunggah dokumen persyaratan seperti kartu keluarga, akta kelahiran, rapor, dan pas foto pada menu <b>"Upload Dokumen"</b>.</div>
-      <div class="step-row"><span class="num">6.</span> Panitia memverifikasi berkas calon peserta didik yang sudah diunggah.</div>
-      <div class="step-row"><span class="num">7.</span> Mengikuti tes seleksi sesuai dengan jadwal yang sudah ditentukan.</div>
+</section>
+ 
+{{-- ============ ALUR TAHAPAN PENDAFTARAN ============ --}}
+<section class="ppdb-section">
+    <h2 class="display">Alur Tahapan Pendaftaran</h2>
+ 
+    {{-- Desktop: baris berisi 4 kartu + panah kanan, panah turun antar baris --}}
+    <div class="step-flow-desktop">
+        @foreach ($stepRows as $rowIndex => $row)
+            <div class="step-flow-row">
+                @foreach ($row as $i => $step)
+                    @php $number = $rowIndex * 4 + $i + 1; @endphp
+                    <div class="step-card">
+                        <div class="icon-badge">
+                            <i class="ti {{ $step['icon'] }}"></i>
+                            <span class="number-badge">{{ $number }}</span>
+                        </div>
+                        <h3>{{ $step['title'] }}</h3>
+                        <p>{{ $step['desc'] }}</p>
+                    </div>
+                    @if (!$loop->last)
+                        <div class="step-arrow-h"><i class="ti ti-arrow-right"></i></div>
+                    @endif
+                @endforeach
+            </div>
+            @if (!$loop->last)
+                <div class="step-arrow-wrap"><i class="ti ti-corner-down-left"></i></div>
+            @endif
+        @endforeach
     </div>
-  </div>
-
-  <div class="content hidden" id="ulang">
-    <h2>Daftar Ulang:</h2>
-    <div class="steps">
-      <div class="step-row"><span class="num">1.</span> Calon peserta didik yang dinyatakan lulus seleksi wajib melakukan daftar ulang sesuai jadwal.</div>
-      <div class="step-row"><span class="num">2.</span> Membayar biaya daftar ulang melalui teller bank, ATM, atau mobile banking.</div>
-      <div class="step-row"><span class="num">3.</span> Mengunggah bukti pembayaran pada menu <b>"Daftar Ulang"</b>.</div>
+ 
+    {{-- Mobile: satu kolom, panah turun antar langkah --}}
+    <div class="step-flow-mobile">
+        @foreach ($steps as $i => $step)
+            <div class="step-card">
+                <div class="icon-badge">
+                    <i class="ti {{ $step['icon'] }}"></i>
+                    <span class="number-badge">{{ $i + 1 }}</span>
+                </div>
+                <h3>{{ $step['title'] }}</h3>
+                <p>{{ $step['desc'] }}</p>
+            </div>
+            @if (!$loop->last)
+                <div class="step-arrow-v"><i class="ti ti-arrow-down"></i></div>
+            @endif
+        @endforeach
     </div>
-  </div>
-</div>
-
-<script>
-function showTab(id, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
-  el.classList.add('active');
-  document.getElementById(id).classList.remove('hidden');
-}
-</script>
+</section>
+ 
+{{-- ============ FAQ / PERTANYAAN UMUM ============ --}}
+<section class="ppdb-section">
+    <h2 class="display">FAQ / Pertanyaan Umum</h2>
+    <div style="display:flex;flex-direction:column;gap:0.75rem" x-data="{ open: null }">
+        @foreach ($faqs as $i => $faq)
+            <div class="faq-item">
+                <button type="button" @click="open = open === {{ $i }} ? null : {{ $i }}">
+                    <span class="q">{{ $faq['q'] }}</span>
+                    <span class="toggle" :class="open === {{ $i }} ? 'open' : ''">+</span>
+                </button>
+                <div class="answer" x-show="open === {{ $i }}" x-cloak>{{ $faq['a'] }}</div>
+            </div>
+        @endforeach
+    </div>
+</section>
+ 
 @endsection

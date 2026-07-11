@@ -31,9 +31,11 @@ use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
 
 // PPDB Controllers
 use App\Http\Controllers\Ppdb\AuthController as PpdbAuthController;
-use App\Http\Controllers\Ppdb\DashboardController as PpdbDashboardController;
+use App\Http\Controllers\Ppdb\PpdbDashboardController;
 use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
 use App\Http\Controllers\PpdbBerandaController;
+use App\Http\Controllers\Admin\Ppdb\PendaftarController as AdminPpdbPendaftarController;
+use App\Http\Controllers\Admin\Ppdb\DataPendaftaranController as AdminPpdbDataPendaftaranController;
 
 
 /*
@@ -106,6 +108,10 @@ Route::prefix('ppdb')
 
         Route::middleware('auth:ppdb')->group(function () {
             Route::get('/dashboard', [PpdbDashboardController::class, 'index'])->name('dashboard');
+            Route::post('/dashboard/step/{step}', [PpdbDashboardController::class, 'saveStep'])->name('dashboard.step');
+            Route::post('/dashboard/berkas', [PpdbDashboardController::class, 'uploadBerkas'])->name('dashboard.berkas.upload');
+            Route::delete('/dashboard/berkas/{berkas}', [PpdbDashboardController::class, 'deleteBerkas'])->name('dashboard.berkas.delete');
+            Route::post('/dashboard/submit', [PpdbDashboardController::class, 'submit'])->name('dashboard.submit');
             Route::post('/logout', [PpdbAuthController::class, 'logout'])->name('logout');
         });
     });
@@ -163,11 +169,19 @@ Route::middleware('auth')
 
         // ROUTE PPDB ADMIN
         Route::prefix('ppdb')->name('ppdb.')->group(function () {
-            Route::get('pendaftar', [\App\Http\Controllers\Admin\Ppdb\PendaftarController::class, 'index'])
+            Route::get('pendaftar', [AdminPpdbPendaftarController::class, 'index'])
                 ->name('pendaftar.index');
 
-            Route::delete('pendaftar/{pendaftar}', [\App\Http\Controllers\Admin\Ppdb\PendaftarController::class, 'destroy'])
+            Route::delete('pendaftar/{pendaftar}', [AdminPpdbPendaftarController::class, 'destroy'])
                 ->name('pendaftar.destroy');
+
+
+            Route::resource('data-pendaftaran', AdminPpdbDataPendaftaranController::class)
+                ->except(['create', 'store', 'show'])
+                ->parameters(['data-pendaftaran' => 'formulir']);
+
+            Route::patch('data-pendaftaran/berkas/{berkas}/verifikasi', [AdminPpdbDataPendaftaranController::class, 'verifikasiBerkas'])
+                ->name('data-pendaftaran.berkas.verifikasi');
 
         });
          // ROUTE BERANDA SETTING

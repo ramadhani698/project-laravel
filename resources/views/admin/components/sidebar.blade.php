@@ -105,7 +105,13 @@
           <a class="nav-link" href="{{ route('admin.ppdb.pendaftar.index') }}">
             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Akun Pendaftar
           </a>
-        </li> 
+        </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.ppdb.data-pendaftaran.index') }}">
+            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Data Pendaftaran
+          </a>
+        </li>
       </ul>
     </li>
   </ul>
