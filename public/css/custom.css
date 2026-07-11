@@ -137,3 +137,19 @@
 .sidebar-toggler:hover {
   background-color: var(--md-gold);
 }
+
+/* HIGHLIGHT STATUS CARD DI PPDB */
+.berkas-card-menunggu {
+    border-color: #ff6a6a !important;
+    background-color: #f7db82;
+}
+
+.berkas-card-valid {
+    border-color: #75d798 !important;
+    background-color: #8af1a6;
+}
+
+.berkas-card-ditolak {
+    border-color: #f1aeb5 !important;
+    background-color: #f0868d;
+}
