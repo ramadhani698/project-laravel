@@ -91,6 +91,11 @@
       </a>
     </li>
     <li class="nav-title">Sistem PPDB</li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('admin.beranda-setting.edit') }}">
+        <img src="{{ asset('coreui/assets/icons/info.svg') }}" class="nav-icon" alt="Pengaturan Icon" style="width: 1em; height: 1em;"> Pengaturan Beranda
+      </a>
+    </li>
     <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/address-book.svg') }}" class="nav-icon" alt="PPDB Icon" style="width: 1em; height: 1em;"> Penerimaan Siswa Baru
@@ -100,6 +105,7 @@
           <a class="nav-link" href="{{ route('admin.ppdb.pendaftar.index') }}">
             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Akun Pendaftar
           </a>
+        </li>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('admin.ppdb.data-pendaftaran.index') }}">

@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\PrincipalMessageController as AdminPrincipalMessa
 use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
+use App\Http\Controllers\Admin\BerandaSettingController;
 
 // Frontend Controllers
 use App\Http\Controllers\HomeController as FrontendHomeController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\PrestasiController as FrontendPrestasiController;
 use App\Http\Controllers\Ppdb\AuthController as PpdbAuthController;
 use App\Http\Controllers\Ppdb\PpdbDashboardController;
 use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
+use App\Http\Controllers\PpdbBerandaController;
 use App\Http\Controllers\Admin\Ppdb\PendaftarController as AdminPpdbPendaftarController;
 use App\Http\Controllers\Admin\Ppdb\DataPendaftaranController as AdminPpdbDataPendaftaranController;
 
@@ -75,7 +77,7 @@ Route::get('/prestasi', [FrontendPrestasiController::class, 'index'])->name('pre
 Route::prefix('ppdb')
     ->name('ppdb.')
     ->group(function () {
-        Route::view('/', 'ppdb.home')->name('home');
+        Route::get('/', [PpdbBerandaController::class, 'index'])->name('home');
         Route::view('/prosedur', 'ppdb.prosedur')->name('prosedur');
         Route::view('/daftar', 'ppdb.daftar')->name('daftar');
         Route::view('/persyaratan', 'ppdb.persyaratan')->name('persyaratan');
@@ -173,18 +175,25 @@ Route::middleware('auth')
             Route::delete('pendaftar/{pendaftar}', [AdminPpdbPendaftarController::class, 'destroy'])
                 ->name('pendaftar.destroy');
 
+
             Route::resource('data-pendaftaran', AdminPpdbDataPendaftaranController::class)
                 ->except(['create', 'store', 'show'])
                 ->parameters(['data-pendaftaran' => 'formulir']);
 
             Route::patch('data-pendaftaran/berkas/{berkas}/verifikasi', [AdminPpdbDataPendaftaranController::class, 'verifikasiBerkas'])
                 ->name('data-pendaftaran.berkas.verifikasi');
+
         });
+         // ROUTE BERANDA SETTING
+            Route::get('/beranda-setting', [BerandaSettingController::class, 'edit'])->name('beranda-setting.edit');
+            Route::put('/beranda-setting', [BerandaSettingController::class, 'update'])->name('beranda-setting.update');
     });
+
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
 
 /*
 |--------------------------------------------------------------------------
