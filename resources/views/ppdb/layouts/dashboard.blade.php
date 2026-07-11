@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard Pendaftar') - PPDB SMK Muhammadiyah 2 Tangerang</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
@@ -15,19 +16,7 @@
 
     <header class="ppdb-header">
         <div class="brand">
-            <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="9" fill="#D4A017"/>
-                <g stroke="#D4A017" stroke-width="2.4" stroke-linecap="round">
-                    <line x1="20" y1="2" x2="20" y2="8"/>
-                    <line x1="20" y1="32" x2="20" y2="38"/>
-                    <line x1="2" y1="20" x2="8" y2="20"/>
-                    <line x1="32" y1="20" x2="38" y2="20"/>
-                    <line x1="7" y1="7" x2="11.5" y2="11.5"/>
-                    <line x1="28.5" y1="28.5" x2="33" y2="33"/>
-                    <line x1="33" y1="7" x2="28.5" y2="11.5"/>
-                    <line x1="11.5" y1="28.5" x2="7" y2="33"/>
-                </g>
-            </svg>
+            <img src="{{ asset('images/logo.jpeg') }}" alt="Logo SMK Muhammadiyah 2 Tangerang" class="brand-logo">
             <div class="brand-text">
                 <div class="school">SMK Muhammadiyah 2 Tangerang</div>
                 <div class="unit">Dashboard Pendaftar PPDB</div>

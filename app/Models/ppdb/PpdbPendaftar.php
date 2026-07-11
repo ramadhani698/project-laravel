@@ -30,4 +30,14 @@ class PpdbPendaftar extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function formulir()
+    {
+        return $this->hasOne(PpdbFormulirPendaftaran::class, 'ppdb_pendaftar_id');
+    }
+
+    public function berkas()
+    {
+        return $this->hasMany(PpdbBerkas::class, 'ppdb_pendaftar_id');
+    }
 }
