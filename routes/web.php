@@ -185,8 +185,9 @@ Route::middleware('auth')
 
         });
          // ROUTE BERANDA SETTING
-            Route::get('/beranda-setting', [BerandaSettingController::class, 'edit'])->name('beranda-setting.edit');
-            Route::put('/beranda-setting', [BerandaSettingController::class, 'update'])->name('beranda-setting.update');
+        Route::resource('beranda-setting', BerandaSettingController::class)
+            ->except(['create', 'store', 'show'])
+            ->parameters(['beranda-setting' => 'beranda-setting']);
     });
 
 

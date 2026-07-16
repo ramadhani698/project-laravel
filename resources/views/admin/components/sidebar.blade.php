@@ -90,12 +90,12 @@
         <img src="{{ asset('coreui/assets/icons/star.svg') }}" class="nav-icon" alt="Prestasi Icon" style="width: 1em; height: 1em;"> Prestasi Siswa
       </a>
     </li>
-    <li class="nav-title">Sistem PPDB</li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('admin.beranda-setting.edit') }}">
-        <img src="{{ asset('coreui/assets/icons/info.svg') }}" class="nav-icon" alt="Pengaturan Icon" style="width: 1em; height: 1em;"> Pengaturan Beranda
-      </a>
-    </li>
+  <a class="nav-link" href="{{ route('admin.beranda-setting.index') }}">
+    <img src="{{ asset('coreui/assets/icons/info.svg') }}" class="nav-icon" alt="Pengaturan Icon" style="width: 1em; height: 1em;"> Pengaturan Beranda
+  </a>
+</li>
+    <li class="nav-title">Sistem PPDB</li>
     <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/address-book.svg') }}" class="nav-icon" alt="PPDB Icon" style="width: 1em; height: 1em;"> Penerimaan Siswa Baru

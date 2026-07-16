@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Pengaturan Beranda</h5>
+            <h5 class="mb-0">Beranda SPMB</h5>
         </div>
 
         <div class="card-body">
@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.beranda-setting.update') }}" method="POST">
+            <form action="{{ route('admin.beranda-setting.update', $settings->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
