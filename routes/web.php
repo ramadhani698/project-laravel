@@ -36,6 +36,12 @@ use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
 use App\Http\Controllers\PpdbBerandaController;
 use App\Http\Controllers\Admin\Ppdb\PendaftarController as AdminPpdbPendaftarController;
 use App\Http\Controllers\Admin\Ppdb\DataPendaftaranController as AdminPpdbDataPendaftaranController;
+use App\Http\Controllers\Admin\Ppdb\PeriodeTesController;
+use App\Http\Controllers\Admin\Ppdb\SoalTesController;
+use App\Http\Controllers\Admin\Ppdb\HasilSeleksiController;
+use App\Http\Controllers\Ppdb\TesOnlineController;
+use App\Http\Controllers\Admin\Ppdb\SiswaDiterimaController;
+
 
 
 /*
@@ -88,6 +94,7 @@ Route::prefix('ppdb')
             ->group(function () {
                 Route::get('/daftar', [PpdbAuthController::class, 'showRegister'])->name('daftar');
                 Route::post('/daftar', [PpdbAuthController::class, 'register'])->name('daftar.store');
+                Route::get('/daftar/sukses', [PpdbAuthController::class, 'registerSukses'])->name('daftar.sukses');
 
                 Route::get('/login', [PpdbAuthController::class, 'showLogin'])->name('login');
                 Route::post('/login', [PpdbAuthController::class, 'login'])->name('login.store');
@@ -113,6 +120,23 @@ Route::prefix('ppdb')
             Route::delete('/dashboard/berkas/{berkas}', [PpdbDashboardController::class, 'deleteBerkas'])->name('dashboard.berkas.delete');
             Route::post('/dashboard/submit', [PpdbDashboardController::class, 'submit'])->name('dashboard.submit');
             Route::post('/logout', [PpdbAuthController::class, 'logout'])->name('logout');
+
+            // Kartu peserta PDF
+            Route::get('/status/kartu-peserta/pdf', [PpdbDashboardController::class, 'cetakKartuPeserta'])
+                ->name('status.cetak-kartu');
+
+            // Lembar pernyataan PDF
+            Route::get('/status/lembar-pernyataan/pdf', [PpdbDashboardController::class, 'cetakLembarPernyataan'])
+                ->name('status.cetak-pernyataan');
+
+            // ==================== STUDENT SIDE ====================
+            Route::prefix('tes')->name('tes.')->group(function () {
+                Route::get('/', [TesOnlineController::class, 'index'])->name('index');
+                Route::post('/mulai', [TesOnlineController::class, 'mulai'])->name('mulai');
+                Route::get('/kerjakan', [TesOnlineController::class, 'kerjakan'])->name('kerjakan');
+                Route::post('/jawab', [TesOnlineController::class, 'jawab'])->name('jawab');
+                Route::post('/selesai', [TesOnlineController::class, 'selesai'])->name('selesai');
+            });
         });
     });
 
@@ -182,6 +206,28 @@ Route::middleware('auth')
 
             Route::patch('data-pendaftaran/berkas/{berkas}/verifikasi', [AdminPpdbDataPendaftaranController::class, 'verifikasiBerkas'])
                 ->name('data-pendaftaran.berkas.verifikasi');
+
+            Route::resource('periode-tes', PeriodeTesController::class)
+                ->parameters(['periode-tes' => 'periode_te'])
+                ->except(['show']);
+
+            Route::patch('periode-tes/{periode_te}/toggle-aktif', [PeriodeTesController::class, 'toggleAktif'])
+                ->name('periode-tes.toggle-aktif');
+
+            // SOAL TES
+            Route::resource('soal-tes', SoalTesController::class)
+                ->parameters(['soal-tes' => 'soal_te'])
+                ->except(['show']);
+
+            Route::resource('hasil-seleksi', HasilSeleksiController::class)
+                ->only(['index', 'show', 'update']);
+
+            // EXPORT SISWA DITERIMA
+            Route::prefix('siswa-diterima')->name('siswa-diterima.')->group(function () {
+                Route::get('/', [SiswaDiterimaController::class, 'index'])->name('index');
+                Route::get('/export', [SiswaDiterimaController::class, 'export'])->name('export');
+                Route::get('/{hasil}', [SiswaDiterimaController::class, 'show'])->name('show');
+            });
 
         });
          // ROUTE BERANDA SETTING

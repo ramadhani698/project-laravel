@@ -4,6 +4,8 @@ namespace App\Models\Ppdb;
 
 use App\Models\Jurusan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PpdbFormulirPendaftaran extends Model
 {
@@ -52,6 +54,21 @@ class PpdbFormulirPendaftaran extends Model
     public function berkas()
     {
         return $this->hasMany(PpdbBerkas::class, 'ppdb_pendaftar_id', 'ppdb_pendaftar_id');
+    }
+
+    public function tesAttempt()
+    {
+        return $this->hasOne(PpdbTesAttempts::class, 'formulir_pendaftaran_id');
+    }
+
+    public function jawabanPendaftar()
+    {
+        return $this->hasMany(PpdbJawabanPendaftar::class, 'formulir_pendaftaran_id');
+    }
+
+    public function hasilSeleksi()
+    {
+        return $this->hasOne(PpdbHasilSeleksi::class, 'formulir_pendaftaran_id');
     }
 
     public function generateNoPendaftaran(): string
