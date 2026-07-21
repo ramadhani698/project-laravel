@@ -12,8 +12,8 @@
             <a href="{{ route('ppdb.persyaratan') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.persyaratan') ? 'active' : '' }}">Persyaratan</a>
             <a href="{{ route('ppdb.prosedur') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.prosedur') ? 'active' : '' }}">Prosedur PPDB</a>
             <a href="{{ route('ppdb.kontak') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.kontak') ? 'active' : '' }}">Kontak</a>
-            <a href="{{ route('ppdb.auth.daftar') }}" class="ppdb-nav-link">Pendaftaran</a>
-            <a href="{{ route('ppdb.auth.login') }}" class="ppdb-nav-link">Login</a>
+            <a href="{{ route('ppdb.auth.daftar') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.auth.daftar') ? 'active' : '' }}">Pendaftaran</a>
+            <a href="{{ route('ppdb.auth.login') }}" class="ppdb-nav-link {{ request()->routeIs('ppdb.auth.login') ? 'active' : '' }}">Login</a>
         </nav>
     </div>
 </header>

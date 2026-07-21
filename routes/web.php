@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
 use App\Http\Controllers\Admin\BerandaSettingController;
+use App\Http\Controllers\Admin\Ppdb\ProsedurSettingController;
 use App\Http\Controllers\Admin\PersyaratanController;
 
 // Frontend Controllers
@@ -87,10 +88,13 @@ Route::prefix('ppdb')
     ->name('ppdb.')
     ->group(function () {
         Route::get('/', [PpdbBerandaController::class, 'index'])->name('home');
-        Route::view('/prosedur', 'ppdb.prosedur')->name('prosedur');
-        Route::view('/daftar', 'ppdb.daftar')->name('daftar');
+
+        Route::get('/prosedur', [\App\Http\Controllers\Ppdb\ProsedurController::class, 'index'])->name('prosedur');       
+        Route::view('/daftar', 'ppdb.daftar')->name('daftar'); 
         Route::get('/persyaratan', [PersyaratanController::class, 'tampilanPublik'])->name('persyaratan');
-        Route::view('/kontak', 'ppdb.kontak')->name('kontak');
+        Route::view('/kontak', 'ppdb.kontak')->name('kontak'); 
+
+
 
         Route::prefix('auth')
             ->name('auth.')
@@ -234,16 +238,18 @@ Route::middleware('auth')
 
         });
          // ROUTE BERANDA SETTING
-        Route::resource('beranda-setting', BerandaSettingController::class)
-            ->except(['create', 'store', 'show'])
-            ->parameters(['beranda-setting' => 'beranda-setting']);
+         Route::resource('beranda-setting', BerandaSettingController::class)
+                ->except(['create', 'store', 'show'])
+                ->parameters(['beranda-setting' => 'beranda-setting']);
+
+            //ROUTE PROSEDUR SETTING
+            Route::resource('/prosedur-setting', ProsedurSettingController::class);
 
         // ROUTE PERSYARATAN
         Route::resource('persyaratan', PersyaratanController::class)
             ->except(['show'])
             ->parameters(['persyaratan' => 'persyaratan']);
-        Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
-            ->except(['show']);
+
     });
     Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
     ->except(['show']);

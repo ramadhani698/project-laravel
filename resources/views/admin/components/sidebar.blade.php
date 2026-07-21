@@ -113,6 +113,11 @@
             <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Jalur Pendaftaran
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.prosedur-setting.index') }}">
+            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Prosedur PPDB
+          </a>
+        </li>
       </ul>
     </li>
     <li class="nav-title">Sistem PPDB</li>
