@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link rel="stylesheet" href="{{ asset('css/ppdb/variables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/ppdb/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ppdb/wizard-tes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ppdb/kerjakan.css') }}">
     @stack('styles')
 </head>
 <body class="ppdb-dashboard">

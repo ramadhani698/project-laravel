@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function showRegister()
     {
-        return view('ppdb.auth.daftar'); // sebelumnya 'ppdb.auth.register'
+        return view('ppdb.auth.daftar');
     }
 
     public function register(RegisterRequest $request)
@@ -26,16 +26,28 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::guard('ppdb')->login($pendaftar);
-
         return redirect()
-            ->route('ppdb.dashboard')
-            ->with('success', 'Akun berhasil dibuat, selamat datang ' . $pendaftar->nama_lengkap . '!');
+            ->route('ppdb.auth.daftar.sukses')
+            ->with('nama_pendaftar', $pendaftar->nama_lengkap)
+            ->with('email_pendaftar', $pendaftar->email);
+    }
+
+    public function registerSukses()
+    {
+        // Kalau halaman ini diakses langsung tanpa lewat proses daftar, arahkan balik
+        if (!session()->has('nama_pendaftar')) {
+            return redirect()->route('ppdb.auth.daftar');
+        }
+
+        return view('ppdb.auth.daftar-sukses', [
+            'nama' => session('nama_pendaftar'),
+            'email' => session('email_pendaftar'),
+        ]);
     }
 
     public function showLogin()
     {
-        return view('ppdb.auth.login'); // ini sudah cocok, tidak berubah
+        return view('ppdb.auth.login');
     }
 
     public function login(LoginRequest $request)
@@ -60,6 +72,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('ppdb.auth.login'); // sebelumnya 'ppdb.login', tidak sesuai nested group
+        return redirect()->route('ppdb.auth.login');
     }
 }

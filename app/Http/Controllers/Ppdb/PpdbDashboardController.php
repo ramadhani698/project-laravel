@@ -7,6 +7,8 @@ use App\Http\Requests\Ppdb\PendaftaranStepRequest;
 use App\Http\Requests\Ppdb\UploadBerkasRequest;
 use App\Models\Jurusan;
 use App\Models\Ppdb\PpdbBerkas;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Ppdb\PpdbHasilSeleksi;
 use App\Models\Ppdb\PpdbFormulirPendaftaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +29,12 @@ class PpdbDashboardController extends Controller
             ->keyBy('jenis_dokumen');
 
         if ($formulir->status !== 'draft') {
-            return view('ppdb.dashboard.status', compact('pendaftar', 'formulir', 'berkas'));
+            $hasilSeleksi = PpdbHasilSeleksi::where('formulir_pendaftaran_id', $formulir->id)
+                ->whereNotNull('tanggal_pengumuman')
+                ->where('tanggal_pengumuman', '<=', now()->toDateString())
+                ->first();
+
+            return view('ppdb.dashboard.status', compact('pendaftar', 'formulir', 'berkas', 'hasilSeleksi'));
         }
 
         $jurusanList = Jurusan::orderBy('order')->get();
@@ -66,7 +73,7 @@ class PpdbDashboardController extends Controller
             ->where('jenis_dokumen', $request->jenis_dokumen)
             ->first();
 
-        // Opsi A: dokumen yang sudah valid dikunci, tidak bisa diganti sepihak oleh siswa
+        // dokumen yang sudah valid dikunci, tidak bisa diganti sepihak oleh siswa
         if ($existing && $existing->status_verifikasi === 'valid') {
             return response()->json([
                 'success' => false,
@@ -161,5 +168,57 @@ class PpdbDashboardController extends Controller
             'message' => 'Pendaftaran berhasil dikirim.',
             'no_pendaftaran' => $formulir->no_pendaftaran,
         ]);
+    }
+
+    public function cetakKartuPeserta()
+    {
+        $pendaftar = Auth::guard('ppdb')->user();
+
+        $formulir = PpdbFormulirPendaftaran::where('ppdb_pendaftar_id', $pendaftar->id)->firstOrFail();
+
+        $hasilSeleksi = $formulir->hasilSeleksi()
+            ->whereNotNull('tanggal_pengumuman')
+            ->where('tanggal_pengumuman', '<=', now()->toDateString())
+            ->first();
+
+        $eligible = $formulir->status === 'terverifikasi'
+            && $hasilSeleksi
+            && $hasilSeleksi->status_kelulusan === 'lulus';
+
+        abort_unless($eligible, 403, 'Kartu peserta hanya bisa dicetak setelah berkas terverifikasi dan dinyatakan lulus seleksi.');
+
+        $pdf = Pdf::loadView('ppdb.pdf.kartu-peserta', [
+            'pendaftar' => $pendaftar,
+            'formulir' => $formulir,
+            'hasilSeleksi' => $hasilSeleksi,
+        ])->setPaper('a5', 'landscape');
+
+        return $pdf->stream('kartu-peserta-' . $formulir->no_pendaftaran . '.pdf');
+    }
+
+    public function cetakLembarPernyataan()
+    {
+        $pendaftar = Auth::guard('ppdb')->user();
+
+        $formulir = PpdbFormulirPendaftaran::where('ppdb_pendaftar_id', $pendaftar->id)->firstOrFail();
+
+        $hasilSeleksi = $formulir->hasilSeleksi()
+            ->whereNotNull('tanggal_pengumuman')
+            ->where('tanggal_pengumuman', '<=', now()->toDateString())
+            ->first();
+
+        $eligible = $formulir->status === 'terverifikasi'
+            && $hasilSeleksi
+            && $hasilSeleksi->status_kelulusan === 'lulus';
+
+        abort_unless($eligible, 403, 'Lembar pernyataan hanya bisa dicetak setelah berkas terverifikasi dan dinyatakan lulus seleksi.');
+
+        $pdf = Pdf::loadView('ppdb.pdf.lembar-pernyataan', [
+            'pendaftar' => $pendaftar,
+            'formulir' => $formulir,
+            'hasilSeleksi' => $hasilSeleksi,
+        ])->setPaper('a4', 'portrait');
+
+        return $pdf->stream('lembar-pernyataan-' . $formulir->no_pendaftaran . '.pdf');
     }
 }

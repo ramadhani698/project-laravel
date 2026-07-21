@@ -7,26 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class BerandaSetting extends Model
 {
     protected $fillable = [
-        'hero_badge_text',
-        'hero_main_title',
-        'hero_sub_title',
-        'hero_academic_year',
-        'hero_date_label',
-        'hero_date_value',
-        'hero_logo_sub',
-        'instagram_url',
-        'instagram_handle',
-        'whatsapp_number',
-        'welcome_heading',
-        'welcome_paragraph_1',
-        'welcome_paragraph_2',
-        'welcome_paragraph_3',
-        'address',
-        'phone',
-        'website_url',
-        'email',
-    ];
-
+    'hero_badge_text',
+    'hero_main_title',
+    'hero_sub_title',
+    'hero_academic_year',
+    'hero_date_label',
+    'hero_date_value',
+    'hero_logo_sub',
+    'instagram_url',
+    'instagram_handle',
+    'whatsapp_number',
+    'welcome_heading',
+    'welcome_paragraph_1',
+    'welcome_paragraph_2',
+    'welcome_paragraph_3',
+    'address',
+    'phone',
+    'website_url',
+    'email',
+    'catatan_persyaratan', // ← tambahan baru
+];
     public static function current(): self
     {
         return static::firstOrCreate([], [
@@ -43,6 +43,7 @@ class BerandaSetting extends Model
             'welcome_paragraph_3' => 'Isi paragraf ketiga di sini.',
             'address'             => 'Alamat sekolah',
             'phone'               => '08xx-xxxx-xxxx',
+            'catatan_persyaratan' => 'Seluruh berkas wajib asli dan sesuai dokumen kependudukan yang berlaku. Berkas tidak lengkap akan menunda proses verifikasi.',
         ]);
     }
 }

@@ -15,9 +15,40 @@ class DataPendaftaranController extends Controller
 {
     public function index(Request $request)
     {
+        $perluVerifikasiBaruCount = PpdbFormulirPendaftaran::where('status', 'menunggu_verifikasi')
+            ->whereDoesntHave('pendaftar.berkas', function ($query) {
+                $query->where('status_verifikasi', 'ditolak');
+            })
+            ->count();
+
+        // Perlu review ulang: berkas terkirim ulang, baik setelah full approve
+        // MAUPUN setelah ada dokumen yang sempat ditolak
+        $perluReviewCount = PpdbFormulirPendaftaran::where(function ($q) {
+                $q->where('status', 'terverifikasi')
+                ->orWhereHas('pendaftar.berkas', function ($sub) {
+                    $sub->where('status_verifikasi', 'ditolak');
+                });
+            })
+            ->whereHas('pendaftar.berkas', function ($query) {
+                $query->where('status_verifikasi', 'menunggu');
+            })
+            ->count();
+
         $formulirList = PpdbFormulirPendaftaran::with(['pendaftar.berkas', 'jurusan'])
             ->when($request->filled('status'), function ($query) use ($request) {
-                $query->where('status', $request->status);
+                if ($request->status === 'perlu_review') {
+                    $query->where(function ($q) {
+                            $q->where('status', 'terverifikasi')
+                            ->orWhereHas('pendaftar.berkas', function ($sub) {
+                                $sub->where('status_verifikasi', 'ditolak');
+                            });
+                        })
+                        ->whereHas('pendaftar.berkas', function ($q) {
+                            $q->where('status_verifikasi', 'menunggu');
+                        });
+                } else {
+                    $query->where('status', $request->status);
+                }
             })
             ->when($request->filled('q'), function ($query) use ($request) {
                 $keyword = $request->q;
@@ -30,7 +61,11 @@ class DataPendaftaranController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('admin.ppdb.data-pendaftaran.index', compact('formulirList'));
+        return view('admin.ppdb.data-pendaftaran.index', compact(
+            'formulirList',
+            'perluReviewCount',
+            'perluVerifikasiBaruCount'
+        ));
     }
 
     public function edit(PpdbFormulirPendaftaran $formulir)
@@ -49,7 +84,7 @@ class DataPendaftaranController extends Controller
         $formulir->update($request->validated());
 
         return redirect()
-            ->route('admin.ppdb.data-pendaftaran.index', $formulir)
+            ->route('admin.ppdb.data-pendaftaran.index')
             ->with('success', 'Data pendaftaran berhasil diperbarui.');
     }
 
@@ -100,16 +135,18 @@ class DataPendaftaranController extends Controller
 
     public function destroy(PpdbFormulirPendaftaran $formulir)
     {
-        $berkasList = PpdbBerkas::where('ppdb_pendaftar_id', $formulir->ppdb_pendaftar_id)->get();
+        $pendaftarId = $formulir->ppdb_pendaftar_id;
 
-        foreach ($berkasList as $berkas) {
-            if ($berkas->file_path && Storage::disk('public')->exists($berkas->file_path)) {
-                Storage::disk('public')->delete($berkas->file_path);
-            }
-            $berkas->delete();
+        \DB::transaction(function () use ($formulir, $pendaftarId) {
+            PpdbBerkas::where('ppdb_pendaftar_id', $pendaftarId)->delete();
+            $formulir->delete();
+        });
+
+        // Storage bukan bagian dari DB transaction, jadi taruh di luar
+        $folderPath = "ppdb/berkas/{$pendaftarId}";
+        if (Storage::disk('public')->exists($folderPath)) {
+            Storage::disk('public')->deleteDirectory($folderPath);
         }
-
-        $formulir->delete();
 
         return back()->with('success', 'Data pendaftaran berhasil dihapus.');
     }

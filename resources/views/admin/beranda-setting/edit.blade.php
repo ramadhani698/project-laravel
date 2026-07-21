@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="mb-0">Pengaturan Beranda</h5>
+            <h5 class="mb-0">Beranda SPMB</h5>
         </div>
 
         <div class="card-body">
@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.beranda-setting.update') }}" method="POST">
+            <form action="{{ route('admin.beranda-setting.update', $settings->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -140,6 +140,15 @@
                 <div class="mb-3">
                     <label class="form-label">Email</label>
                     <input type="email" name="email" class="form-control" value="{{ old('email', $settings->email) }}">
+                </div>
+
+                <hr>
+                <h6 class="mt-2 mb-3">Halaman Persyaratan Pendaftaran</h6>
+
+                <div class="mb-3">
+                    <label class="form-label">Catatan / Peringatan Berkas</label>
+                    <textarea name="catatan_persyaratan" rows="3" class="form-control">{{ old('catatan_persyaratan', $settings->catatan_persyaratan) }}</textarea>
+                    <small class="text-muted">Muncul di bagian bawah halaman "Persyaratan Pendaftaran" untuk calon siswa, contoh: peringatan berkas harus asli</small>
                 </div>
 
                 <button type="submit" class="btn btn-success">Update</button>

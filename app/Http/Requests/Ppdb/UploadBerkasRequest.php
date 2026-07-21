@@ -18,14 +18,14 @@ class UploadBerkasRequest extends FormRequest
                 'required',
                 'in:ktp_ortu,akta_kelahiran,kartu_keluarga,ijazah,skl,rapor_semester_akhir,surat_keterangan_sehat',
             ],
-            'file' => ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:10240'],
+            'file' => ['required', 'file', 'mimes:pdf,jpg,jpeg,png,webp', 'max:10240'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'file.mimes' => 'Format file harus PDF, JPG, atau PNG.',
+            'file.mimes' => 'Format file harus PDF, JPG, JPEG, PNG, atau WEBP.',
             'file.max' => 'Ukuran file maksimal 10MB.',
         ];
     }

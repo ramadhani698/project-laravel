@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
 use App\Http\Controllers\Admin\BerandaSettingController;
 use App\Http\Controllers\Admin\Ppdb\ProsedurSettingController;
+use App\Http\Controllers\Admin\PersyaratanController;
+
 // Frontend Controllers
 use App\Http\Controllers\HomeController as FrontendHomeController;
 use App\Http\Controllers\JurusanController as FrontendJurusanController;
@@ -36,6 +38,14 @@ use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
 use App\Http\Controllers\PpdbBerandaController;
 use App\Http\Controllers\Admin\Ppdb\PendaftarController as AdminPpdbPendaftarController;
 use App\Http\Controllers\Admin\Ppdb\DataPendaftaranController as AdminPpdbDataPendaftaranController;
+
+use App\Http\Controllers\Admin\Ppdb\PeriodeTesController;
+use App\Http\Controllers\Admin\Ppdb\SoalTesController;
+use App\Http\Controllers\Admin\Ppdb\HasilSeleksiController;
+use App\Http\Controllers\Ppdb\TesOnlineController;
+use App\Http\Controllers\Admin\Ppdb\SiswaDiterimaController;
+use App\Http\Controllers\Admin\Ppdb\PersyaratanController as AdminPpdbPersyaratanController;
+use App\Http\Controllers\Admin\JalurPendaftaranController as AdminJalurPendaftaranController;
 
 
 /*
@@ -78,16 +88,20 @@ Route::prefix('ppdb')
     ->name('ppdb.')
     ->group(function () {
         Route::get('/', [PpdbBerandaController::class, 'index'])->name('home');
+
         Route::get('/prosedur', [\App\Http\Controllers\Ppdb\ProsedurController::class, 'index'])->name('prosedur');       
         Route::view('/daftar', 'ppdb.daftar')->name('daftar'); 
-        Route::view('/persyaratan', 'ppdb.persyaratan')->name('persyaratan');
+        Route::get('/persyaratan', [PersyaratanController::class, 'tampilanPublik'])->name('persyaratan');
         Route::view('/kontak', 'ppdb.kontak')->name('kontak'); 
+
+
 
         Route::prefix('auth')
             ->name('auth.')
             ->group(function () {
                 Route::get('/daftar', [PpdbAuthController::class, 'showRegister'])->name('daftar');
                 Route::post('/daftar', [PpdbAuthController::class, 'register'])->name('daftar.store');
+                Route::get('/daftar/sukses', [PpdbAuthController::class, 'registerSukses'])->name('daftar.sukses');
 
                 Route::get('/login', [PpdbAuthController::class, 'showLogin'])->name('login');
                 Route::post('/login', [PpdbAuthController::class, 'login'])->name('login.store');
@@ -113,6 +127,23 @@ Route::prefix('ppdb')
             Route::delete('/dashboard/berkas/{berkas}', [PpdbDashboardController::class, 'deleteBerkas'])->name('dashboard.berkas.delete');
             Route::post('/dashboard/submit', [PpdbDashboardController::class, 'submit'])->name('dashboard.submit');
             Route::post('/logout', [PpdbAuthController::class, 'logout'])->name('logout');
+
+            // Kartu peserta PDF
+            Route::get('/status/kartu-peserta/pdf', [PpdbDashboardController::class, 'cetakKartuPeserta'])
+                ->name('status.cetak-kartu');
+
+            // Lembar pernyataan PDF
+            Route::get('/status/lembar-pernyataan/pdf', [PpdbDashboardController::class, 'cetakLembarPernyataan'])
+                ->name('status.cetak-pernyataan');
+
+            // ==================== STUDENT SIDE ====================
+            Route::prefix('tes')->name('tes.')->group(function () {
+                Route::get('/', [TesOnlineController::class, 'index'])->name('index');
+                Route::post('/mulai', [TesOnlineController::class, 'mulai'])->name('mulai');
+                Route::get('/kerjakan', [TesOnlineController::class, 'kerjakan'])->name('kerjakan');
+                Route::post('/jawab', [TesOnlineController::class, 'jawab'])->name('jawab');
+                Route::post('/selesai', [TesOnlineController::class, 'selesai'])->name('selesai');
+            });
         });
     });
 
@@ -183,14 +214,60 @@ Route::middleware('auth')
             Route::patch('data-pendaftaran/berkas/{berkas}/verifikasi', [AdminPpdbDataPendaftaranController::class, 'verifikasiBerkas'])
                 ->name('data-pendaftaran.berkas.verifikasi');
 
+            Route::resource('periode-tes', PeriodeTesController::class)
+                ->parameters(['periode-tes' => 'periode_te'])
+                ->except(['show']);
+
+            Route::patch('periode-tes/{periode_te}/toggle-aktif', [PeriodeTesController::class, 'toggleAktif'])
+                ->name('periode-tes.toggle-aktif');
+
+            // SOAL TES
+            Route::resource('soal-tes', SoalTesController::class)
+                ->parameters(['soal-tes' => 'soal_te'])
+                ->except(['show']);
+
+            Route::resource('hasil-seleksi', HasilSeleksiController::class)
+                ->only(['index', 'show', 'update']);
+
+            // EXPORT SISWA DITERIMA
+            Route::prefix('siswa-diterima')->name('siswa-diterima.')->group(function () {
+                Route::get('/', [SiswaDiterimaController::class, 'index'])->name('index');
+                Route::get('/export', [SiswaDiterimaController::class, 'export'])->name('export');
+                Route::get('/{hasil}', [SiswaDiterimaController::class, 'show'])->name('show');
+            });
+
         });
          // ROUTE BERANDA SETTING
-            Route::get('/beranda-setting', [BerandaSettingController::class, 'edit'])->name('beranda-setting.edit');
-            Route::put('/beranda-setting', [BerandaSettingController::class, 'update'])->name('beranda-setting.update');
+         Route::resource('beranda-setting', BerandaSettingController::class)
+                ->except(['create', 'store', 'show'])
+                ->parameters(['beranda-setting' => 'beranda-setting']);
 
             //ROUTE PROSEDUR SETTING
             Route::resource('/prosedur-setting', ProsedurSettingController::class);
+
+        // ROUTE PERSYARATAN
+        Route::resource('persyaratan', PersyaratanController::class)
+            ->except(['show'])
+            ->parameters(['persyaratan' => 'persyaratan']);
+
     });
+    Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
+    ->except(['show']);
+
+/*
+|--------------------------------------------------------------------------
+| ALTERNATIF: cara singkat pakai Route::resource
+|--------------------------------------------------------------------------
+| Baris di bawah ini SAMA DENGAN 5 route admin di atas (index, create, store,
+| edit, update, destroy), cukup 1 baris. Pilih salah satu cara saja
+| (jangan dipakai bersamaan dengan blok Route::prefix('admin') di atas).
+|
+| Route::prefix('admin')->name('admin.')->group(function () {
+|     Route::resource('persyaratan-dokumen', PersyaratanDokumenController::class)
+|         ->except(['show'])
+|         ->parameters(['persyaratan-dokumen' => 'persyaratanDokumen']);
+| });
+*/
 
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
