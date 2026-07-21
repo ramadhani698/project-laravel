@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Jurusan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 
@@ -27,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
                 'navJurusan',
                 Jurusan::orderBy('order')->get()
             );
+        });
+
+        View::composer('ppdb.layouts.dashboard', function ($view) {
+            $view->with('pendaftar', Auth::guard('ppdb')->user());
         });
 
         Paginator::useBootstrap();

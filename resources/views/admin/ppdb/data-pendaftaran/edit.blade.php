@@ -233,90 +233,90 @@
 
 @push('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const statusBerkasClass = {
-        menunggu: 'bg-secondary-subtle text-secondary-emphasis',
-        valid: 'bg-success-subtle text-success-emphasis',
-        ditolak: 'bg-danger-subtle text-danger-emphasis',
-    };
+    document.addEventListener('DOMContentLoaded', function () {
+        const statusBerkasClass = {
+            menunggu: 'bg-secondary-subtle text-secondary-emphasis',
+            valid: 'bg-success-subtle text-success-emphasis',
+            ditolak: 'bg-danger-subtle text-danger-emphasis',
+        };
 
-    const statusFormulirClass = {
-        draft: 'bg-secondary-subtle text-secondary-emphasis',
-        menunggu_verifikasi: 'bg-warning-subtle text-warning-emphasis',
-        terverifikasi: 'bg-success-subtle text-success-emphasis',
-    };
+        const statusFormulirClass = {
+            draft: 'bg-secondary-subtle text-secondary-emphasis',
+            menunggu_verifikasi: 'bg-warning-subtle text-warning-emphasis',
+            terverifikasi: 'bg-success-subtle text-success-emphasis',
+        };
 
-    const statusCardClass = {
-        menunggu: 'berkas-card-menunggu',
-        valid: 'berkas-card-valid',
-        ditolak: 'berkas-card-ditolak',
-    };
+        const statusCardClass = {
+            menunggu: 'berkas-card-menunggu',
+            valid: 'berkas-card-valid',
+            ditolak: 'berkas-card-ditolak',
+        };
 
-    document.querySelectorAll('.verifikasi-form').forEach(form => {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.querySelectorAll('.verifikasi-form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
 
-            const submitter = e.submitter; // tombol yang diklik: Valid / Konfirmasi Tolak
-            const kode = form.dataset.kode;
-            const formData = new FormData(form);
-            formData.set('status_verifikasi', submitter.value);
+                const submitter = e.submitter; // tombol yang diklik: Valid / Konfirmasi Tolak
+                const kode = form.dataset.kode;
+                const formData = new FormData(form);
+                formData.set('status_verifikasi', submitter.value);
 
-            submitter.disabled = true;
+                submitter.disabled = true;
 
-            fetch(form.action, {
-                method: 'POST', // @method('PATCH') di formData yang urus method spoofing
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Accept': 'application/json',
-                },
-                body: formData,
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (!data.success) {
-                    alert(data.message ?? 'Gagal menyimpan verifikasi.');
-                    return;
-                }
+                fetch(form.action, {
+                    method: 'POST', // @method('PATCH') di formData yang urus method spoofing
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json',
+                    },
+                    body: formData,
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert(data.message ?? 'Gagal menyimpan verifikasi.');
+                        return;
+                    }
 
-                // update badge dokumen
-                const badge = document.querySelector(`[data-badge="${kode}"]`);
-                if (badge) {
-                    badge.className = 'badge ' + statusBerkasClass[data.status_verifikasi];
-                    badge.textContent = data.status_verifikasi.charAt(0).toUpperCase() + data.status_verifikasi.slice(1);
-                }
+                    // update badge dokumen
+                    const badge = document.querySelector(`[data-badge="${kode}"]`);
+                    if (badge) {
+                        badge.className = 'badge ' + statusBerkasClass[data.status_verifikasi];
+                        badge.textContent = data.status_verifikasi.charAt(0).toUpperCase() + data.status_verifikasi.slice(1);
+                    }
 
-                // update warna kartu sesuai status terbaru
-                const card = document.getElementById(`berkas-card-${kode}`);
-                if (card) {
-                    card.classList.remove('berkas-card-menunggu', 'berkas-card-valid', 'berkas-card-ditolak');
-                    card.classList.add(statusCardClass[data.status_verifikasi]);
-                }
+                    // update warna kartu sesuai status terbaru
+                    const card = document.getElementById(`berkas-card-${kode}`);
+                    if (card) {
+                        card.classList.remove('berkas-card-menunggu', 'berkas-card-valid', 'berkas-card-ditolak');
+                        card.classList.add(statusCardClass[data.status_verifikasi]);
+                    }
 
-                // update catatan penolakan
-                const catatanWrap = document.querySelector(`[data-catatan-wrap="${kode}"]`);
-                if (catatanWrap) {
-                    catatanWrap.innerHTML = (data.status_verifikasi === 'ditolak' && data.catatan_admin)
-                        ? `<div class="small text-danger-emphasis mt-2"><em>Catatan: ${data.catatan_admin}</em></div>`
-                        : '';
-                }
+                    // update catatan penolakan
+                    const catatanWrap = document.querySelector(`[data-catatan-wrap="${kode}"]`);
+                    if (catatanWrap) {
+                        catatanWrap.innerHTML = (data.status_verifikasi === 'ditolak' && data.catatan_admin)
+                            ? `<div class="small text-danger-emphasis mt-2"><em>Catatan: ${data.catatan_admin}</em></div>`
+                            : '';
+                    }
 
-                // update badge status formulir di header (kalau berubah jadi terverifikasi)
-                const badgeFormulir = document.getElementById('badge-status-formulir');
-                if (badgeFormulir && data.status_formulir) {
-                    badgeFormulir.className = 'badge fs-6 ' + statusFormulirClass[data.status_formulir];
-                    badgeFormulir.textContent = data.status_formulir.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
-                }
+                    // update badge status formulir di header (kalau berubah jadi terverifikasi)
+                    const badgeFormulir = document.getElementById('badge-status-formulir');
+                    if (badgeFormulir && data.status_formulir) {
+                        badgeFormulir.className = 'badge fs-6 ' + statusFormulirClass[data.status_formulir];
+                        badgeFormulir.textContent = data.status_formulir.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+                    }
 
-                // tutup collapse "Tolak" kalau lagi kebuka
-                const collapseEl = form.querySelector('.collapse');
-                if (collapseEl && collapseEl.classList.contains('show')) {
-                    coreui.Collapse.getOrCreateInstance(collapseEl).hide();
-                }
-            })
-            .catch(() => alert('Terjadi kesalahan, coba lagi.'))
-            .finally(() => { submitter.disabled = false; });
+                    // tutup collapse "Tolak" kalau lagi kebuka
+                    const collapseEl = form.querySelector('.collapse');
+                    if (collapseEl && collapseEl.classList.contains('show')) {
+                        coreui.Collapse.getOrCreateInstance(collapseEl).hide();
+                    }
+                })
+                .catch(() => alert('Terjadi kesalahan, coba lagi.'))
+                .finally(() => { submitter.disabled = false; });
+            });
         });
     });
-});
 </script>
 @endpush

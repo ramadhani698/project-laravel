@@ -42,9 +42,9 @@
             <div class="kontak-sosmed">
                 <span class="kontak-label">Media Sosial</span>
                 <div class="sosmed-icons">
-                    <a href="#" title="Instagram">IG</a>
-                    <a href="#" title="Facebook">FB</a>
-                    <a href="#" title="YouTube">YT</a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>

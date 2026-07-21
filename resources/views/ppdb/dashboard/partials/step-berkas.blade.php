@@ -1,6 +1,6 @@
 <div class="step-panel" data-step="4">
     <h2>Upload berkas</h2>
-    <p class="hint">Format PDF/JPG/PNG, maksimal 10MB per file.</p>
+    <p class="hint">Format PDF, JPG, JPEG, PNG, atau WEBP, maksimal 10MB per file.</p>
 
     @php
         $dokumenList = [

@@ -389,78 +389,362 @@ body.ppdb-dashboard{
 }
 
 /* 
-    HALAMAN STATUS
+    HALAMAN STATUS — Redesign: Kartu Peserta
 */
 
 .ppdb-status-page {
     max-width: 640px;
     margin: 0 auto;
 }
-.status-hero {
-    text-align: center;
-    padding: 40px 24px;
-    background: var(--ppdb-green-700);
+
+/* ===== Derived tokens (dari variable brand kamu, nggak perlu tau hex asli) ===== */
+.ppdb-status-page {
+    --pp-deep: color-mix(in srgb, var(--ppdb-green-700) 82%, black);
+    --pp-deeper: color-mix(in srgb, var(--ppdb-green-700) 60%, black);
+    --pp-tint: color-mix(in srgb, var(--ppdb-green-700) 12%, white);
+    --pp-gold-soft: color-mix(in srgb, var(--ppdb-gold) 55%, white);
+}
+
+/* ===================== TICKET HERO ===================== */
+.ticket-wrap { margin-bottom: 28px; }
+
+.ppdb-ticket {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 36px 32px 28px;
     color: #fff;
-    border-radius: 16px;
-    margin-bottom: 24px;
+    background:
+        radial-gradient(circle at 15% -10%, color-mix(in srgb, var(--ppdb-gold) 35%, transparent), transparent 55%),
+        linear-gradient(135deg, var(--ppdb-green-700) 0%, var(--pp-deep) 55%, var(--pp-deeper) 100%);
+    box-shadow: 0 12px 32px -12px rgba(0,0,0,.35);
 }
-.status-icon {
-    font-size: 48px;
-    color: var(--ppdb-gold);
-    margin-bottom: 12px;
+
+.ticket-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
-.status-hero h1 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 24px;
+
+/* Notch tiket kayak sobekan tiket asli */
+.ticket-notch {
+    position: absolute;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    background: var(--ppdb-bg, #f4f6f5);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+.ticket-notch-left { left: -13px; }
+.ticket-notch-right { right: -13px; }
+
+.ticket-top { position: relative; z-index: 1; text-align: center; }
+
+.ticket-eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: .75;
     margin-bottom: 8px;
 }
-.status-sub {
-    opacity: 0.9;
-    margin-bottom: 20px;
-}
-.no-pendaftaran-box {
-    display: inline-flex;
-    flex-direction: column;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 10px;
-    padding: 12px 24px;
-    margin-bottom: 16px;
-}
-.no-pendaftaran-box .label {
-    font-size: 12px;
-    opacity: 0.8;
-}
-.no-pendaftaran-box .value {
+.ticket-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--ppdb-gold);
+    margin-bottom: 14px;
 }
+
 .status-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     padding: 6px 16px;
     border-radius: 999px;
     font-size: 13px;
     font-weight: 500;
-    margin-bottom: 16px;
 }
-.status-badge.status-menunggu_verifikasi {
-    background: var(--ppdb-gold);
-    color: #3a2e00;
+.status-badge.status-menunggu_verifikasi { background: var(--ppdb-gold); color: #3a2e00; }
+.status-badge.status-terverifikasi { background: #2e7d32; color: #fff; }
+
+/* Garis putus-putus pemisah, kayak perforasi tiket */
+.ticket-divider {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    margin: 26px 0 22px;
 }
-.status-badge.status-terverifikasi {
+.ticket-divider span {
+    flex: 1;
+    height: 2px;
+    margin: 0 2px;
+    background: rgba(255,255,255,.28);
+    border-radius: 2px;
+}
+
+.ticket-bottom {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+.ticket-id-label {
+    display: block;
+    font-size: 12px;
+    opacity: .8;
+    margin-bottom: 6px;
+}
+.ticket-id-value {
+    position: relative;
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: var(--ppdb-gold);
+}
+/* Efek shimmer/hologram sekali jalan, dipicu class dari JS */
+.ticket-id-shimmer {
+    position: absolute;
+    inset: -4px -12px;
+    background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+    transform: translateX(-120%);
+    pointer-events: none;
+}
+.ppdb-ticket.is-shimmering .ticket-id-shimmer {
+    animation: ticketShimmer 1.4s ease-out .5s 1;
+}
+@keyframes ticketShimmer {
+    to { transform: translateX(120%); }
+}
+
+/* ===================== JALUR SELEKSI (timeline) ===================== */
+.jalur-timeline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 18px 14px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.jalur-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-width: 72px;
+}
+.jalur-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--pp-tint);
+    color: color-mix(in srgb, var(--ppdb-green-700) 60%, #999);
+    font-size: 16px;
+    transition: background .25s, color .25s, transform .25s;
+}
+.jalur-step.is-active .jalur-dot {
+    background: var(--ppdb-green-700);
+    color: #fff;
+    transform: scale(1.08);
+}
+.jalur-step.is-done .jalur-dot {
     background: #2e7d32;
     color: #fff;
 }
-.status-note {
-    font-size: 13px;
-    opacity: 0.85;
-    max-width: 420px;
+.jalur-label {
+    font-size: 11px;
+    color: #777;
+    text-align: center;
+}
+.jalur-step.is-active .jalur-label,
+.jalur-step.is-done .jalur-label { color: #222; font-weight: 600; }
+
+.jalur-line {
+    flex: 1 1 auto;
+    height: 3px;
+    background: var(--pp-tint);
+    margin: 0 2px 20px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+.jalur-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #2e7d32;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .6s ease;
+}
+.jalur-line.is-done::after { transform: scaleX(1); }
+
+/* ===================== ACTION CARD ===================== */
+.ppdb-action-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-left: 4px solid var(--ppdb-gold);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+}
+.ppdb-action-card-primary { border-left-color: var(--ppdb-green-700); background: var(--pp-tint); }
+.action-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    color: var(--ppdb-green-700);
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+}
+.action-text strong { display: block; margin-bottom: 2px; }
+.action-text p { margin: 0; font-size: 13px; color: #666; }
+.upload-btn-primary { background: var(--ppdb-green-700); color: #fff; white-space: nowrap; }
+
+/* ===================== Berkas grid ===================== */
+.berkas-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 768px) {
+    .berkas-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.edit-hint {
+    font-size: 14px;
+    color: var(--text-muted, #474747);
+    margin-top: 12px;
+}
+
+/* ===================== Reveal animations ===================== */
+.reveal-on-load,
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .55s ease, transform .55s ease;
+}
+.reveal-on-load.is-visible,
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-on-load, .reveal-on-scroll { opacity: 1; transform: none; transition: none; }
+    .ppdb-ticket.is-shimmering .ticket-id-shimmer { animation: none; }
+    .jalur-line::after { transition: none; }
+}
+
+/* ===================== HASIL SELEKSI — redesign ===================== */
+.ppdb-card-hasil {
+    position: relative;
+    overflow: hidden;
+    padding: 32px 28px 26px;
+    text-align: center;
+}
+
+.hasil-confetti {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* --- Varian LULUS: gradient hangat hijau-emas --- */
+.ppdb-card-hasil-lulus {
+    background:
+        radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--ppdb-gold) 25%, transparent), transparent 60%),
+        linear-gradient(180deg, #fff 0%, var(--pp-tint) 100%);
+    border: 1px solid color-mix(in srgb, var(--ppdb-gold) 40%, #eee);
+}
+
+/* --- Varian TIDAK LULUS: netral, tenang, bermartabat --- */
+.ppdb-card-hasil-tidak_lulus {
+    background: #fafafa;
+    border: 1px solid #ececec;
+}
+
+/* --- Stamp / cap resmi --- */
+.hasil-stamp-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+}
+
+.hasil-stamp {
+    position: relative;
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+}
+
+.hasil-stamp-lulus {
+    color: #2e7d32;
+    border: 3px solid #2e7d32;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--ppdb-gold) 30%, transparent);
+    animation: stampIn .55s cubic-bezier(.2,1.4,.4,1) both;
+}
+
+.hasil-stamp-netral {
+    color: color-mix(in srgb, var(--ppdb-green-700) 55%, #888);
+    border: 3px dashed #d8d8d8;
+    background: #fff;
+    animation: stampFadeIn .6s ease both;
+}
+
+/* Teks melingkar tipis di sekitar stamp — opsional, disembunyikan visual, cukup buat aksesibilitas/detail */
+.hasil-stamp-ring {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip: rect(0 0 0 0);
+}
+
+@keyframes stampIn {
+    0%   { transform: scale(1.6) rotate(-14deg); opacity: 0; }
+    60%  { transform: scale(0.92) rotate(3deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes stampFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hasil-body { position: relative; z-index: 1; }
+
+.hasil-heading {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.ppdb-card-hasil-lulus .hasil-heading { color: #1b4d1f; }
+.ppdb-card-hasil-tidak_lulus .hasil-heading { color: #333; }
+
+.hasil-desc {
+    font-size: 16px;
+    color: #313131;
+    max-width: 440px;
     margin: 0 auto;
 }
-.edit-hint {
-    font-size: 13px;
-    color: var(--text-muted, #777);
-    margin-top: 12px;
+
+.hasil-tanggal {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #666464;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hasil-stamp-lulus, .hasil-stamp-netral { animation: none; }
 }

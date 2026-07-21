@@ -19,6 +19,32 @@
         </div>
     @endif
 
+    @if($perluVerifikasiBaruCount > 0)
+        <div class="alert alert-info d-flex align-items-center gap-2" role="alert">
+            <i class="fas fa-user-plus"></i>
+            <div class="flex-grow-1">
+                <strong>{{ $perluVerifikasiBaruCount }} pendaftar baru</strong> menunggu verifikasi awal admin.
+            </div>
+            <a href="{{ route('admin.ppdb.data-pendaftaran.index', ['status' => 'menunggu_verifikasi']) }}"
+            class="btn btn-sm btn-info text-white">
+                Lihat Semua
+            </a>
+        </div>
+    @endif
+
+    @if($perluReviewCount > 0)
+        <div class="alert alert-warning d-flex align-items-center gap-2" role="alert">
+            <i class="fas fa-bell"></i>
+            <div class="flex-grow-1">
+                <strong>{{ $perluReviewCount }} pendaftar</strong> mengunggah berkas baru dan perlu direview ulang.
+            </div>
+            <a href="{{ route('admin.ppdb.data-pendaftaran.index', ['status' => 'perlu_review']) }}"
+            class="btn btn-sm btn-warning">
+                Lihat Semua
+            </a>
+        </div>
+    @endif
+
     <div class="card border-0 shadow-sm mb-3">
         <div class="card-body py-3">
             <form method="GET" class="d-flex gap-2 flex-wrap align-items-center">
@@ -27,6 +53,7 @@
                     <option value="draft" @selected(request('status') === 'draft')>Draft</option>
                     <option value="menunggu_verifikasi" @selected(request('status') === 'menunggu_verifikasi')>Menunggu verifikasi</option>
                     <option value="terverifikasi" @selected(request('status') === 'terverifikasi')>Terverifikasi</option>
+                    <option value="perlu_review" @selected(request('status') === 'perlu_review')>🔔 Perlu review ulang</option>
                 </select>
                 <input type="text" name="q" value="{{ request('q') }}" class="form-control form-control-sm w-auto" placeholder="Cari nama / no. pendaftaran...">
                 <button type="submit" class="btn btn-sm btn-outline-secondary">Cari</button>
@@ -56,8 +83,10 @@
                         @php
                             $totalBerkas = $formulir->pendaftar->berkas->count();
                             $validBerkas = $formulir->pendaftar->berkas->where('status_verifikasi', 'valid')->count();
+                            $adaBerkasBaru = $formulir->status === 'terverifikasi'
+                                && $formulir->pendaftar->berkas->where('status_verifikasi', 'menunggu')->isNotEmpty();
                         @endphp
-                        <tr>
+                        <tr class="{{ $adaBerkasBaru ? 'border-start border-3 border-warning' : '' }}">
                             <td class="ps-4">
                                 <span class="fw-semibold text-primary-emphasis">
                                     {{ $formulir->no_pendaftaran ?? '—' }}
@@ -78,6 +107,11 @@
                                 <span class="badge {{ $validBerkas === $totalBerkas && $totalBerkas > 0 ? 'bg-success-subtle text-success-emphasis' : 'bg-warning-subtle text-warning-emphasis' }}">
                                     {{ $validBerkas }}/{{ $totalBerkas }} valid
                                 </span>
+                                @if($adaBerkasBaru)
+                                    <span class="badge bg-danger-subtle text-danger-emphasis ms-1" title="Ada berkas baru yang belum diverifikasi ulang">
+                                        <i class="fas fa-bell"></i> Baru
+                                    </span>
+                                @endif
                             </td>
                             <td>
                                 @php
