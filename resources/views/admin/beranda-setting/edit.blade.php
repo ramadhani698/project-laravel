@@ -142,6 +142,15 @@
                     <input type="email" name="email" class="form-control" value="{{ old('email', $settings->email) }}">
                 </div>
 
+                <hr>
+                <h6 class="mt-2 mb-3">Halaman Persyaratan Pendaftaran</h6>
+
+                <div class="mb-3">
+                    <label class="form-label">Catatan / Peringatan Berkas</label>
+                    <textarea name="catatan_persyaratan" rows="3" class="form-control">{{ old('catatan_persyaratan', $settings->catatan_persyaratan) }}</textarea>
+                    <small class="text-muted">Muncul di bagian bawah halaman "Persyaratan Pendaftaran" untuk calon siswa, contoh: peringatan berkas harus asli</small>
+                </div>
+
                 <button type="submit" class="btn btn-success">Update</button>
             </form>
         </div>

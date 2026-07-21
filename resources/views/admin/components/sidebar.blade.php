@@ -98,6 +98,23 @@
     <li class="nav-title">Sistem PPDB</li>
     <li class="nav-item nav-group">
       <a class="nav-link nav-group-toggle" href="#">
+        <img src="{{ asset('coreui/assets/icons/info.svg') }}" class="nav-icon" alt="Persyaratan Icon" style="width: 1em; height: 1em;"> Persyaratan PPDB
+      </a>
+      <ul class="nav-group-items">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.persyaratan.index') }}">
+            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Persyaratan Dokumen
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('admin.jalur-pendaftaran.index') }}">
+            <span class="nav-icon"><span class="nav-icon-bullet"></span></span> Jalur Pendaftaran
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item nav-group">
+      <a class="nav-link nav-group-toggle" href="#">
         <img src="{{ asset('coreui/assets/icons/address-book.svg') }}" class="nav-icon" alt="PPDB Icon" style="width: 1em; height: 1em;"> Penerimaan Siswa Baru
       </a>
       <ul class="nav-group-items">
