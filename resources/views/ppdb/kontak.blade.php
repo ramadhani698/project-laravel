@@ -1,87 +1,287 @@
 @extends('ppdb.layouts.app')
 
-@section('title', 'Kontak Kami')
-
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('css/ppdb/kontak.css') }}">
-@endpush
+@section('title', 'Kontak Kami - SMK Muhammadiyah')
 
 @section('content')
-    <div class="page-title">Kontak Kami</div>
+<div class="kontak-page">
 
-    <div class="kontak-wrapper">
-        {{-- Kolom kiri: info kontak --}}
-        <div class="kontak-info">
-            <h2>Informasi Kontak</h2>
+    {{-- HERO / BANNER --}}
+    <section class="kontak-hero">
+        <div class="container">
+            <h1 class="kontak-hero__title">Kontak Kami</h1>
+            <p class="kontak-hero__subtitle">Hubungi Panitia PPDB SMK Muhammadiyah</p>
+            <p class="kontak-hero__desc">
+                Punya pertanyaan seputar pendaftaran, persyaratan, atau jadwal PPDB?
+                Silakan hubungi kami melalui kontak di bawah ini, atau kunjungi langsung
+                lokasi sekolah pada peta yang tersedia.
+            </p>
+        </div>
+    </section>
 
-            <div class="kontak-item">
-                <span class="kontak-label">Alamat</span>
-                <p>Jl. Contoh Raya No. 123, Serpong, Tangerang Selatan, Banten 15310</p>
-            </div>
+    {{-- KONTEN UTAMA: KARTU INFO + PETA --}}
+    <section class="kontak-content">
+        <div class="container kontak-grid">
 
-            <div class="kontak-item">
-                <span class="kontak-label">Telepon / WhatsApp</span>
-                <p>+62 812-3456-7890</p>
-            </div>
+            {{-- KARTU INFORMASI KONTAK --}}
+            <div class="card kontak-card">
+                <h2 class="card__title">Informasi Kontak</h2>
 
-            <div class="kontak-item">
-                <span class="kontak-label">Email</span>
-                <p>ppdb@namasekolah.sch.id</p>
-            </div>
+                <ul class="kontak-list">
+                    <li class="kontak-list__item">
+                        <span class="kontak-list__icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+                        <div class="kontak-list__text">
+                            <strong>Alamat</strong>
+                            <p>{{ $kontak['alamat'] ?? 'Jl. Raden Fatah No. 100, Parung Serab, Kecamatan Ciledug, Kota Tangerang' }}</p>
+                        </div>
+                    </li>
 
-            <div class="kontak-item">
-                <span class="kontak-label">Jam Layanan</span>
-                <p>Senin – Jumat, 08.00 – 15.00 WIB</p>
-            </div>
+                    <li class="kontak-list__item">
+                        <span class="kontak-list__icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+                        <div class="kontak-list__text">
+                            <strong>Telepon / WhatsApp</strong>
+                            <p>{{ $kontak['telepon'] ?? '+62 812-3456-7890' }}</p>
+                        </div>
+                    </li>
 
-            <div class="kontak-tombol">
-                <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-whatsapp">Chat via WhatsApp</a>
-                <a href="mailto:ppdb@namasekolah.sch.id" class="btn btn-email">Kirim Email</a>
-            </div>
+                    <li class="kontak-list__item">
+                        <span class="kontak-list__icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                        <div class="kontak-list__text">
+                            <strong>Email</strong>
+                            <p>{{ $kontak['email'] ?? 'ppdb@namasekolah.sch.id' }}</p>
+                        </div>
+                    </li>
 
-            <div class="kontak-sosmed">
-                <span class="kontak-label">Media Sosial</span>
-                <div class="sosmed-icons">
-                    <a href="#" title="Instagram">IG</a>
-                    <a href="#" title="Facebook">FB</a>
-                    <a href="#" title="YouTube">YT</a>
+                    <li class="kontak-list__item">
+                        <span class="kontak-list__icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </span>
+                        <div class="kontak-list__text">
+                            <strong>Jam Layanan</strong>
+                            <p>{{ $kontak['jam'] ?? 'Senin - Jumat, 08.00 - 15.00 WIB' }}</p>
+                        </div>
+                    </li>
+                </ul>
+
+                {{-- IKON MEDIA SOSIAL --}}
+                <div class="kontak-social">
+                    <h3 class="kontak-social__title">Ikuti Kami</h3>
+                    <div class="kontak-social__icons">
+                        <a href="{{ $kontak['instagram'] ?? '#' }}" target="_blank" class="kontak-social__icon" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="{{ $kontak['facebook'] ?? '#' }}" target="_blank" class="kontak-social__icon" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/{{ $kontak['whatsapp'] ?? '6281234567890' }}" target="_blank" class="kontak-social__icon" aria-label="WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                {{-- TOMBOL AKSI CEPAT --}}
+                <div class="kontak-actions">
+                    <a href="https://wa.me/{{ $kontak['whatsapp'] ?? '6281234567890' }}" target="_blank" class="btn btn--whatsapp">
+                        <i class="fa-brands fa-whatsapp"></i> Chat via WhatsApp
+                    </a>
+                    <a href="mailto:{{ $kontak['email'] ?? 'ppdb@namasekolah.sch.id' }}" class="btn btn--email">
+                        <i class="fa-solid fa-envelope"></i> Kirim Email
+                    </a>
                 </div>
             </div>
+
+            {{-- PETA LOKASI --}}
+            <div class="card kontak-map-card">
+                <h2 class="card__title">Peta Lokasi Sekolah</h2>
+                <div class="kontak-map">
+                    <iframe
+                        src="{{ $kontak['map_embed_url'] ?? 'https://www.google.com/maps?q=' . urlencode($kontak['alamat'] ?? 'Jl. Raden Fatah No. 100, Parung Serab, Kecamatan Ciledug, Kota Tangerang') . '&output=embed' }}"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
         </div>
+    </section>
 
-        {{-- Kolom kanan: peta --}}
-        <div class="kontak-map">
-            <h2>Lokasi Sekolah</h2>
-            <div class="map-frame">
-                <iframe
-                    src="https://www.google.com/maps?q=BSD%20Serpong&output=embed"
-                    width="100%" height="320" style="border:0;" allowfullscreen loading="lazy">
-                </iframe>
-            </div>
-        </div>
-    </div>
-
-    {{-- Formulir kontak --}}
-    <div class="kontak-form-wrapper">
-        <h2>Ada Pertanyaan? Kirim Pesan</h2>
-
-        <form class="kontak-form" onsubmit="return false;">
-            <div class="form-row">
-                <label for="nama">Nama Lengkap</label>
-                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
-            </div>
-
-            <div class="form-row">
-                <label for="kontak">Email / No. HP</label>
-                <input type="text" id="kontak" name="kontak" placeholder="Masukkan email atau nomor HP" required>
-            </div>
-
-            <div class="form-row">
-                <label for="pesan">Pesan</label>
-                <textarea id="pesan" name="pesan" rows="4" placeholder="Tulis pertanyaan Anda di sini" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-kirim">Kirim Pesan</button>
-        </form>
-    </div>
+</div>
 @endsection
+
+@push('styles')
+<style>
+    .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* HERO */
+    .kontak-hero {
+        background: #ffffff;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
+        padding: 36px 0;
+        margin: 24px auto 20px;
+        max-width: 1160px;
+    }
+    .kontak-hero__title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a3c2e;
+        margin: 0 0 8px;
+    }
+    .kontak-hero__subtitle {
+        font-size: 17px;
+        font-weight: 600;
+        color: #2d6a4f;
+        margin: 0 0 10px;
+    }
+    .kontak-hero__desc {
+        font-size: 15px;
+        color: #555;
+        max-width: 700px;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* GRID */
+    .kontak-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+        margin-bottom: 40px;
+    }
+    @media (max-width: 860px) {
+        .kontak-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* CARD - background hijau senada navbar */
+    .card {
+        background: #146C43;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
+        padding: 28px;
+    }
+    .card__title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 20px;
+    }
+
+    /* LIST INFO KONTAK */
+    .kontak-list {
+        list-style: none;
+        margin: 0 0 24px;
+        padding: 0;
+    }
+    .kontak-list__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .kontak-list__item:last-child {
+        border-bottom: none;
+    }
+    .kontak-list__icon {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+    }
+    .kontak-list__text strong {
+        display: block;
+        font-size: 14px;
+        color: #ffffff;
+        margin-bottom: 3px;
+    }
+    .kontak-list__text p {
+        margin: 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.5;
+    }
+
+    /* SOCIAL */
+    .kontak-social {
+        margin-bottom: 24px;
+    }
+    .kontak-social__title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 12px;
+    }
+    .kontak-social__icons {
+        display: flex;
+        gap: 12px;
+    }
+    .kontak-social__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 18px;
+        transition: background .15s ease, color .15s ease;
+    }
+    .kontak-social__icon:hover {
+        background: #ffffff;
+        color: #146C43;
+    }
+
+    /* ACTIONS */
+    .kontak-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+    }
+    .btn--whatsapp { background: #25D366; }
+    .btn--whatsapp:hover { background: #1ebe57; }
+    .btn--email { background: #ffffff; color: #146C43; }
+    .btn--email:hover { background: #eaf4ee; }
+
+    /* MAP */
+    .kontak-map {
+        border-radius: 8px;
+        overflow: hidden;
+        height: 380px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+</style>
+@endpush

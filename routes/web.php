@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
 use App\Http\Controllers\Admin\BerandaSettingController;
-
+use App\Http\Controllers\Admin\Ppdb\ProsedurSettingController;
 // Frontend Controllers
 use App\Http\Controllers\HomeController as FrontendHomeController;
 use App\Http\Controllers\JurusanController as FrontendJurusanController;
@@ -78,10 +78,10 @@ Route::prefix('ppdb')
     ->name('ppdb.')
     ->group(function () {
         Route::get('/', [PpdbBerandaController::class, 'index'])->name('home');
-        Route::view('/prosedur', 'ppdb.prosedur')->name('prosedur');
-        Route::view('/daftar', 'ppdb.daftar')->name('daftar');
+        Route::get('/prosedur', [\App\Http\Controllers\Ppdb\ProsedurController::class, 'index'])->name('prosedur');       
+        Route::view('/daftar', 'ppdb.daftar')->name('daftar'); 
         Route::view('/persyaratan', 'ppdb.persyaratan')->name('persyaratan');
-        Route::view('/kontak', 'ppdb.kontak')->name('kontak');
+        Route::view('/kontak', 'ppdb.kontak')->name('kontak'); 
 
         Route::prefix('auth')
             ->name('auth.')
@@ -187,6 +187,9 @@ Route::middleware('auth')
          // ROUTE BERANDA SETTING
             Route::get('/beranda-setting', [BerandaSettingController::class, 'edit'])->name('beranda-setting.edit');
             Route::put('/beranda-setting', [BerandaSettingController::class, 'update'])->name('beranda-setting.update');
+
+            //ROUTE PROSEDUR SETTING
+            Route::resource('/prosedur-setting', ProsedurSettingController::class);
     });
 
 
