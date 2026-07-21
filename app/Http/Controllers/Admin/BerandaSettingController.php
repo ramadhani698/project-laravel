@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class BerandaSettingController extends Controller
 {
-    // GET /beranda-setting → tampilkan halaman index (bukan langsung redirect)
     public function index()
     {
         $settings = BerandaSetting::current();
@@ -61,8 +60,8 @@ class BerandaSettingController extends Controller
             'phone'               => 'nullable|string',
             'website_url'         => 'nullable|url',
             'email'               => 'nullable|email',
+            'catatan_persyaratan' => 'nullable|string',
         ]);
-
         $settings->update($validated);
 
         return redirect()
@@ -72,7 +71,6 @@ class BerandaSettingController extends Controller
 
     public function destroy($id)
     {
-        // Sengaja tidak dipakai — settingan beranda tidak boleh dihapus
         return redirect()->route('admin.beranda-setting.index');
     }
 }

@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\SarprasController as AdminSarprasController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\PrestasiController as AdminPrestasiController;
 use App\Http\Controllers\Admin\BerandaSettingController;
+use App\Http\Controllers\Admin\PersyaratanController;
 
 // Frontend Controllers
 use App\Http\Controllers\HomeController as FrontendHomeController;
@@ -36,6 +37,9 @@ use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
 use App\Http\Controllers\PpdbBerandaController;
 use App\Http\Controllers\Admin\Ppdb\PendaftarController as AdminPpdbPendaftarController;
 use App\Http\Controllers\Admin\Ppdb\DataPendaftaranController as AdminPpdbDataPendaftaranController;
+use App\Http\Controllers\Admin\Ppdb\PersyaratanController as AdminPpdbPersyaratanController;
+use App\Http\Controllers\Admin\JalurPendaftaranController as AdminJalurPendaftaranController;
+
 
 
 /*
@@ -80,7 +84,7 @@ Route::prefix('ppdb')
         Route::get('/', [PpdbBerandaController::class, 'index'])->name('home');
         Route::view('/prosedur', 'ppdb.prosedur')->name('prosedur');
         Route::view('/daftar', 'ppdb.daftar')->name('daftar');
-        Route::view('/persyaratan', 'ppdb.persyaratan')->name('persyaratan');
+        Route::get('/persyaratan', [PersyaratanController::class, 'tampilanPublik'])->name('persyaratan');
         Route::view('/kontak', 'ppdb.kontak')->name('kontak');
 
         Route::prefix('auth')
@@ -188,7 +192,31 @@ Route::middleware('auth')
         Route::resource('beranda-setting', BerandaSettingController::class)
             ->except(['create', 'store', 'show'])
             ->parameters(['beranda-setting' => 'beranda-setting']);
+
+        // ROUTE PERSYARATAN
+        Route::resource('persyaratan', PersyaratanController::class)
+            ->except(['show'])
+            ->parameters(['persyaratan' => 'persyaratan']);
+        Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
+            ->except(['show']);
     });
+    Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
+    ->except(['show']);
+
+/*
+|--------------------------------------------------------------------------
+| ALTERNATIF: cara singkat pakai Route::resource
+|--------------------------------------------------------------------------
+| Baris di bawah ini SAMA DENGAN 5 route admin di atas (index, create, store,
+| edit, update, destroy), cukup 1 baris. Pilih salah satu cara saja
+| (jangan dipakai bersamaan dengan blok Route::prefix('admin') di atas).
+|
+| Route::prefix('admin')->name('admin.')->group(function () {
+|     Route::resource('persyaratan-dokumen', PersyaratanDokumenController::class)
+|         ->except(['show'])
+|         ->parameters(['persyaratan-dokumen' => 'persyaratanDokumen']);
+| });
+*/
 
 
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
