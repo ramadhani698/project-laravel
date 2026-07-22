@@ -1,133 +1,164 @@
-/* ==========================================================
-   public/css/ppdb/kontak.css
-   Catatan: kode HTML yang dikirim tidak menyertakan isi asli
-   ppdb.css, jadi berikut ini style dasar berdasarkan nama
-   class yang dipakai di kontak.blade.php. Silakan sesuaikan
-   dengan style ppdb.css yang sudah ada di project kamu.
-   ========================================================== */
+    .container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 
-.page-title {
-    font-size: 28px;
-    font-weight: 700;
-    text-align: center;
-    margin: 24px 0;
-}
+    /* HERO */
+    .kontak-hero {
+        background: #ffffff;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
+        padding: 36px 0;
+        margin: 24px auto 20px;
+        max-width: 1160px;
+    }
+    .kontak-hero__title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1a3c2e;
+        margin: 0 0 8px;
+    }
+    .kontak-hero__subtitle {
+        font-size: 17px;
+        font-weight: 600;
+        color: #2d6a4f;
+        margin: 0 0 10px;
+    }
+    .kontak-hero__desc {
+        font-size: 15px;
+        color: #555;
+        max-width: 700px;
+        line-height: 1.6;
+        margin: 0;
+    }
 
-.kontak-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    max-width: 1100px;
-    margin: 0 auto 32px;
-    padding: 0 16px;
-}
+    /* GRID */
+    .kontak-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+        margin-bottom: 40px;
+    }
+    @media (max-width: 860px) {
+        .kontak-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 
-.kontak-info,
-.kontak-map {
-    flex: 1 1 400px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+    /* CARD - background hijau senada navbar */
+    .card {
+        background: #146C43;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
+        padding: 28px;
+    }
+    .card__title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 20px;
+    }
 
-.kontak-item {
-    margin-bottom: 16px;
-}
+    /* LIST INFO KONTAK */
+    .kontak-list {
+        list-style: none;
+        margin: 0 0 24px;
+        padding: 0;
+    }
+    .kontak-list__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .kontak-list__item:last-child {
+        border-bottom: none;
+    }
+    .kontak-list__icon {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+    }
+    .kontak-list__text strong {
+        display: block;
+        font-size: 14px;
+        color: #ffffff;
+        margin-bottom: 3px;
+    }
+    .kontak-list__text p {
+        margin: 0;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.5;
+    }
 
-.kontak-label {
-    display: block;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 4px;
-}
+    /* SOCIAL */
+    .kontak-social {
+        margin-bottom: 24px;
+    }
+    .kontak-social__title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 12px;
+    }
+    .kontak-social__icons {
+        display: flex;
+        gap: 12px;
+    }
+    .kontak-social__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 18px;
+        transition: background .15s ease, color .15s ease;
+    }
+    .kontak-social__icon:hover {
+        background: #ffffff;
+        color: #146C43;
+    }
 
-.kontak-tombol {
-    display: flex;
-    gap: 12px;
-    margin: 16px 0;
-    flex-wrap: wrap;
-}
+    /* ACTIONS */
+    .kontak-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #fff;
+    }
+    .btn--whatsapp { background: #25D366; }
+    .btn--whatsapp:hover { background: #1ebe57; }
+    .btn--email { background: #ffffff; color: #146C43; }
+    .btn--email:hover { background: #eaf4ee; }
 
-.btn {
-    display: inline-block;
-    padding: 10px 18px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-}
-
-.btn-whatsapp {
-    background: #25d366;
-}
-
-.btn-email {
-    background: #3b82f6;
-}
-
-.kontak-sosmed .sosmed-icons {
-    display: flex;
-    gap: 10px;
-    margin-top: 6px;
-}
-
-.sosmed-icons a {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #f1f1f1;
-    color: #333;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.map-frame {
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.kontak-form-wrapper {
-    max-width: 700px;
-    margin: 0 auto 40px;
-    padding: 24px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.form-row {
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-row label {
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.form-row input,
-.form-row textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-.btn-kirim {
-    background: #16a34a;
-    border: none;
-    cursor: pointer;
-}
-
-.text-danger {
-    color: #dc2626;
-    font-size: 12px;
-    margin-top: 4px;
-}
+    /* MAP */
+    .kontak-map {
+        border-radius: 8px;
+        overflow: hidden;
+        height: 380px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }   
