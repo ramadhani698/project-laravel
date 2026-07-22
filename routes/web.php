@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,7 +37,6 @@ use App\Http\Controllers\Ppdb\Auth\ForgotPasswordController;
 use App\Http\Controllers\PpdbBerandaController;
 use App\Http\Controllers\Admin\Ppdb\PendaftarController as AdminPpdbPendaftarController;
 use App\Http\Controllers\Admin\Ppdb\DataPendaftaranController as AdminPpdbDataPendaftaranController;
-
 use App\Http\Controllers\Admin\Ppdb\PeriodeTesController;
 use App\Http\Controllers\Admin\Ppdb\SoalTesController;
 use App\Http\Controllers\Admin\Ppdb\HasilSeleksiController;
@@ -88,21 +86,18 @@ Route::prefix('ppdb')
     ->name('ppdb.')
     ->group(function () {
         Route::get('/', [PpdbBerandaController::class, 'index'])->name('home');
-
         Route::get('/prosedur', [\App\Http\Controllers\Ppdb\ProsedurController::class, 'index'])->name('prosedur');       
         Route::view('/daftar', 'ppdb.daftar')->name('daftar'); 
         Route::get('/persyaratan', [PersyaratanController::class, 'tampilanPublik'])->name('persyaratan');
         Route::view('/kontak', 'ppdb.kontak')->name('kontak'); 
 
-
-
         Route::prefix('auth')
             ->name('auth.')
+            ->middleware('throttle:10,1')
             ->group(function () {
                 Route::get('/daftar', [PpdbAuthController::class, 'showRegister'])->name('daftar');
                 Route::post('/daftar', [PpdbAuthController::class, 'register'])->name('daftar.store');
                 Route::get('/daftar/sukses', [PpdbAuthController::class, 'registerSukses'])->name('daftar.sukses');
-
                 Route::get('/login', [PpdbAuthController::class, 'showLogin'])->name('login');
                 Route::post('/login', [PpdbAuthController::class, 'login'])->name('login.store');
 
@@ -114,7 +109,6 @@ Route::prefix('ppdb')
                     ->group(function () {
                         Route::get('/', [ForgotPasswordController::class, 'showVerifyForm'])->name('verify');
                         Route::post('/', [ForgotPasswordController::class, 'verify'])->name('verify.store');
-
                         Route::get('/reset', [ForgotPasswordController::class, 'showResetForm'])->name('reset');
                         Route::post('/reset', [ForgotPasswordController::class, 'resetPassword'])->name('reset.store');
                     });
@@ -141,7 +135,9 @@ Route::prefix('ppdb')
                 Route::get('/', [TesOnlineController::class, 'index'])->name('index');
                 Route::post('/mulai', [TesOnlineController::class, 'mulai'])->name('mulai');
                 Route::get('/kerjakan', [TesOnlineController::class, 'kerjakan'])->name('kerjakan');
-                Route::post('/jawab', [TesOnlineController::class, 'jawab'])->name('jawab');
+                Route::post('/jawab', [TesOnlineController::class, 'jawab'])
+                    ->middleware('throttle:60,1')
+                    ->name('jawab');
                 Route::post('/selesai', [TesOnlineController::class, 'selesai'])->name('selesai');
             });
         });
@@ -157,36 +153,28 @@ Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-
         Route::resource('carousel', AdminCarouselController::class);
         Route::resource('keunggulan', AdminKeunggulanController::class);
         Route::resource('statistik', AdminStatistikController::class);
-
+        
         // Jurusan + child resources (head, visi-misi, gallery)
         Route::resource('jurusan', AdminJurusanController::class);
-
         Route::put('jurusan/{jurusan}/head', [JurusanHeadController::class, 'update'])
             ->name('jurusan.head.update');
-
         Route::put('jurusan/{jurusan}/visi-misi', [JurusanVisiMisiController::class, 'update'])
             ->name('jurusan.visi-misi.update');
-
         Route::post('jurusan/{jurusan}/gallery', [JurusanGalleryController::class, 'store'])
             ->name('jurusan.gallery.store');
-
         Route::delete('jurusan/gallery/{gallery}', [JurusanGalleryController::class, 'destroy'])
             ->name('jurusan.gallery.destroy');
 
         // WIZARD ROUTES (alur create jurusan bertahap)
         Route::get('jurusan/{jurusan}/wizard/head', [AdminJurusanController::class, 'wizardHead'])
             ->name('jurusan.wizard.head');
-
         Route::get('jurusan/{jurusan}/wizard/visi-misi', [AdminJurusanController::class, 'wizardVisiMisi'])
             ->name('jurusan.wizard.visi-misi');
-
         Route::get('jurusan/{jurusan}/wizard/gallery', [AdminJurusanController::class, 'wizardGallery'])
             ->name('jurusan.wizard.gallery');
-
         Route::get('jurusan/{jurusan}/wizard/finish', [AdminJurusanController::class, 'wizardFinish'])
             ->name('jurusan.wizard.finish');
 
@@ -197,15 +185,13 @@ Route::middleware('auth')
         Route::resource('sarpras', AdminSarprasController::class);
         Route::resource('gallery', AdminGalleryController::class);
         Route::resource('prestasi', AdminPrestasiController::class);
-
+        
         // ROUTE PPDB ADMIN
         Route::prefix('ppdb')->name('ppdb.')->group(function () {
             Route::get('pendaftar', [AdminPpdbPendaftarController::class, 'index'])
                 ->name('pendaftar.index');
-
             Route::delete('pendaftar/{pendaftar}', [AdminPpdbPendaftarController::class, 'destroy'])
                 ->name('pendaftar.destroy');
-
 
             Route::resource('data-pendaftaran', AdminPpdbDataPendaftaranController::class)
                 ->except(['create', 'store', 'show'])
@@ -237,22 +223,22 @@ Route::middleware('auth')
             });
 
         });
-         // ROUTE BERANDA SETTING
-         Route::resource('beranda-setting', BerandaSettingController::class)
+        
+        // ROUTE BERANDA SETTING
+        Route::resource('beranda-setting', BerandaSettingController::class)
                 ->except(['create', 'store', 'show'])
                 ->parameters(['beranda-setting' => 'beranda-setting']);
 
-            //ROUTE PROSEDUR SETTING
-            Route::resource('/prosedur-setting', ProsedurSettingController::class);
+        //ROUTE PROSEDUR SETTING
+        Route::resource('/prosedur-setting', ProsedurSettingController::class);
 
         // ROUTE PERSYARATAN
         Route::resource('persyaratan', PersyaratanController::class)
             ->except(['show'])
             ->parameters(['persyaratan' => 'persyaratan']);
-
+        Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
+            ->except(['show']);
     });
-    Route::resource('jalur-pendaftaran', AdminJalurPendaftaranController::class)
-    ->except(['show']);
 
 /*
 |--------------------------------------------------------------------------
@@ -269,11 +255,9 @@ Route::middleware('auth')
 | });
 */
 
-
 Route::get('/dashboard', [AdminDashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
 
 /*
 |--------------------------------------------------------------------------

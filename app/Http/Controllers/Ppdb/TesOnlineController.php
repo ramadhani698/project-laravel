@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class TesOnlineController extends Controller
 {
+
     private const DURASI_TES_MENIT = 120; // 2 jam
 
     public function index()
@@ -39,11 +40,11 @@ class TesOnlineController extends Controller
 
         return view('ppdb.tes.index', compact('formulir', 'periodeAktif', 'bisaMulai', 'attempt'));
     }
-
+    
     public function mulai()
     {
         $formulir = Auth::guard('ppdb')->user()->formulir;
-
+        
         abort_unless($formulir, 403, 'Formulir pendaftaran belum dibuat.');
         abort_unless($formulir->status === 'terverifikasi', 403, 'Formulir belum diverifikasi.');
 
@@ -85,7 +86,7 @@ class TesOnlineController extends Controller
         abort_unless($attempt->status === 'sedang_mengerjakan', 403, 'Tes tidak sedang berlangsung.');
 
         $batasWaktu = $attempt->waktu_mulai->copy()->addMinutes(self::DURASI_TES_MENIT);
-
+        
         // Kalau ternyata waktu sudah habis (misal user reload / balik lagi setelah 2 jam), langsung finalisasi
         if (now()->greaterThanOrEqualTo($batasWaktu)) {
             $this->finalisasiTes($attempt, $formulir);
@@ -95,8 +96,8 @@ class TesOnlineController extends Controller
         }
 
         $sisaDetik = max(0, (int) now()->diffInSeconds($batasWaktu, false));
-
-        $soal = PpdbSoalTes::where('tipe_soal', 'akademik')
+        $soal = PpdbSoalTes::select('id', 'jurusan_id', 'tipe_soal', 'pertanyaan', 'opsi_a', 'opsi_b', 'opsi_c', 'opsi_d')
+            ->where('tipe_soal', 'akademik')
             ->orWhere(function ($q) use ($formulir) {
                 $q->where('tipe_soal', 'kejuruan')->where('jurusan_id', $formulir->jurusan_id);
             })
@@ -119,7 +120,7 @@ class TesOnlineController extends Controller
         abort_unless($attempt->status === 'sedang_mengerjakan', 403, 'Sesi tes tidak aktif.');
 
         $batasWaktu = $attempt->waktu_mulai->copy()->addMinutes(self::DURASI_TES_MENIT);
-
+        
         if (now()->greaterThanOrEqualTo($batasWaktu)) {
             $this->finalisasiTes($attempt, $formulir);
 
@@ -182,26 +183,28 @@ class TesOnlineController extends Controller
 
     private function hitungNilai(int $formulirId): void
     {
+        $formulir = \App\Models\Ppdb\PpdbFormulirPendaftaran::findOrFail($formulirId);
+        $totalAkademik = PpdbSoalTes::where('tipe_soal', 'akademik')->count();
+        $totalKejuruan = PpdbSoalTes::where('tipe_soal', 'kejuruan')
+            ->where('jurusan_id', $formulir->jurusan_id)
+            ->count();
         $jawaban = PpdbJawabanPendaftar::where('formulir_pendaftaran_id', $formulirId)
             ->with('soalTes')
             ->get();
-
-        $benarAkademik = $totalAkademik = 0;
-        $benarKejuruan = $totalKejuruan = 0;
-
+        $benarAkademik = 0;
+        $benarKejuruan = 0;
         foreach ($jawaban as $j) {
             $soal = $j->soalTes;
+            if (!$soal) continue;
             $isBenar = $j->jawaban_dipilih === $soal->kunci_jawaban;
-
+            
             if ($soal->tipe_soal === 'akademik') {
-                $totalAkademik++;
                 if ($isBenar) $benarAkademik++;
             } else {
-                $totalKejuruan++;
                 if ($isBenar) $benarKejuruan++;
             }
         }
-
+        
         PpdbHasilSeleksi::updateOrCreate(
             ['formulir_pendaftaran_id' => $formulirId],
             [

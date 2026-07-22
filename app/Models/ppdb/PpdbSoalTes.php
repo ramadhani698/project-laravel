@@ -22,6 +22,10 @@ class PpdbSoalTes extends Model
         'kunci_jawaban',
     ];
 
+    protected $hidden = [
+        'kunci_jawaban',
+    ];
+
     public function jurusan(): BelongsTo
     {
         return $this->belongsTo(Jurusan::class);
@@ -36,7 +40,7 @@ class PpdbSoalTes extends Model
     {
         return $query->where('tipe_soal', 'akademik');
     }
-
+    
     public function scopeKejuruan($query, ?int $jurusanId = null)
     {
         return $query->where('tipe_soal', 'kejuruan')
