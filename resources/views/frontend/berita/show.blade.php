@@ -39,7 +39,7 @@
 
         <!-- Content -->
         <article class="berita-detail-content">
-            {!! $berita->content !!}
+            @sanitizeHtml($berita->content)
         </article>
 
         <!-- Back -->

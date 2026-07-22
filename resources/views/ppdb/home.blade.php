@@ -64,15 +64,15 @@
             <h2 class="ppdb-welcome-heading">{{ $settings->welcome_heading }}</h2>
 
             <p class="ppdb-welcome-text">
-                {!! $settings->welcome_paragraph_1 !!}
+                @sanitizeHtml($settings->welcome_paragraph_1)
             </p>
 
             <p class="ppdb-welcome-text">
-                {!! $settings->welcome_paragraph_2 !!}
+                @sanitizeHtml($settings->welcome_paragraph_2)
             </p>
 
             <p class="ppdb-welcome-text">
-                {!! $settings->welcome_paragraph_3 !!}
+                @sanitizeHtml($settings->welcome_paragraph_3)
             </p>
 
             <p class="ppdb-welcome-text address-section">

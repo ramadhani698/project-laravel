@@ -35,5 +35,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Paginator::useBootstrap();
+
+        \Illuminate\Support\Facades\Blade::directive('sanitizeHtml', function ($expression) {
+            return "<?php echo \App\Helpers\HtmlSanitizer::clean($expression); ?>";
+        });
     }
 }
