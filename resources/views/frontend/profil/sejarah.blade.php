@@ -13,7 +13,7 @@
             <h2>{{ $history->title }}</h2>
 
             <div class="history-content">
-                {!! $history->content  !!}
+                @sanitizeHtml($history->content)
             </div>
 
         </div>
