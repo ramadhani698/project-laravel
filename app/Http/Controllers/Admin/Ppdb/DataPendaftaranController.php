@@ -34,6 +34,15 @@ class DataPendaftaranController extends Controller
             })
             ->count();
 
+        // Belum ijazah: sudah submit (menunggu_verifikasi/terverifikasi) tapi
+        // belum unggah ijazah ASLI, walaupun SKL sudah cukup buat lolos verifikasi.
+        // Ijazah tetap wajib ditagih menyusul untuk keperluan administrasi sekolah.
+        $belumIjazahCount = PpdbFormulirPendaftaran::whereIn('status', ['menunggu_verifikasi', 'terverifikasi'])
+            ->whereDoesntHave('pendaftar.berkas', function ($query) {
+                $query->where('jenis_dokumen', 'ijazah');
+            })
+            ->count();
+
         $formulirList = PpdbFormulirPendaftaran::with(['pendaftar.berkas', 'jurusan'])
             ->when($request->filled('status'), function ($query) use ($request) {
                 if ($request->status === 'perlu_review') {
@@ -46,6 +55,10 @@ class DataPendaftaranController extends Controller
                         ->whereHas('pendaftar.berkas', function ($q) {
                             $q->where('status_verifikasi', 'menunggu');
                         });
+                } elseif ($request->status === 'belum_ijazah') {
+                    $query->whereDoesntHave('pendaftar.berkas', function ($q) {
+                        $q->where('jenis_dokumen', 'ijazah');
+                    });
                 } else {
                     $query->where('status', $request->status);
                 }
@@ -64,7 +77,8 @@ class DataPendaftaranController extends Controller
         return view('admin.ppdb.data-pendaftaran.index', compact(
             'formulirList',
             'perluReviewCount',
-            'perluVerifikasiBaruCount'
+            'perluVerifikasiBaruCount',
+            'belumIjazahCount'
         ));
     }
 

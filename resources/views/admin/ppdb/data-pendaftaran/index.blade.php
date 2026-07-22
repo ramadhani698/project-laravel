@@ -45,6 +45,20 @@
         </div>
     @endif
 
+    @if($belumIjazahCount > 0)
+        <div class="alert alert-danger d-flex align-items-center gap-2" role="alert">
+            <i class="fas fa-file-circle-exclamation"></i>
+            <div class="flex-grow-1">
+                <strong>{{ $belumIjazahCount }} calon siswa</strong> belum mengunggah ijazah asli
+                <span class="text-body-secondary">(termasuk yang sudah terverifikasi pakai SKL)</span>.
+            </div>
+            <a href="{{ route('admin.ppdb.data-pendaftaran.index', ['status' => 'belum_ijazah']) }}"
+            class="btn btn-sm btn-danger">
+                Lihat Semua
+            </a>
+        </div>
+    @endif
+
     <div class="card border-0 shadow-sm mb-3">
         <div class="card-body py-3">
             <form method="GET" class="d-flex gap-2 flex-wrap align-items-center">
@@ -86,7 +100,7 @@
                             $adaBerkasBaru = $formulir->status === 'terverifikasi'
                                 && $formulir->pendaftar->berkas->where('status_verifikasi', 'menunggu')->isNotEmpty();
                         @endphp
-                        <tr class="{{ $adaBerkasBaru ? 'border-start border-3 border-warning' : '' }}">
+                        <tr>
                             <td class="ps-4">
                                 <span class="fw-semibold text-primary-emphasis">
                                     {{ $formulir->no_pendaftaran ?? '—' }}

@@ -14,7 +14,6 @@ class Persyaratan extends Model
      * Dipakai sebagai pengganti default value di database, karena
      * MySQL tidak mengizinkan default value pada kolom JSON.
      */
-    protected $table = 'persyaratan';
     protected $attributes = [
         'format_diizinkan' => '["jpg","jpeg","pdf"]',
     ];

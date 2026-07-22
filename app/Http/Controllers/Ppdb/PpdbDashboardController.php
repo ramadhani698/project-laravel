@@ -86,7 +86,7 @@ class PpdbDashboardController extends Controller
         }
 
         $file = $request->file('file');
-        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        $filename = time() . '_' . uniqid() . '.' . $file->extension();
         $path = $file->storeAs('ppdb/berkas/' . $pendaftar->id, $filename, 'public');
 
         $berkas = PpdbBerkas::updateOrCreate(

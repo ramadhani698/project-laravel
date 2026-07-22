@@ -38,8 +38,9 @@ class ForgotPasswordController extends Controller
             ]);
         }
 
-        // Simpan flag verifikasi ke session, valid untuk 1x proses reset
+        // Simpan flag verifikasi ke session, valid 15 menit untuk 1x proses reset
         $request->session()->put('ppdb_reset_verified_id', $pendaftar->id);
+        $request->session()->put('ppdb_reset_expires_at', now()->addMinutes(15)->timestamp);
 
         return redirect()->route('ppdb.auth.lupa-password.reset');
     }
@@ -49,10 +50,14 @@ class ForgotPasswordController extends Controller
      */
     public function showResetForm(Request $request)
     {
-        if (! $request->session()->has('ppdb_reset_verified_id')) {
+        $expiresAt = $request->session()->get('ppdb_reset_expires_at', 0);
+
+        if (! $request->session()->has('ppdb_reset_verified_id') || now()->timestamp > $expiresAt) {
+            $request->session()->forget(['ppdb_reset_verified_id', 'ppdb_reset_expires_at']);
+
             return redirect()
                 ->route('ppdb.auth.lupa-password.verify')
-                ->with('error', 'Silakan verifikasi data diri terlebih dahulu.');
+                ->with('error', 'Sesi verifikasi telah kadaluarsa. Silakan verifikasi ulang data diri Anda.');
         }
 
         return view('ppdb.auth.lupa-password-reset');
@@ -64,11 +69,14 @@ class ForgotPasswordController extends Controller
     public function resetPassword(Request $request)
     {
         $pendaftarId = $request->session()->get('ppdb_reset_verified_id');
+        $expiresAt = $request->session()->get('ppdb_reset_expires_at', 0);
 
-        if (! $pendaftarId) {
+        if (! $pendaftarId || now()->timestamp > $expiresAt) {
+            $request->session()->forget(['ppdb_reset_verified_id', 'ppdb_reset_expires_at']);
+
             return redirect()
                 ->route('ppdb.auth.lupa-password.verify')
-                ->with('error', 'Sesi verifikasi telah berakhir, silakan ulangi.');
+                ->with('error', 'Sesi verifikasi telah berakhir atau kadaluarsa, silakan ulangi.');
         }
 
         $validated = $request->validate([
@@ -80,7 +88,7 @@ class ForgotPasswordController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
-        $request->session()->forget('ppdb_reset_verified_id');
+        $request->session()->forget(['ppdb_reset_verified_id', 'ppdb_reset_expires_at']);
 
         return redirect()
             ->route('ppdb.auth.login')
