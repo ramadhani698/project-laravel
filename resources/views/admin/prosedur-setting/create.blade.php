@@ -6,7 +6,8 @@
         </div>
 
         <div class="card-body">
-                <form action="{{ route('admin.prosedur-setting.store') }}" method="POST">                @csrf
+                <form action="{{ route('admin.prosedur-setting.store') }}" method="POST">
+                    @csrf
 
                 <div class="mb-3">
                     <label class="form-label">label</label>

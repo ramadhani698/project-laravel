@@ -99,7 +99,7 @@
 
 {{-- ============ FAQ / PERTANYAAN UMUM ============ --}}
 <section class="ppdb-section">
-    <h2 class="display">FAQ / Pertanyaan Umum</h2>
+    <h2 class="display">Pertanyaan Umum</h2>
     <div style="display:flex;flex-direction:column;gap:0.75rem" x-data="{ open: null }">
         @foreach ($faqs as $i => $faq)
             <div class="faq-item">
