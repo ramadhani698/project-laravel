@@ -23,7 +23,7 @@ class SiswaDiterimaController extends Controller
                       ->orWhere('no_pendaftaran', 'like', "%{$search}%");
                 });
             })
-            ->latest('tanggal_pengumuman')
+            ->latest('formulir_pendaftaran_id')
             ->paginate(20)
             ->withQueryString();
 
