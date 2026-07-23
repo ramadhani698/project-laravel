@@ -18,14 +18,19 @@ class PendaftarController extends Controller
     
     public function destroy(PpdbPendaftar $pendaftar): RedirectResponse
     {
+        $pendaftarId = $pendaftar->id;
+
         DB::transaction(function () use ($pendaftar) {
-            foreach ($pendaftar->berkas as $berkas) {
-                if ($berkas->file_path && Storage::disk('public')->exists($berkas->file_path)) {
-                    Storage::disk('public')->delete($berkas->file_path);
-                }
-            }
+            $pendaftar->berkas()->delete();
             $pendaftar->delete();
         });
+
+        // Storage bukan bagian dari DB transaction, jadi taruh di luar
+        $folderPath = "ppdb/berkas/{$pendaftarId}";
+        if (Storage::disk('public')->exists($folderPath)) {
+            Storage::disk('public')->deleteDirectory($folderPath);
+        }
+
         return redirect()
             ->route('admin.ppdb.pendaftar.index')
             ->with('success', 'Akun pendaftar berhasil dihapus.');
